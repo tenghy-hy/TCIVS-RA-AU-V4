@@ -1,0 +1,2339 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>臺中高工實用技能學程冷凍空調技術科契合式人才培訓產學專班116年度合作產業機構與學生聯合就業媒合會</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+
+:root{
+  --bg:#F5F7FB;
+  --panel:#FFFFFF;
+  --panel-2:#FBFCFE;
+  --line:#E4E9F1;
+  --text:#1B2333;
+  --text-dim:#7C8798;
+  --accent:#3B6DF0;
+  --accent-soft:#EAF0FE;
+  --green:#16A34A;
+  --green-soft:#E7F8ED;
+  --amber:#D97C0A;
+  --amber-soft:#FEF3E1;
+  --purple:#7C3AED;
+  --purple-soft:#F1EAFD;
+  --gray:#94A3B8;
+  --gray-soft:#F0F3F8;
+  --danger:#E23F63;
+  --danger-soft:#FDEAEF;
+  --shadow:0 1px 2px rgba(20,30,60,.04), 0 6px 20px rgba(20,30,60,.06);
+  --mono:'IBM Plex Mono', ui-monospace, monospace;
+  --sans-d:'Sora', 'Inter', system-ui, sans-serif;
+  --sans:'Inter', system-ui, -apple-system, sans-serif;
+  --tv-company-font:18px;
+  --tv-student-font:20px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:var(--sans);}
+body{min-height:100vh;}
+.app{max-width:1040px;margin:0 auto;padding:20px 16px 60px;}
+
+/* header */
+.header{display:flex;align-items:center;justify-content:space-between;padding:20px 22px;gap:16px;flex-wrap:wrap;
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;margin-bottom:16px;
+  position:relative;overflow:hidden;box-shadow:var(--shadow);}
+.header::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--accent),var(--green),var(--amber),var(--purple));}
+.h-title{display:flex;align-items:flex-start;gap:9px;flex:1 1 320px;min-width:0;}
+.h-title .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 1.6s infinite;margin-top:7px;flex-shrink:0;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+.h-title-lines{display:flex;flex-direction:column;gap:2px;min-width:0;}
+.h-title-line{font-family:var(--sans-d);line-height:1.5;letter-spacing:0;margin:0;font-weight:800;color:var(--text);
+  word-break:break-word;}
+.h-title-line:empty{display:none;}
+.h-sub{color:var(--text-dim);font-size:12.5px;font-family:var(--sans);margin-top:5px;font-weight:500;}
+.h-clock{font-family:var(--mono);font-size:22px;font-weight:600;letter-spacing:.5px;color:var(--accent);
+  font-variant-numeric:tabular-nums;flex-shrink:0;}
+
+/* nav */
+.tabs{display:flex;gap:6px;margin-bottom:16px;}
+.tab{flex:1;padding:11px 10px;text-align:center;background:var(--panel);border:1px solid var(--line);
+  border-radius:10px;cursor:pointer;font-size:13.5px;font-weight:700;color:var(--text-dim);
+  font-family:var(--sans);transition:all .15s;user-select:none;box-shadow:var(--shadow);}
+.tab:hover{color:var(--text);border-color:#c9d4e8;}
+.tab.active{color:#fff;background:var(--accent);border-color:var(--accent);}
+
+/* panels */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;display:none;
+  box-shadow:var(--shadow);}
+.panel.active{display:block;}
+
+/* summary strip */
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
+.sum-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px;box-shadow:var(--shadow);}
+.sum-num{font-family:var(--sans-d);font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;}
+.sum-label{font-size:11.5px;color:var(--text-dim);margin-top:2px;font-weight:600;}
+.sum-card.c-interviewing .sum-num{color:var(--green);}
+.sum-card.c-waiting .sum-num{color:var(--amber);}
+.sum-card.c-free .sum-num{color:var(--text-dim);}
+.sum-card.c-hired .sum-num{color:var(--purple);}
+
+/* board grid */
+.board-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.board-head h2{font-size:13px;margin:0;font-family:var(--sans);color:var(--text-dim);letter-spacing:.3px;font-weight:700;text-transform:uppercase;}
+.flap-list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+.flap-row{display:grid;grid-template-columns:44px 1fr auto 1fr auto;align-items:center;gap:12px;
+  background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gray);
+  border-radius:8px;padding:9px 14px;font-family:var(--sans);font-size:12.5px;box-shadow:var(--shadow);}
+.flap-row.flip{animation:flip .4s ease;}
+@keyframes flip{0%{transform:scale(.94);opacity:0;}100%{transform:scale(1);opacity:1;}}
+.flap-num{color:var(--text-dim);font-weight:700;font-size:11px;font-family:var(--mono);}
+.flap-name{font-family:var(--sans);font-weight:700;font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.flap-company{color:var(--text-dim);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.flap-time{color:var(--text-dim);font-size:11px;font-family:var(--mono);text-align:right;white-space:nowrap;}
+@media (max-width:820px){ .flap-list{grid-template-columns:repeat(1,1fr);} }
+
+
+/* 即時廠商錄取名單（總覽看板）：一間公司一列，公司名稱固定一行（深色底白字），名單在右邊 */
+.ov-admit-list{display:grid;grid-template-columns:fit-content(300px) minmax(0,1fr);gap:6px 0;align-items:stretch;}
+.ov-admit-row{display:contents;}
+.ov-admit-company{display:flex;align-items:center;max-width:300px;min-height:50px;padding:8px 16px;background:#fff;color:#000;
+  font-size:16px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-radius:10px 0 0 10px;
+  border:1px solid #C4B5FD;border-left:6px solid #6D28D9;}
+.ov-admit-names{display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-width:0;min-height:50px;padding:8px 12px;
+  background:#F5F3FF;border:1px solid #DDD6FE;border-left:none;border-radius:0 10px 10px 0;}
+.ov-chip{display:inline-flex;align-items:center;gap:6px;border:2px solid #C4B5FD;background:#fff;border-radius:999px;padding:2px 12px;
+  font-size:15px;font-weight:700;color:var(--text);white-space:nowrap;}
+.ov-chip .ov-num{font-family:var(--mono);font-size:11.5px;color:#5B21B6;background:#EDE9FE;border-radius:5px;padding:1px 6px;}
+.ov-chip.matched{background:#6D28D9;border-color:#6D28D9;color:#fff;}
+.ov-chip.matched .ov-num{background:rgba(255,255,255,.28);color:#fff;}
+.ov-chip .ov-badge{font-size:11px;font-weight:800;color:#5B21B6;background:#fff;border-radius:5px;padding:0 6px;}
+.ov-empty{color:var(--text-dim);font-weight:600;font-size:14px;}
+@media (max-width:600px){
+  /* 手機：公司名稱獨佔一行，名單排在下面 */
+  .ov-admit-list{grid-template-columns:minmax(0,1fr);gap:0;}
+  .ov-admit-company{max-width:none;min-height:40px;margin-top:8px;border-radius:10px 10px 0 0;font-size:16px;border-bottom:1px solid #DDD6FE;}
+  .ov-admit-names{border-left:1px solid #DDD6FE;border-top:none;border-radius:0 0 10px 10px;}
+  .ov-chip{font-size:14px;padding:2px 10px;}
+}
+  background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--purple);
+  border-radius:8px;padding:10px 14px;font-family:var(--sans);box-shadow:var(--shadow);min-height:64px;}
+  white-space:normal;overflow-wrap:break-word;word-break:break-word;}
+.status-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border-radius:6px;font-size:11.5px;font-weight:700;letter-spacing:.2px;width:fit-content;}
+.status-pill .led{width:6px;height:6px;border-radius:50%;}
+.st-interviewing{background:var(--green-soft);color:var(--green);}
+.st-interviewing .led{background:var(--green);}
+.st-waiting{background:var(--amber-soft);color:var(--amber);}
+.st-waiting .led{background:var(--amber);}
+.st-free{background:var(--gray-soft);color:var(--text-dim);}
+.st-free .led{background:var(--gray);}
+.st-done{background:var(--accent-soft);color:var(--accent);}
+.st-done .led{background:var(--accent);}
+.st-hired{background:var(--purple-soft);color:var(--purple);}
+.st-hired .led{background:var(--purple);}
+.flap-row:has(.st-interviewing){border-left-color:var(--green);}
+.flap-row:has(.st-waiting){border-left-color:var(--amber);}
+.flap-row:has(.st-hired){border-left-color:var(--purple);}
+.empty{color:var(--text-dim);font-size:13px;padding:24px;text-align:center;font-family:var(--sans);}
+.flap-list .empty{grid-column:1/-1;}
+
+/* company panel */
+.company-select{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+/* 公司操作台學生方塊（手機 4 欄，桌機自動加寬） */
+.co-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;}
+.co-card{display:flex;flex-direction:column;gap:4px;text-align:center;background:var(--panel);border:1px solid var(--line);
+  border-top:3px solid var(--gray);border-radius:10px;padding:7px 4px;box-shadow:var(--shadow);min-width:0;}
+.co-card.co-s-green{border-top-color:var(--green);} .co-card.co-s-amber{border-top-color:var(--amber);}
+.co-card.co-s-purple{border-top-color:var(--purple);background:var(--purple-soft);}
+.co-card-done{opacity:.8;}
+.co-name{font-weight:800;font-size:13px;line-height:1.25;word-break:break-all;}
+.co-num{font-family:var(--mono);font-size:11px;color:var(--accent);}
+.co-status{font-size:10.5px;font-weight:700;color:var(--text-dim);}
+.co-s-green .co-status{color:var(--green);} .co-s-amber .co-status{color:var(--amber);} .co-s-purple .co-status{color:var(--purple);}
+.co-opt{font-family:var(--sans);font-size:10.5px;font-weight:700;line-height:1.2;color:var(--text);background:var(--panel-2);
+  border:1px solid var(--line);border-radius:6px;padding:6px 2px;cursor:pointer;word-break:keep-all;}
+.co-opt.selected{background:var(--accent);border-color:var(--accent);color:#fff;}
+.co-opt.selected::before{content:'✓ ';}
+.co-confirm{font-family:var(--sans);font-size:11px;font-weight:800;color:#fff;background:var(--green);border:none;border-radius:6px;padding:7px 0;cursor:pointer;}
+.co-confirm:disabled{background:var(--gray-soft);color:var(--gray);cursor:not-allowed;}
+@media (min-width:701px){
+  .co-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;}
+  .co-name{font-size:15px;} .co-status{font-size:12px;} .co-opt{font-size:12.5px;padding:7px 4px;} .co-confirm{font-size:13px;}
+}
+.company-select label{font-size:12.5px;color:var(--text-dim);font-weight:600;}
+.current-badge{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:999px;
+  font-size:16px;font-weight:800;letter-spacing:.2px;}
+.current-badge::before{content:"";width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.current-badge-active{background:var(--green-soft);color:var(--green);
+  box-shadow:0 0 0 2px var(--green) inset;}
+.current-badge-active::before{background:var(--green);animation:pulse 1.4s infinite;}
+.current-badge-empty{background:var(--gray-soft);color:var(--text-dim);font-weight:600;font-size:14px;}
+.current-badge-empty::before{background:var(--gray);}
+
+.interview-banner{display:flex;align-items:center;gap:14px;padding:16px 20px;border-radius:12px;
+  margin-bottom:16px;transition:all .2s;}
+.interview-banner-label{font-size:12.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;flex-shrink:0;}
+.interview-banner-name{font-family:var(--sans-d);font-size:26px;font-weight:800;flex:1;line-height:1.2;}
+.interview-banner-empty{background:var(--gray-soft);border:2px solid var(--line);}
+.interview-banner-empty .interview-banner-label{color:var(--text-dim);}
+.interview-banner-empty .interview-banner-name{color:var(--text-dim);font-size:18px;font-weight:600;}
+.interview-banner-active{background:var(--green-soft);border:2px solid var(--green);
+  box-shadow:0 4px 18px rgba(22,163,74,.18);}
+.interview-banner-active .interview-banner-label{color:var(--green);}
+.interview-banner-active .interview-banner-name{color:var(--green);}
+.interview-banner-active .interview-banner-name::before{content:"🟢 ";}
+@media (max-width:600px){
+  .interview-banner{flex-wrap:wrap;}
+  .interview-banner-name{font-size:21px;}
+}
+select,input[type=text],input[type=password],textarea{background:var(--panel-2);border:1px solid var(--line);color:var(--text);
+  border-radius:8px;padding:9px 11px;font-family:var(--sans);font-size:13.5px;outline:none;}
+select:focus,input:focus,textarea:focus{border-color:var(--accent);}
+select{min-width:200px;}
+
+.roster{display:flex;flex-direction:column;gap:8px;}
+.roster-row{display:grid;grid-template-columns:1fr 140px 1fr auto;align-items:center;gap:10px;
+  background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;}
+.roster-name{font-weight:700;font-size:15px;}
+.roster-note{color:var(--text-dim);font-size:11.5px;font-family:var(--sans);}
+.btn{border:none;border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;
+  font-family:var(--sans);transition:all .15s;white-space:nowrap;}
+.btn:hover{filter:brightness(0.95);}
+.btn:disabled{opacity:.45;cursor:not-allowed;}
+.btn-start{background:var(--green);color:#fff;}
+.btn-queue{background:var(--amber);color:#fff;}
+.btn-end{background:var(--accent);color:#fff;}
+.auto-fill-row{display:flex;align-items:flex-start;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  padding:10px 14px;margin-bottom:12px;cursor:pointer;font-size:14px;font-weight:700;}
+.auto-fill-row input{width:20px;height:20px;margin-top:1px;flex-shrink:0;accent-color:var(--green);cursor:pointer;}
+.auto-fill-row small{display:block;font-size:11.5px;font-weight:600;color:var(--text-dim);margin-top:2px;line-height:1.4;}
+.btn-end.selected::before{content:'✓ ';}
+.btn-end.selected{box-shadow:0 0 0 3px rgba(59,109,240,.3);}
+.queue-move{padding:4px 9px;font-size:13px;line-height:1;}
+.queue-draft-bar{display:flex;align-items:center;flex-wrap:wrap;gap:8px;background:var(--amber-soft);border:1px solid var(--amber);
+  border-radius:10px;padding:8px 12px;margin-bottom:8px;font-size:12.5px;font-weight:700;color:var(--amber);}
+.btn-remove{background:var(--panel);color:var(--text-dim);border:1px solid var(--line);}
+.btn-add{background:var(--accent);color:#fff;}
+.btn-danger{background:var(--danger-soft);color:var(--danger);border:1px solid rgba(226,63,99,.25);}
+.btn-hire{background:var(--purple);color:#fff;}
+.btn-unhire{background:var(--purple-soft);color:var(--purple);border:1px solid rgba(124,58,237,.25);}
+
+/* admitted list */
+.admit-list{display:flex;flex-direction:column;gap:8px;}
+.admit-row{display:grid;grid-template-columns:1fr 1fr 140px auto;align-items:center;gap:10px;
+  background:var(--panel-2);border:1px solid var(--line);border-left:3px solid var(--purple);
+  border-radius:10px;padding:10px 12px;}
+.admit-name{font-weight:700;font-size:15px;}
+.admit-company{color:var(--purple);font-weight:700;font-size:14.5px;}
+.admit-time{color:var(--text-dim);font-size:11.5px;font-family:var(--mono);}
+
+/* setup */
+.setup-block{margin-bottom:22px;}
+/* 設定選單（設定 hub）與返回按鈕 */
+.settings-hub-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
+.settings-hub-card{display:block;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  padding:22px 20px;cursor:pointer;box-shadow:var(--shadow);transition:transform .12s, box-shadow .12s, border-color .12s;font-family:var(--sans);}
+.settings-hub-card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(20,30,60,.1);border-color:var(--accent);}
+.settings-hub-title{font-size:17px;font-weight:800;color:var(--text);margin-bottom:8px;}
+.settings-hub-desc{font-size:12.5px;color:var(--text-dim);line-height:1.5;}
+.settings-back-btn{display:inline-block;background:none;border:none;color:var(--accent);font-size:12.5px;font-weight:700;
+  cursor:pointer;padding:0;margin-bottom:16px;font-family:var(--sans);}
+.settings-back-btn:hover{text-decoration:underline;}
+/* 學生個人查詢 */
+.stu-hero{border-radius:14px;padding:16px 18px;margin-bottom:12px;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);}
+.stu-hero .stu-hero-name{font-size:20px;font-weight:800;}
+.stu-hero .stu-hero-sub{font-size:13px;color:var(--text-dim);margin-top:4px;font-weight:600;}
+.stu-hero.is-hired{background:var(--purple-soft);border-color:var(--purple);}
+.stu-hero.is-interviewing{background:var(--green-soft);border-color:var(--green);}
+.stu-section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow);}
+.stu-section h3{margin:0 0 10px;font-size:14px;font-weight:800;}
+.stu-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:10px;background:var(--panel-2);
+  border:1px solid var(--line);margin-bottom:8px;font-size:15px;font-weight:700;}
+.stu-item:last-child{margin-bottom:0;}
+.stu-item .stu-meta{font-size:12px;color:var(--text-dim);font-weight:700;white-space:nowrap;}
+.stu-item.amber{border-left:4px solid var(--amber);} .stu-item.green{border-left:4px solid var(--green);} .stu-item.purple{border-left:4px solid var(--purple);}
+.stu-empty{font-size:13px;color:var(--text-dim);font-weight:600;}
+.stu-badge{font-size:11px;font-weight:800;color:#fff;background:var(--purple);border-radius:5px;padding:2px 7px;white-space:nowrap;}
+/* 公司登入 / 帳號設定 */
+.login-box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--shadow);max-width:560px;}
+.login-box input{flex:1 1 140px;min-width:120px;}
+.login-error{color:var(--danger);font-size:12.5px;font-weight:700;margin-top:8px;min-height:16px;}
+.login-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--accent-soft);border:1px solid var(--line);
+  border-radius:10px;padding:8px 14px;margin-bottom:12px;font-size:13px;}
+.account-list{display:flex;flex-direction:column;gap:8px;}
+.account-row{display:grid;grid-template-columns:minmax(110px,1.2fr) minmax(90px,1fr) minmax(90px,1fr) auto auto;gap:8px;align-items:center;
+  background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:12.5px;}
+.account-row .acc-name{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.account-row input{min-width:0;width:100%;}
+.acc-status{font-size:11.5px;font-weight:700;white-space:nowrap;}
+.acc-status.online{color:var(--green);} .acc-status.offline{color:var(--text-dim);} .acc-status.unset{color:var(--danger);}
+.account-row .acc-actions{display:flex;gap:6px;}
+@media (max-width:820px){ .account-row{grid-template-columns:1fr 1fr;} }
+.setup-block h3{font-size:12.5px;font-family:var(--sans);color:var(--text-dim);margin:0 0 10px;letter-spacing:.3px;font-weight:700;text-transform:uppercase;}
+.title-setup-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:12px;
+  background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:10px 12px;}
+.title-setup-row label{font-size:12.5px;color:var(--text-dim);font-weight:700;flex-shrink:0;min-width:90px;}
+.title-setup-row input[type=text]{flex:1 1 200px;min-width:160px;}
+.title-size-control{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.title-size-control span{font-size:11.5px;color:var(--text-dim);white-space:nowrap;}
+.title-size-control input[type=range]{width:100px;accent-color:var(--accent);}
+.title-size-value{font-family:var(--mono);font-weight:700;color:var(--accent);min-width:36px;}
+.row-inline{display:flex;gap:8px;margin-bottom:10px;}
+.row-inline input,.row-inline select{flex:1;}
+textarea{width:100%;min-height:80px;resize:vertical;font-family:var(--mono);}
+.chip-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+.chip{display:flex;align-items:center;gap:8px;background:var(--panel-2);border:1px solid var(--line);
+  border-radius:20px;padding:6px 8px 6px 12px;font-size:13.5px;font-weight:600;}
+.chip-num{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--accent);
+  background:var(--accent-soft);border-radius:5px;padding:1px 6px;}
+.chip button{background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:14px;line-height:1;padding:2px 4px;}
+.chip button:hover{color:var(--danger);}
+.hint{color:var(--text-dim);font-size:12px;line-height:1.6;margin-top:6px;}
+.conn{font-family:var(--sans);font-size:11.5px;color:var(--text-dim);display:flex;align-items:center;gap:6px;margin-top:6px;font-weight:600;}
+.conn .led{width:6px;height:6px;border-radius:50%;background:var(--green);}
+
+/* password modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(27,35,51,.45);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;}
+.modal-overlay.show{display:flex;}
+.modal-box{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;width:100%;max-width:300px;
+  box-shadow:0 20px 60px rgba(20,30,60,.25);}
+.modal-title{font-family:var(--sans-d);font-size:16px;font-weight:800;margin-bottom:6px;}
+.modal-sub{color:var(--text-dim);font-size:12.5px;margin-bottom:14px;line-height:1.5;}
+.modal-box input{width:100%;letter-spacing:2px;font-family:var(--mono);}
+.modal-error{color:var(--danger);font-size:12px;margin-top:8px;display:none;}
+.modal-actions{display:flex;gap:8px;margin-top:16px;}
+.modal-actions .btn{flex:1;}
+
+/* TV wall / 投影模式 */
+body.tv-active .app{display:none;}
+body.tv-active #tvWall{display:flex;}
+.tv-wall{display:none;position:fixed;inset:0;background:#FFFFFF;color:var(--text);flex-direction:column;
+  padding:18px 32px 14px;font-family:var(--sans);z-index:100;overflow:auto;}
+.tv-header{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;margin-bottom:10px;
+  border-bottom:2px solid var(--line);padding-bottom:10px;padding-right:310px;}
+.tv-title{font-family:var(--sans-d);font-weight:800;line-height:1.5;max-width:80%;color:var(--text);}
+.tv-title-line{word-break:break-word;}
+.tv-title-line:empty{display:none;}
+.tv-clock{font-family:var(--mono);font-size:36px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;flex-shrink:0;}
+.tv-num{font-family:var(--mono);font-weight:700;}
+.tv-empty{color:var(--text-dim);font-size:19px;}
+.tv-header-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0;}
+.tv-stats-mini{font-size:15px;font-weight:700;color:var(--text-dim);white-space:nowrap;}
+
+/* 投影模式：一間公司一列，三個區域（面試進行中／等候中／即時錄取）同列並排，一眼看完 */
+.tv-body{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;}
+.tv-board-wrap{flex:1 1 auto;min-height:0;container-type:size;}
+.tv-board{--cols:minmax(0,1.1fr) minmax(0,1fr) minmax(0,1.6fr) minmax(0,1.7fr);
+  --head-h:40px;
+  --row-h:calc((100cqh - var(--head-h)) / var(--n,19));
+  height:min(100cqh, calc(var(--head-h) + var(--n,19) * 96px));
+  display:flex;flex-direction:column;gap:0;}
+.tv-b-head,.tv-b-row{display:grid;grid-template-columns:var(--cols);gap:8px;align-items:stretch;}
+.tv-b-head{flex:0 0 var(--head-h);margin-bottom:4px;}
+.tv-b-hcell{display:flex;align-items:center;justify-content:center;border-radius:8px;color:#fff;font-weight:800;letter-spacing:1px;font-size:20px;}
+.tv-b-hcell.h-company{background:#fff;color:#000;border:2px solid #000;}
+.tv-b-hcell.h-int{background:var(--green);}
+.tv-b-hcell.h-wait{background:var(--amber);}
+.tv-b-hcell.h-admit{background:var(--purple);}
+.tv-b-row{flex:1 1 0;min-height:0;padding:3px 0;border-bottom:2px solid #6B7280;}   /* 每間公司一條貫穿整列的水平線，方便對齊 */
+.tv-b-row:last-child{border-bottom:2px solid #6B7280;}
+.tv-b-row:nth-child(even){background:#F3F4F6;}   /* 隔列淡灰底，視線更好跟著橫向移動 */
+.tv-b-company-cell,.tv-b-int:not(.active){background:transparent;border-color:transparent;}
+.tv-b-cell{display:flex;align-items:center;min-width:0;min-height:0;overflow:hidden;border-radius:8px;padding:0 12px;
+  background:var(--panel-2);border:1px solid var(--line);}
+.tv-b-company{font-weight:800;line-height:1.15;color:var(--text);font-size:var(--tv-company-font);
+  font-size:min(var(--tv-company-font), calc(var(--row-h) * .42));
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:break-word;}
+.tv-b-student{font-weight:800;white-space:nowrap;font-size:var(--tv-student-font);
+  font-size:min(var(--tv-student-font), calc(var(--row-h) * .52));}
+.tv-b-empty{color:#B8C0CD;font-weight:600;}
+.tv-b-num{font-family:var(--mono);font-weight:700;font-size:.72em;border-radius:5px;padding:1px 6px;margin-right:6px;}
+.tv-b-int{cursor:pointer;}
+.tv-b-int.active{background:var(--green);border-color:var(--green);box-shadow:0 3px 12px rgba(22,163,74,.3);}
+.tv-b-int.active .tv-b-student{color:#fff;}
+.tv-b-int.active .tv-b-num{background:rgba(255,255,255,.22);color:#fff;}
+.tv-b-wait{background:var(--amber-soft);border-color:#F3D9AE;}
+.tv-b-wait .tv-b-num{background:#fff;color:var(--amber);}
+.tv-b-rank{font-family:var(--mono);font-weight:800;font-size:.62em;color:#fff;background:var(--amber);border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;min-width:1.5em;height:1.5em;margin-right:6px;}
+.tv-b-marq{width:100%;overflow:hidden;}
+.tv-b-marq.is-scrolling{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 18px,#000 calc(100% - 18px),transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 18px,#000 calc(100% - 18px),transparent 100%);}
+.tv-b-track{display:inline-flex;align-items:center;white-space:nowrap;width:max-content;}
+.tv-b-track.scrolling{animation:tv-marquee-scroll linear infinite;}
+.tv-b-item{display:inline-flex;align-items:center;margin-right:30px;}
+@keyframes tv-marquee-scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.tv-b-admit{background:var(--purple-soft);border-color:#D9C8F7;}
+.tv-b-chip{display:inline-flex;align-items:center;margin-right:10px;border:2px solid var(--purple);background:#fff;border-radius:999px;padding:0 12px;}
+.tv-b-chip .tv-b-num{background:var(--purple-soft);color:var(--purple);}
+.tv-b-chip.matched{background:var(--purple);}
+.tv-b-chip.matched .tv-b-student{color:#fff;}
+.tv-b-chip.matched .tv-b-num{background:rgba(255,255,255,.25);color:#fff;}
+.tv-b-badge{font-size:.6em;font-weight:800;color:var(--purple);background:#fff;border-radius:6px;padding:1px 7px;margin-left:8px;}
+@media (max-height:820px) and (min-width:761px){   /* 較矮的投影幕：標題縮小，把空間留給 19 列公司 */
+  .tv-title-line{font-size:20px !important;}
+  .tv-clock{font-size:28px;}
+  .tv-wall{padding-top:12px;}
+}
+@media (max-width:760px){
+  .tv-body{flex:none;}
+  .tv-board-wrap{container-type:normal;}
+  .tv-board{--row-h:56px;height:auto;}
+  .tv-b-head{display:none;}
+  .tv-b-row{grid-template-columns:repeat(3,minmax(0,1fr));flex:none;gap:6px;padding:8px;background:#fff;border:1px solid var(--line);border-radius:10px;}
+  .tv-b-company-cell{grid-column:1/-1;}
+  .tv-b-cell{flex-direction:column;align-items:flex-start;justify-content:center;min-height:52px;padding:6px 8px;}
+  .tv-b-cell[data-label]::before{content:attr(data-label);font-size:11px;font-weight:800;color:var(--text-dim);margin-bottom:2px;}
+  .tv-stats-mini{font-size:12px;}
+}
+.tv-exit{position:fixed;top:22px;right:24px;background:var(--panel);border:1px solid var(--line);
+  color:var(--text-dim);padding:10px 18px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;
+  font-family:var(--sans);z-index:101;box-shadow:var(--shadow);}
+.tv-exit:hover{color:var(--text);border-color:#c9d4e8;}
+.tv-sound-toggle{position:fixed;top:22px;right:170px;background:var(--green-soft);border:1px solid var(--green);
+  color:var(--green);padding:10px 18px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;
+  font-family:var(--sans);z-index:101;box-shadow:var(--shadow);}
+.tv-sound-toggle.muted{background:var(--gray-soft);border-color:var(--line);color:var(--text-dim);}
+.tv-launch{margin-bottom:16px;}
+@media (max-width:700px){
+  .tv-wall{padding:24px 20px;}
+  .tv-title{transform:scale(.85);transform-origin:left top;}
+  .tv-clock{font-size:26px;}
+  .tv-sound-toggle{right:24px;top:64px;}
+}
+
+/* ===== 手機版優化（需搭配 viewport 設定才會生效） ===== */
+html{-webkit-text-size-adjust:100%;}
+button,.tab,.btn,.co-opt,.co-confirm,.settings-hub-card,.auto-fill-row{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+@media (max-width:600px){
+  .app{padding:10px 8px 40px;}
+  .header{padding:14px;gap:8px;margin-bottom:10px;}
+  .h-clock{font-size:18px;}
+  .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;}
+  .tab{flex:none;padding:12px 4px;font-size:13.5px;}
+  .panel{padding:12px;border-radius:12px;}
+  .board-head h2{font-size:15px;}
+  .hint{font-size:13px;line-height:1.5;}
+  /* 輸入框字級 16px：避免 iPhone 點選輸入框時畫面自動放大 */
+  select,input[type=text],input[type=password],textarea{font-size:16px;padding:11px 12px;}
+  select{min-width:0;width:100%;}
+  .row-inline{flex-wrap:wrap;}
+  .row-inline input,.row-inline select{flex:1 1 100%;}
+  .btn{padding:10px 14px;font-size:13.5px;min-height:40px;}
+  .summary{grid-template-columns:repeat(3,1fr);gap:6px;}
+  .sum-card{padding:10px 6px;text-align:center;}
+  .sum-num{font-size:24px;}
+  .sum-label{font-size:12px;}
+  .flap-row{grid-template-columns:34px 1fr auto;gap:4px 8px;padding:10px 12px;}
+  .flap-name{font-size:16px;}
+  .flap-company{display:block;grid-column:2 / -1;font-size:13px;white-space:normal;}
+  .flap-time{display:none;}
+  .flap-company:empty{display:none;}
+  .roster-row,.admit-row{grid-template-columns:1fr;gap:6px;padding:12px;}
+  .roster-name,.admit-name{font-size:16px;}
+  .admit-company{font-size:14px;}
+  .roster-note{font-size:12.5px;}
+  .interview-banner{padding:12px 14px;gap:8px;}
+  .interview-banner-label{flex:1 1 100%;}
+  .interview-banner-name{flex:1 1 100%;}
+  .interview-banner .btn{flex:1 1 40%;}
+  .login-box{padding:14px;}
+  .account-row{grid-template-columns:1fr;}
+  .settings-hub-grid{grid-template-columns:1fr;}
+  .stu-hero .stu-hero-name{font-size:19px;}
+  .stu-item{font-size:16px;}
+  .modal-box{max-width:92vw;}
+  .co-name{font-size:14px;}
+  .co-status{font-size:11px;}
+  .co-opt{font-size:11px;padding:7px 2px;}
+  .co-confirm{font-size:12px;padding:8px 0;}
+  .auto-fill-row{padding:12px;}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="header">
+    <div>
+      <div class="h-title">
+        <span class="dot"></span>
+        <div class="h-title-lines">
+          <div id="titleLine1" class="h-title-line"></div>
+          <div id="titleLine2" class="h-title-line"></div>
+        </div>
+      </div>
+      <div class="conn"><span class="led"></span><span id="connText">連線中 · Firestore 即時同步</span></div>
+    </div>
+    <div class="h-clock" id="clock">--:--:--</div>
+  </div>
+
+  <button class="btn btn-add tv-launch" id="tvModeBtn">📽️ 進入投影模式（給教室投影幕用）</button>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="overview">總覽看板</div>
+    <div class="tab" data-tab="company">公司操作台</div>
+    <div class="tab" data-tab="matchOverview">媒合成功總覽</div>
+    <div class="tab" data-tab="studentView">學生查詢</div>
+    <div class="tab" data-tab="settingsHub">設定</div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="panel active" id="panel-overview">
+    <div class="summary">
+      <div class="sum-card c-interviewing"><div class="sum-num" id="numInterviewing">0</div><div class="sum-label">面試中</div></div>
+      <div class="sum-card c-free"><div class="sum-num" id="numFree">0</div><div class="sum-label">目前空閒</div></div>
+      <div class="sum-card c-hired"><div class="sum-num" id="numHired">0</div><div class="sum-label">媒合成功</div></div>
+    </div>
+    <div class="board-head"><h2>學生即時狀態</h2></div>
+    <div class="flap-list" id="overviewList"></div>
+    <div class="board-head" style="margin-top:20px;"><h2>即時廠商錄取名單</h2></div>
+    <div class="ov-admit-list" id="overviewPendingAdmitList"></div>
+  </div>
+
+  <!-- COMPANY -->
+  <div class="panel" id="panel-company">
+    <!-- 公司登入（每間公司一組帳密，同一帳號同時只能一位登入） -->
+    <div id="companyLoginBox" class="login-box">
+      <div class="board-head"><h2>公司登入</h2></div>
+      <div class="hint" style="margin-bottom:12px;">請輸入貴公司的帳號與密碼。同一個帳號同一時間只能有一位登入；帳密由主辦單位提供。</div>
+      <div class="row-inline">
+        <input type="text" id="loginAccount" placeholder="帳號" autocomplete="username" autocapitalize="off" spellcheck="false">
+        <input type="password" id="loginPassword" placeholder="密碼" autocomplete="current-password">
+        <button class="btn btn-add" id="loginBtn">登入</button>
+      </div>
+      <div class="login-error" id="loginError"></div>
+    </div>
+
+    <div id="companyConsole" style="display:none;">
+      <div class="login-bar">
+        <span>目前登入：<b id="loggedCompanyName"></b></span>
+        <button class="btn btn-remove" id="logoutBtn">登出</button>
+      </div>
+      <div id="currentInterviewBanner" class="interview-banner interview-banner-empty">
+        <span class="interview-banner-label">目前面試</span>
+        <span id="currentInterviewName" class="interview-banner-name">尚無</span>
+        <button class="btn btn-end" id="endInterviewBtn" disabled>結束面試</button>
+        <button class="btn btn-hire" id="endConfirmBtn" disabled>確認</button>
+      </div>
+      <label class="auto-fill-row">
+        <input type="checkbox" id="autoFillCheck" checked>
+        <span>自動遞補<small>（勾選：結束面試後，自動叫我方等候名單第一位；取消勾選：需自行按「開始面試」）</small></span>
+      </label>
+      <div id="companyQueue"></div>
+      <div class="board-head"><h2 id="companyHeading">全體學生名單</h2></div>
+      <div class="roster" id="companyRoster"></div>
+    </div>
+  </div>
+
+  <!-- STUDENT VIEW (學生個人查詢) -->
+  <div class="panel" id="panel-studentView">
+    <div id="studentLoginBox" class="login-box">
+      <div class="board-head"><h2>學生查詢</h2></div>
+      <div class="hint" style="margin-bottom:12px;">請輸入主辦單位提供的帳號與密碼，查看自己目前被哪些公司等候、正在面試的公司，以及錄取結果。</div>
+      <div class="row-inline">
+        <input type="text" id="stuAccount" placeholder="帳號" autocomplete="username" autocapitalize="off" spellcheck="false">
+        <input type="password" id="stuPassword" placeholder="密碼" autocomplete="current-password">
+        <button class="btn btn-add" id="stuLoginBtn">登入</button>
+      </div>
+      <div class="login-error" id="stuLoginError"></div>
+    </div>
+    <div id="studentConsole" style="display:none;">
+      <div class="login-bar">
+        <span>目前登入：<b id="loggedStudentName"></b></span>
+        <button class="btn btn-remove" id="stuLogoutBtn">登出</button>
+      </div>
+      <div id="studentView"></div>
+    </div>
+  </div>
+
+  <!-- SETTINGS HUB (設定選單) -->
+  <div class="panel" id="panel-settingsHub">
+    <div class="board-head"><h2>設定 / 管理</h2></div>
+    <div class="hint" style="margin-bottom:18px;">請選擇要進入的功能頁面。</div>
+    <div class="settings-hub-grid">
+      <button class="settings-hub-card" data-goto="pendingAdmit">
+        <div class="settings-hub-title">即時廠商錄取名單</div>
+        <div class="settings-hub-desc">廠商面試完學生後，登記初步要錄取的即時名單。</div>
+      </button>
+      <button class="settings-hub-card" data-goto="admitted">
+        <div class="settings-hub-title">媒合成功名單</div>
+        <div class="settings-hub-desc">登記每位學生最終確定的唯一媒合結果。</div>
+      </button>
+      <button class="settings-hub-card" data-goto="setup">
+        <div class="settings-hub-title">名單設定</div>
+        <div class="settings-hub-desc">標題、投影字體、公司與學生名單等基本設定。</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- PENDING ADMIT (即時廠商錄取名單) -->
+  <div class="panel" id="panel-pendingAdmit">
+    <button class="settings-back-btn" data-goto="settingsHub">← 返回設定選單</button>
+    <div class="company-select">
+      <label>目前操作公司：</label>
+      <select id="pendingAdmitCompanySelect"></select>
+    </div>
+    <div class="hint" style="margin-bottom:16px;">此名單是廠商面試完學生後，即時登記「初步要錄取」的名單。同一位學生可以同時被多間公司登記，不會因為某公司先登記就無法被其他公司登記；登記結果會即時顯示在「總覽看板」。等最終確定媒合結果後，請至「媒合成功名單」登記唯一的媒合結果，屆時該學生就會從這份名單移除，也無法再被其他公司面試或登記。</div>
+    <div class="board-head"><h2 id="pendingAdmitHeading">學生名單（登記本公司即時錄取）</h2></div>
+    <div class="roster" id="pendingAdmitRoster"></div>
+  </div>
+
+  <!-- ADMITTED (媒合成功名單) -->
+  <div class="panel" id="panel-admitted">
+    <button class="settings-back-btn" data-goto="settingsHub">← 返回設定選單</button>
+    <div class="board-head"><h2>登記媒合成功</h2></div>
+    <div class="row-inline">
+      <select id="admitStudentSelect"></select>
+      <select id="admitCompanySelect"></select>
+      <button class="btn btn-hire" id="addAdmitBtn">確認媒合成功</button>
+    </div>
+    <div class="hint" id="admitFormHint" style="margin-bottom:16px;"></div>
+    <div class="board-head"><h2>已媒合成功名單</h2></div>
+    <div class="admit-list" id="admitList"></div>
+  </div>
+
+  <!-- MATCH OVERVIEW (媒合成功總覽，依座號排序) -->
+  <div class="panel" id="panel-matchOverview">
+    <div class="board-head"><h2>媒合成功總覽（依座號排序）</h2></div>
+    <div class="flap-list" id="matchOverviewList"></div>
+  </div>
+
+  <!-- SETUP -->
+  <div class="panel" id="panel-setup">
+    <button class="settings-back-btn" data-goto="settingsHub">← 返回設定選單</button>
+    <div class="setup-block">
+      <h3>標題列設定</h3>
+      <div class="hint">分別設定第一行、第二行標題文字與字體大小，會同步顯示在頁面上方與投影模式。</div>
+      <div class="title-setup-row">
+        <label>標題1（第一行）</label>
+        <input type="text" id="titleLine1Input" placeholder="輸入第一行標題">
+        <div class="title-size-control">
+          <span>字體大小</span>
+          <input type="range" id="titleSize1Input" min="12" max="40" value="16">
+          <span id="titleSize1Value" class="title-size-value">16px</span>
+        </div>
+      </div>
+      <div class="title-setup-row">
+        <label>標題2（第二行）</label>
+        <input type="text" id="titleLine2Input" placeholder="輸入第二行標題（選填）">
+        <div class="title-size-control">
+          <span>字體大小</span>
+          <input type="range" id="titleSize2Input" min="12" max="40" value="13">
+          <span id="titleSize2Value" class="title-size-value">13px</span>
+        </div>
+      </div>
+      <div class="row-inline" style="margin-top:10px;">
+        <button class="btn btn-add" id="saveTitleBtn">儲存標題設定</button>
+      </div>
+    </div>
+    <div class="setup-block">
+      <h3>投影模式字體設定</h3>
+      <div class="hint">分開調整投影模式中「公司名稱」與「學生座號＋姓名」的字體大小，會套用到面試進行中、等候中、即時廠商錄取名單等所有卡片，讓卡片大小與字體維持一致。</div>
+      <div class="title-setup-row">
+        <label>公司名稱</label>
+        <div class="title-size-control">
+          <span>字體大小</span>
+          <input type="range" id="tvCompanyFontInput" min="12" max="32" value="18">
+          <span id="tvCompanyFontValue" class="title-size-value">18px</span>
+        </div>
+      </div>
+      <div class="title-setup-row">
+        <label>學生座號＋姓名</label>
+        <div class="title-size-control">
+          <span>字體大小</span>
+          <input type="range" id="tvStudentFontInput" min="12" max="36" value="20">
+          <span id="tvStudentFontValue" class="title-size-value">20px</span>
+        </div>
+      </div>
+      <div class="row-inline" style="margin-top:10px;">
+        <button class="btn btn-add" id="saveTvFontBtn">儲存投影字體設定</button>
+      </div>
+    </div>
+    <div class="setup-block">
+      <h3>學生帳號設定</h3>
+      <div class="hint">每位學生一組帳號與密碼，學生到「學生查詢」頁登入後，只能看到自己的狀態（被哪些公司等候、面試中、錄取結果）。密碼不會被明文保存，儲存後無法再查看，忘記時請重新設定。</div>
+      <div class="row-inline" style="margin:8px 0;">
+        <button class="btn btn-add" id="genStuMissingBtn">自動產生（尚未設定的學生）</button>
+        <button class="btn btn-danger" id="genStuAllBtn">全部重新產生</button>
+      </div>
+      <div id="stuCredOutputWrap" style="display:none;margin-bottom:10px;">
+        <div class="hint">本次產生的帳密（僅此刻顯示，請立即複製或截圖保存）：</div>
+        <textarea id="stuCredOutput" readonly rows="6" style="width:100%;font-family:var(--mono);"></textarea>
+        <div class="row-inline" style="margin-top:6px;"><button class="btn btn-add" id="copyStuCredBtn">複製</button></div>
+      </div>
+      <div id="stuAccountList" class="account-list"></div>
+    </div>
+    <div class="setup-block">
+      <h3>公司帳號設定</h3>
+      <div class="hint">每間公司一組帳號與密碼，公司在「公司操作台」登入後才能操作；同一帳號同時只能一位登入。密碼不會被明文保存，儲存後無法再查看，忘記時請重新設定。</div>
+      <div class="row-inline" style="margin:8px 0;">
+        <button class="btn btn-add" id="genMissingBtn">自動產生（尚未設定的公司）</button>
+        <button class="btn btn-danger" id="genAllBtn">全部重新產生</button>
+      </div>
+      <div id="credOutputWrap" style="display:none;margin-bottom:10px;">
+        <div class="hint">本次產生的帳密（僅此刻顯示，請立即複製或截圖保存）：</div>
+        <textarea id="credOutput" readonly rows="6" style="width:100%;font-family:var(--mono);"></textarea>
+        <div class="row-inline" style="margin-top:6px;"><button class="btn btn-add" id="copyCredBtn">複製</button></div>
+      </div>
+      <div id="accountList" class="account-list"></div>
+    </div>
+    <div class="setup-block">
+      <h3>公司名單</h3>
+      <div class="hint">每行一間公司名稱，可一次貼上多筆。</div>
+      <textarea id="companyBulk" placeholder="A 公司&#10;B 公司&#10;C 公司"></textarea>
+      <div class="row-inline" style="margin-top:8px;">
+        <button class="btn btn-add" id="addCompanyBtn">新增公司</button>
+        <button class="btn btn-danger" id="clearCompanyBtn">清空公司名單</button>
+      </div>
+      <div class="chip-list" id="companyChips"></div>
+    </div>
+    <div class="setup-block">
+      <h3>學生名單</h3>
+      <div class="hint">每行一位學生姓名或編號，可一次貼上多筆。</div>
+      <textarea id="studentBulk" placeholder="1號同學&#10;2號同學&#10;3號同學"></textarea>
+      <div class="row-inline" style="margin-top:8px;">
+        <button class="btn btn-add" id="addStudentBtn">新增學生</button>
+        <button class="btn btn-danger" id="clearStudentBtn">清空學生名單</button>
+      </div>
+      <div class="chip-list" id="studentChips"></div>
+    </div>
+    <div class="hint">提示：所有公司人員看到的是同一份即時資料，任何人新增或更新都會同步給大家。</div>
+  </div>
+
+</div>
+
+<div class="tv-wall" id="tvWall">
+  <button class="tv-exit" id="tvExitBtn">✕ 結束投影模式</button>
+  <button class="tv-sound-toggle" id="tvSoundToggle">🔊 語音提醒：開啟</button>
+  <div class="tv-header">
+    <div class="tv-title" id="tvTitle">
+      <div id="tvTitleLine1" class="tv-title-line"></div>
+      <div id="tvTitleLine2" class="tv-title-line"></div>
+    </div>
+    <div class="tv-header-right">
+      <div class="tv-clock" id="tvClock">--:--:--</div>
+      <div class="tv-stats-mini" id="tvStats"></div>
+    </div>
+  </div>
+  <div class="tv-body" id="tvBody">
+    <div class="tv-board-wrap"><div class="tv-board" id="tvBodyMain"></div></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="pwModal">
+  <div class="modal-box">
+    <div class="modal-title">🔒 需要密碼</div>
+    <div class="modal-sub" id="pwModalSub">請輸入密碼以進入</div>
+    <input type="password" id="pwInput" placeholder="輸入密碼" inputmode="numeric">
+    <div class="modal-error" id="pwError">密碼錯誤，請再試一次</div>
+    <div class="modal-actions">
+      <button class="btn btn-remove" id="pwCancel">取消</button>
+      <button class="btn btn-add" id="pwSubmit">確認進入</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc, onSnapshot, runTransaction, updateDoc, deleteField } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* ====== 請填入你自己的 Firebase 專案設定 ======
+   1. 前往 https://console.firebase.google.com 建立一個免費專案
+   2. 左側選單開啟「Firestore Database」→ 建立資料庫（測試模式即可先開始）
+   3. 專案設定（齒輪圖示）→ 一般 → 新增網路應用程式 → 複製底下這組設定值貼上
+*/
+const firebaseConfig = {
+  apiKey: "AIzaSyAY1oay6Tze7OVfbdU0Q2jQc4UFvcuUL4M",
+  authDomain: "matching-board-ca8a5.firebaseapp.com",
+  projectId: "matching-board-ca8a5",
+  storageBucket: "matching-board-ca8a5.firebasestorage.app",
+  messagingSenderId: "887898313068",
+  appId: "1:887898313068:web:51f6c106e65ef8a8a1a349"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const boardRef = doc(db, "matching-board", "main");
+const sessionsRef = doc(db, "matching-board", "sessions"); // 公司登入狀態（與主資料分開存放，避免互相覆蓋）
+
+const DEFAULT_TITLE_LINE1 = '臺中高工實用技能學程冷凍空調技術科契合式人才培訓產學專班116年度合作產業機構與學生聯合就業媒合會';
+const DEFAULT_TITLE_LINE2 = '';
+const DEFAULT_TITLE_SIZE1 = 16;
+const DEFAULT_TITLE_SIZE2 = 13;
+const DEFAULT_TV_COMPANY_FONT = 18;
+const DEFAULT_TV_STUDENT_FONT = 20;
+
+let state = { companies: [], students: [] };
+let prevRenderSnapshot = '';
+let myCompanyId = null;      // 目前「公司操作台」登入的公司（未登入為 null）
+let adminCompanyId = null;   // 「即時廠商錄取名單」管理頁選擇的公司
+
+function uid(prefix){ return prefix + '_' + Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+
+function ensureTitleDefaults(){
+  if(state.titleLine1 === undefined) state.titleLine1 = DEFAULT_TITLE_LINE1;
+  if(state.titleLine2 === undefined) state.titleLine2 = DEFAULT_TITLE_LINE2;
+  if(state.titleSize1 === undefined) state.titleSize1 = DEFAULT_TITLE_SIZE1;
+  if(state.titleSize2 === undefined) state.titleSize2 = DEFAULT_TITLE_SIZE2;
+  if(state.tvCompanyFont === undefined) state.tvCompanyFont = DEFAULT_TV_COMPANY_FONT;
+  if(state.tvStudentFont === undefined) state.tvStudentFont = DEFAULT_TV_STUDENT_FONT;
+}
+
+async function saveState(){
+  try{
+    await setDoc(boardRef, state);
+  }catch(e){ console.error('存檔失敗', e); alert('儲存失敗，請確認 Firebase 設定與 Firestore 規則是否正確。'); }
+}
+
+// 即時監聽：只要任何人更新資料，所有裝置會立刻收到推送更新（不需輪詢）
+function startRealtimeSync(){
+  onSnapshot(boardRef, (snap)=>{
+    if(snap.exists()){
+      const data = snap.data();
+      state = {
+        companies: data.companies || [], students: data.students || [],
+        titleLine1: data.titleLine1, titleLine2: data.titleLine2,
+        titleSize1: data.titleSize1, titleSize2: data.titleSize2,
+        tvCompanyFont: data.tvCompanyFont, tvStudentFont: data.tvStudentFont
+      };
+    } else {
+      state = { companies: [], students: [] };
+    }
+    ensureTitleDefaults();
+    stateLoaded = true;
+    maybeResumeLogin();
+    maybeResumeStudentLogin();
+    renderAll();
+  }, (err)=>{
+    console.error('即時同步失敗', err);
+  });
+}
+
+function loadMyCompany(){
+  adminCompanyId = localStorage.getItem('admin-company') || null;
+}
+function saveMyCompany(id){
+  adminCompanyId = id;
+  localStorage.setItem('admin-company', id);
+}
+
+function statusMeta(s){
+  if(s.state === 'interviewing') return {label:'面試中', cls:'st-interviewing'};
+  if(s.state === 'hired') return {label:'媒合成功', cls:'st-hired'};
+  if(s.state === 'done') return {label:'已完成', cls:'st-done'};
+  if(s.queues && Object.keys(s.queues).length>0) return {label:'等候中', cls:'st-waiting'};
+  return {label:'空閒', cls:'st-free'};
+}
+function getQueuePosition(s, companyId){
+  if(!s.queues || s.queues[companyId]==null) return null;
+  const queue = state.students.filter(x=>x.queues && x.queues[companyId]!=null)
+    .sort((a,b)=>a.queues[companyId]-b.queues[companyId]);
+  const idx = queue.findIndex(x=>x.id===s.id);
+  return idx === -1 ? null : idx+1;
+}
+function companyName(id){
+  const c = state.companies.find(c=>c.id===id);
+  return c ? c.name : '—';
+}
+function timeAgo(ts){
+  if(!ts) return '';
+  const d = new Date(ts);
+  return d.toLocaleTimeString('zh-TW', {hour:'2-digit',minute:'2-digit',second:'2-digit'});
+}
+
+function renderOverview(){
+  const list = document.getElementById('overviewList');
+  const sorted = state.students;
+
+  document.getElementById('numInterviewing').textContent = state.students.filter(s=>s.state==='interviewing').length;
+  document.getElementById('numFree').textContent = state.students.filter(s=>!s.state || s.state==='free').length;
+  document.getElementById('numHired').textContent = state.students.filter(s=>s.state==='hired').length;
+
+  if(sorted.length===0){
+    list.innerHTML = '<div class="empty">尚未新增學生，請至「名單設定」新增。</div>';
+    return;
+  }
+
+  const snapshot = JSON.stringify(sorted.map(s=>[s.id,s.state,s.companyId]));
+  const changed = snapshot !== prevRenderSnapshot;
+  prevRenderSnapshot = snapshot;
+
+  list.innerHTML = sorted.map((s,i)=>{
+    const meta = statusMeta(s);
+    const comp = s.companyId ? companyName(s.companyId) : '';
+    return `<div class="flap-row ${changed?'flip':''}">
+      <span class="flap-num">${String(i+1).padStart(2,'0')}</span>
+      <span class="flap-name">${escapeHtml(s.name)}</span>
+      <span class="status-pill ${meta.cls}"><span class="led"></span>${meta.label}</span>
+      <span class="flap-company">${escapeHtml(comp)}</span>
+      <span class="flap-time">${timeAgo(s.updatedAt)}</span>
+    </div>`;
+  }).join('');
+}
+
+function renderCompanySelect(){
+  const sel = document.getElementById('pendingAdmitCompanySelect');
+  if(!sel) return;
+  if(state.companies.length===0){
+    sel.innerHTML = '<option value="">尚未新增公司</option>';
+    adminCompanyId = null;
+    return;
+  }
+  sel.innerHTML = state.companies.map(c=>`<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('');
+  if(!(adminCompanyId && state.companies.some(c=>c.id===adminCompanyId))){
+    adminCompanyId = state.companies[0].id;
+  }
+  sel.value = adminCompanyId;
+}
+
+function renderCompanyPanel(){
+  renderCompanySelect();
+  const heading = document.getElementById('companyHeading');
+  const roster = document.getElementById('companyRoster');
+  const queueEl = document.getElementById('companyQueue');
+  const me = state.companies.find(c=>c.id===myCompanyId);
+  heading.textContent = me ? `${me.name} · 學生名單` : '全體學生名單';
+
+  const companyBusy = state.students.some(s=>s.state==='interviewing' && s.companyId===myCompanyId);
+  const autoFillEl = document.getElementById('autoFillCheck');
+  if(autoFillEl && me) autoFillEl.checked = me.autoFill !== false;
+
+  const currentInterviewEl = document.getElementById('currentInterviewName');
+  const currentBanner = document.getElementById('currentInterviewBanner');
+  const endBtn = document.getElementById('endInterviewBtn');
+  const currentStudent = state.students.find(s=>s.state==='interviewing' && s.companyId===myCompanyId);
+  const endConfirmBtn = document.getElementById('endConfirmBtn');
+  if(currentStudent){
+    if(endSelectedId !== currentStudent.id) endSelectedId = null;
+    currentInterviewEl.textContent = `${getStudentNumber(currentStudent)} ${currentStudent.name}`;
+    currentBanner.className = 'interview-banner interview-banner-active';
+    endBtn.disabled = false;
+    endBtn.dataset.id = currentStudent.id;
+    endBtn.classList.toggle('selected', endSelectedId === currentStudent.id);
+    endConfirmBtn.disabled = endSelectedId !== currentStudent.id;
+  } else {
+    endSelectedId = null;
+    currentInterviewEl.textContent = '尚無';
+    currentBanner.className = 'interview-banner interview-banner-empty';
+    endBtn.disabled = true;
+    endBtn.classList.remove('selected');
+    endConfirmBtn.disabled = true;
+    delete endBtn.dataset.id;
+  }
+
+  const displayIds = getDisplayQueueOrder();
+  const myQueue = displayIds.map(id=>state.students.find(x=>x.id===id)).filter(Boolean);
+
+  if(myQueue.length===0){
+    queueEl.innerHTML = '';
+  } else {
+    const lastIdx = myQueue.length-1;
+    const draftBar = queueDraft ? `<div class="queue-draft-bar"><span>順序已調整，按「確認順序」後才會生效</span>
+        <button class="btn btn-hire" data-qconfirm="1">確認順序</button>
+        <button class="btn btn-remove" data-qreset="1">還原</button></div>` : '';
+    queueEl.innerHTML = `<div class="board-head"><h2>我方等候名單（可用 ↑ ↓ 調整順序，調整後按確認）</h2></div>${draftBar}
+      <div class="admit-list" style="margin-bottom:20px;">` +
+      myQueue.map((s,i)=>{
+        const busyAnywhere = s.state === 'interviewing';
+        const startBtn = (companyBusy || busyAnywhere)
+          ? `<button class="btn btn-remove" disabled>${busyAnywhere ? '對方面試中' : '等待本公司面試中'}</button>`
+          : `<button class="btn btn-start" data-action="start" data-id="${s.id}">開始面試</button>`;
+        return `<div class="admit-row" style="border-left-color:var(--amber);">
+          <div class="admit-name">${i+1}. <span class="chip-num">${getStudentNumber(s)}</span> ${escapeHtml(s.name)}</div>
+          <div class="admit-company" style="color:var(--amber);">等候中</div>
+          <div class="admit-time">${timeAgo(s.queues[myCompanyId])}</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <button class="btn btn-remove queue-move" data-qmove="up" data-id="${s.id}" ${i===0?'disabled':''}>↑</button>
+            <button class="btn btn-remove queue-move" data-qmove="down" data-id="${s.id}" ${i===lastIdx?'disabled':''}>↓</button>
+            ${startBtn}
+            <button class="btn btn-remove" data-action="unqueue" data-id="${s.id}">移出等候</button>
+          </div>
+        </div>`;
+      }).join('') + `</div>`;
+  }
+
+  renderCompanyRoster(companyBusy);
+}
+
+// 公司操作台：學生方塊（手機 4 欄）。每張方塊：座號姓名、狀態、可勾選的操作選項、確認鈕。不顯示學生目前在哪一間公司。
+let endSelectedId = null;   // 已勾選「結束面試」、等待按確認的學生 id
+let queueDraft = null;      // 我方等候名單調整中的順序（student id 陣列），按確認前不會寫入資料庫
+function savedQueueIds(){
+  return state.students.filter(s=>s.queues && s.queues[myCompanyId]!=null)
+    .sort((a,b)=>a.queues[myCompanyId]-b.queues[myCompanyId]).map(s=>s.id);
+}
+function getDisplayQueueOrder(){
+  const saved = savedQueueIds();
+  if(!queueDraft) return saved;
+  const set = new Set(saved);
+  const d = queueDraft.filter(id=>set.has(id));
+  saved.forEach(id=>{ if(!d.includes(id)) d.push(id); });   // 期間新加入的學生排在最後
+  if(d.every((id,i)=>id===saved[i])){ queueDraft = null; return saved; }
+  queueDraft = d;
+  return d;
+}
+async function confirmQueueOrder(){
+  if(!myCompanyId || !queueDraft) return;
+  const saved = state.students.filter(s=>s.queues && s.queues[myCompanyId]!=null)
+    .sort((a,b)=>a.queues[myCompanyId]-b.queues[myCompanyId]);
+  const ts = saved.map(s=>s.queues[myCompanyId]);
+  for(let i=1;i<ts.length;i++) if(ts[i] <= ts[i-1]) ts[i] = ts[i-1] + 1;   // 確保順序不會因時間相同而錯亂
+  getDisplayQueueOrder().forEach((id,i)=>{
+    const st = state.students.find(x=>x.id===id);
+    if(st && st.queues) st.queues[myCompanyId] = ts[i];
+  });
+  queueDraft = null;
+  await saveState();
+  renderAll();
+}
+const coSelections = {};   // studentId -> 已勾選但尚未確認的操作（重新整理畫面時保留）
+function coOptionsFor(s, companyBusy){
+  const hired = s.state === 'hired';
+  const withMe = s.companyId === myCompanyId;
+  const interviewingWithMe = s.state === 'interviewing' && withMe;
+  const busyAnywhere = s.state === 'interviewing';
+  const inMyQueue = !!(s.queues && s.queues[myCompanyId] != null);
+  if(hired) return [];
+  if(interviewingWithMe) return [{action:'end', label:'結束面試'}];
+  const opts = [{action: inMyQueue ? 'unqueue' : 'queue', label: inMyQueue ? '移出等候' : '加入我方等候'}];
+  if(!busyAnywhere && !companyBusy) opts.push({action:'start', label:'開始面試'});
+  return opts;
+}
+function renderCompanyRoster(companyBusy){
+  const roster = document.getElementById('companyRoster');
+  if(!roster) return;
+  if(state.companies.length===0 || !myCompanyId){ roster.innerHTML = ''; return; }
+  if(state.students.length===0){
+    roster.innerHTML = '<div class="empty">尚未新增學生，請至「名單設定」新增。</div>';
+    return;
+  }
+  if(companyBusy === undefined) companyBusy = state.students.some(x=>x.state==='interviewing' && x.companyId===myCompanyId);
+  const statusCls = {'st-interviewing':'co-s-green','st-waiting':'co-s-amber','st-hired':'co-s-purple'};
+  roster.innerHTML = '<div class="co-grid">' + state.students.map((s,i)=>{
+    const meta = statusMeta(s);
+    const opts = coOptionsFor(s, companyBusy);
+    let sel = coSelections[s.id];
+    if(sel && !opts.some(o=>o.action===sel)){ delete coSelections[s.id]; sel = null; }
+    const optHtml = opts.map(o=>
+      `<button type="button" class="co-opt${sel===o.action?' selected':''}" data-opt="${o.action}" data-id="${s.id}">${o.label}</button>`
+    ).join('');
+    const confirmHtml = opts.length
+      ? `<button type="button" class="co-confirm" data-confirm="1" data-id="${s.id}" ${sel?'':'disabled'}>確認</button>`
+      : '';
+    return `<div class="co-card ${statusCls[meta.cls]||'co-s-gray'}${opts.length?'':' co-card-done'}">
+      <div class="co-name"><span class="co-num">${String(i+1).padStart(2,'0')}</span> ${escapeHtml(s.name)}</div>
+      <div class="co-status">${meta.label}</div>
+      ${optHtml}${confirmHtml}
+    </div>`;
+  }).join('') + '</div>';
+}
+
+function renderSetup(){
+  const chips = document.getElementById('companyChips');
+  chips.innerHTML = state.companies.map(c=>
+    `<div class="chip">${escapeHtml(c.name)}<button data-action="del-company" data-id="${c.id}">×</button></div>`
+  ).join('') || '<span class="hint">尚未新增公司</span>';
+
+  const schips = document.getElementById('studentChips');
+  schips.innerHTML = state.students.map((s,i)=>
+    `<div class="chip"><span class="chip-num">${String(i+1).padStart(2,'0')}</span>${escapeHtml(s.name)}<button data-action="del-student" data-id="${s.id}">×</button></div>`
+  ).join('') || '<span class="hint">尚未新增學生</span>';
+}
+
+function renderPendingAdmit(){
+  const heading = document.getElementById('pendingAdmitHeading');
+  const me = state.companies.find(c=>c.id===adminCompanyId);
+  heading.textContent = me ? `${me.name} · 學生名單（登記本公司即時錄取）` : '學生名單（尚未選擇公司）';
+
+  const roster = document.getElementById('pendingAdmitRoster');
+  if(state.students.length===0){
+    roster.innerHTML = '<div class="empty">尚未新增學生，請至「名單設定」新增。</div>';
+  } else if(!adminCompanyId){
+    roster.innerHTML = '<div class="empty">請先至「名單設定」新增公司。</div>';
+  } else {
+    roster.innerHTML = state.students.map((s,i)=>{
+      const matched = s.state === 'hired';
+      const admits = s.pendingAdmits || {};
+      const mine = admits[adminCompanyId] != null;
+      const otherCount = Object.keys(admits).filter(id=>id!==adminCompanyId).length;
+
+      let statusCls, statusLabel, note, actions;
+      if(matched){
+        statusCls = 'st-hired'; statusLabel = '媒合成功';
+        note = `已媒合成功於 ${escapeHtml(companyName(s.companyId))}`;
+        actions = `<button class="btn btn-remove" disabled>已媒合成功</button>`;
+      } else {
+        statusCls = mine ? 'st-waiting' : 'st-free';
+        statusLabel = mine ? '本公司已登記' : '尚未登記';
+        const parts = [];
+        if(mine) parts.push('本公司已登記即時錄取');
+        if(otherCount>0) parts.push(`另有 ${otherCount} 間公司登記`);
+        note = parts.length ? parts.join('・') : '目前尚無公司登記';
+        actions = mine
+          ? `<button class="btn btn-remove" data-action="premove" data-id="${s.id}">取消本公司登記</button>`
+          : `<button class="btn btn-hire" data-action="padd" data-id="${s.id}">登記即時錄取</button>`;
+      }
+
+      return `<div class="roster-row">
+        <div class="roster-name"><span class="chip-num">${String(i+1).padStart(2,'0')}</span> ${escapeHtml(s.name)}</div>
+        <div><span class="status-pill ${statusCls}"><span class="led"></span>${statusLabel}</span></div>
+        <div class="roster-note">${note}</div>
+        <div style="display:flex;gap:6px;">${actions}</div>
+      </div>`;
+    }).join('');
+  }
+}
+
+function renderOverviewPendingAdmit(){
+  const wrap = document.getElementById('overviewPendingAdmitList');
+  if(!wrap) return;
+
+  if(state.companies.length===0){
+    wrap.innerHTML = '<div class="empty">尚未新增公司，請至「名單設定」新增。</div>';
+    return;
+  }
+
+  const byCompany = {};
+  state.students.forEach(s=>{
+    if(s.pendingAdmits){
+      Object.keys(s.pendingAdmits).forEach(compId=>{
+        if(!byCompany[compId]) byCompany[compId] = [];
+        byCompany[compId].push({ student: s, t: s.pendingAdmits[compId] });
+      });
+    }
+  });
+
+  // 依公司匯入順序，一間公司一列：公司名稱在左，錄取名單在右（媒合成功者排最前並標示）
+  wrap.innerHTML = state.companies.map(c=>{
+    const list = (byCompany[c.id] || []).sort((a,b)=>{
+      const ma = a.student.state==='hired' && a.student.companyId===c.id ? 0 : 1;
+      const mb = b.student.state==='hired' && b.student.companyId===c.id ? 0 : 1;
+      return ma-mb || a.t-b.t;
+    });
+    const namesHtml = list.length===0
+      ? '<span class="ov-empty">尚無登記</span>'
+      : list.map(item=>{
+          const matched = item.student.state==='hired' && item.student.companyId===c.id;
+          return `<span class="ov-chip${matched?' matched':''}"><span class="ov-num">${getStudentNumber(item.student)}</span>${escapeHtml(item.student.name)}${matched?'<span class="ov-badge">✓ 媒合成功</span>':''}</span>`;
+        }).join('');
+    return `<div class="ov-admit-row">
+      <div class="ov-admit-company">${escapeHtml(c.name)}</div>
+      <div class="ov-admit-names">${namesHtml}</div>
+    </div>`;
+  }).join('');
+}
+
+async function handlePendingAdmitAction(e){
+  const btn = e.target.closest('button[data-action]');
+  if(!btn) return;
+  const id = btn.dataset.id;
+  const action = btn.dataset.action;
+  const student = state.students.find(s=>s.id===id);
+  if(!student) return;
+  if(!student.pendingAdmits) student.pendingAdmits = {};
+  if(student.state === 'hired'){ renderAll(); return; }
+
+  if(action === 'padd'){
+    if(!adminCompanyId) return;
+    student.pendingAdmits[adminCompanyId] = Date.now();
+  } else if(action === 'premove'){
+    if(!adminCompanyId) return;
+    delete student.pendingAdmits[adminCompanyId];
+  } else {
+    return;
+  }
+  await saveState();
+  renderAll();
+}
+document.getElementById('pendingAdmitRoster').addEventListener('click', handlePendingAdmitAction);
+
+function renderAdmitted(){
+  const studentSel = document.getElementById('admitStudentSelect');
+  const companySel = document.getElementById('admitCompanySelect');
+  const addBtn = document.getElementById('addAdmitBtn');
+  const hint = document.getElementById('admitFormHint');
+  const prevStudent = studentSel.value;
+  const prevCompany = companySel.value;
+
+  if(state.students.length===0 || state.companies.length===0){
+    studentSel.innerHTML = '<option value="">尚無學生</option>';
+    companySel.innerHTML = '<option value="">尚無公司</option>';
+    addBtn.disabled = true;
+    hint.textContent = '請先到「名單設定」新增學生與公司，才能在此登記媒合成功。';
+  } else {
+    addBtn.disabled = false;
+    hint.textContent = '直接選擇學生與媒合成功的公司即可登記，若學生已在名單中會更新為最新媒合結果。可先參考「即時廠商錄取名單」了解各公司初步錄取意願。登記後，該學生會從即時廠商錄取名單移除，也無法再被其他公司面試或登記。';
+    studentSel.innerHTML = state.students.map(s=>{
+      const tag = s.state==='hired' ? `（目前媒合成功於 ${companyName(s.companyId)}）` : '';
+      return `<option value="${s.id}">${getStudentNumber(s)} ${escapeHtml(s.name)}${tag}</option>`;
+    }).join('');
+    companySel.innerHTML = state.companies.map(c=>`<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('');
+    if(prevStudent && state.students.some(s=>s.id===prevStudent)) studentSel.value = prevStudent;
+    if(prevCompany && state.companies.some(c=>c.id===prevCompany)) companySel.value = prevCompany;
+  }
+
+  const list = document.getElementById('admitList');
+  const hired = state.students.filter(s=>s.state==='hired').sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0));
+  if(hired.length===0){
+    list.innerHTML = '<div class="empty">目前尚無學生媒合成功。使用上方表單選擇學生與公司即可登記。</div>';
+    return;
+  }
+  list.innerHTML = hired.map(s=>{
+    return `<div class="admit-row">
+      <div class="admit-name"><span class="chip-num">${getStudentNumber(s)}</span> ${escapeHtml(s.name)}</div>
+      <div class="admit-company">${escapeHtml(companyName(s.companyId))}</div>
+      <div class="admit-time">${timeAgo(s.updatedAt)}</div>
+      <div><button class="btn btn-unhire" data-action="unhire" data-id="${s.id}">取消媒合成功</button></div>
+    </div>`;
+  }).join('');
+}
+
+function renderMatchOverview(){
+  const list = document.getElementById('matchOverviewList');
+  if(!list) return;
+
+  if(state.students.length===0){
+    list.innerHTML = '<div class="empty">尚未新增學生，請至「名單設定」新增。</div>';
+    return;
+  }
+
+  list.innerHTML = state.students.map((s,i)=>{
+    const matched = s.state === 'hired';
+    const comp = matched ? companyName(s.companyId) : '';
+    return `<div class="flap-row">
+      <span class="flap-num">${String(i+1).padStart(2,'0')}</span>
+      <span class="flap-name">${escapeHtml(s.name)}</span>
+      <span class="status-pill ${matched?'st-hired':'st-free'}"><span class="led"></span>${matched?'媒合成功':'尚未媒合'}</span>
+      <span class="flap-company">${escapeHtml(comp)}</span>
+      <span class="flap-time">${matched?timeAgo(s.updatedAt):''}</span>
+    </div>`;
+  }).join('');
+}
+
+function renderAll(){
+  renderTitle();
+  renderOverview();
+  renderOverviewPendingAdmit();
+  renderCompanyPanel();
+  renderLoginUi();
+  renderStudentView();
+  renderPendingAdmit();
+  renderAdmitted();
+  renderMatchOverview();
+  renderSetup();
+  renderAccountList();
+  renderStudentAccountList();
+  renderTV();
+}
+
+function renderTitle(){
+  const l1El = document.getElementById('titleLine1');
+  const l2El = document.getElementById('titleLine2');
+  if(l1El){
+    l1El.textContent = state.titleLine1 || '';
+    l1El.style.fontSize = (state.titleSize1 || DEFAULT_TITLE_SIZE1) + 'px';
+  }
+  if(l2El){
+    l2El.textContent = state.titleLine2 || '';
+    l2El.style.fontSize = (state.titleSize2 || DEFAULT_TITLE_SIZE2) + 'px';
+  }
+
+  const l1Input = document.getElementById('titleLine1Input');
+  const l2Input = document.getElementById('titleLine2Input');
+  const s1Input = document.getElementById('titleSize1Input');
+  const s2Input = document.getElementById('titleSize2Input');
+  const s1Value = document.getElementById('titleSize1Value');
+  const s2Value = document.getElementById('titleSize2Value');
+  if(l1Input && document.activeElement !== l1Input) l1Input.value = state.titleLine1 || '';
+  if(l2Input && document.activeElement !== l2Input) l2Input.value = state.titleLine2 || '';
+  if(s1Input && document.activeElement !== s1Input){
+    s1Input.value = state.titleSize1 || DEFAULT_TITLE_SIZE1;
+    if(s1Value) s1Value.textContent = (state.titleSize1 || DEFAULT_TITLE_SIZE1) + 'px';
+  }
+  if(s2Input && document.activeElement !== s2Input){
+    s2Input.value = state.titleSize2 || DEFAULT_TITLE_SIZE2;
+    if(s2Value) s2Value.textContent = (state.titleSize2 || DEFAULT_TITLE_SIZE2) + 'px';
+  }
+
+  // 投影模式字體（公司名稱 / 學生座號＋姓名）：套用 CSS 變數，全站投影卡片統一套用
+  const companyFont = state.tvCompanyFont || DEFAULT_TV_COMPANY_FONT;
+  const studentFont = state.tvStudentFont || DEFAULT_TV_STUDENT_FONT;
+  document.documentElement.style.setProperty('--tv-company-font', companyFont + 'px');
+  document.documentElement.style.setProperty('--tv-student-font', studentFont + 'px');
+
+  const cInput = document.getElementById('tvCompanyFontInput');
+  const uInput = document.getElementById('tvStudentFontInput');
+  const cValue = document.getElementById('tvCompanyFontValue');
+  const uValue = document.getElementById('tvStudentFontValue');
+  if(cInput && document.activeElement !== cInput){
+    cInput.value = companyFont;
+    if(cValue) cValue.textContent = companyFont + 'px';
+  }
+  if(uInput && document.activeElement !== uInput){
+    uInput.value = studentFont;
+    if(uValue) uValue.textContent = studentFont + 'px';
+  }
+}
+
+let tvBoardHtml = null;   // 上一次畫出的內容；沒有變動就不重畫，避免跑馬燈每次更新都從頭開始
+function tvFitMarquees(root){
+  root.querySelectorAll('.tv-b-marq').forEach(m=>{
+    const track = m.firstElementChild;
+    if(!track) return;
+    if(track.scrollWidth > m.clientWidth + 2){          // 放不下才捲動：內容複製一份，無縫循環
+      track.innerHTML = track.innerHTML + track.innerHTML;
+      track.classList.add('scrolling');
+      m.classList.add('is-scrolling');
+      track.style.animationDuration = Math.max(8, (track.scrollWidth / 2) / 55) + 's';
+    }
+  });
+}
+
+function renderTV(){
+  const boardEl = document.getElementById('tvBodyMain');
+  const tvL1 = document.getElementById('tvTitleLine1');
+  const tvL2 = document.getElementById('tvTitleLine2');
+  if(!tvL1 || !boardEl) return;
+  const TV_SCALE = 1.6; // 投影畫面字級放大倍率，方便遠距離觀看
+  tvL1.textContent = state.titleLine1 || '';
+  tvL1.style.fontSize = Math.round((state.titleSize1 || DEFAULT_TITLE_SIZE1) * TV_SCALE) + 'px';
+  if(tvL2){
+    tvL2.textContent = state.titleLine2 || '';
+    tvL2.style.fontSize = Math.round((state.titleSize2 || DEFAULT_TITLE_SIZE2) * TV_SCALE) + 'px';
+  }
+  if(!document.body.classList.contains('tv-active')) return;   // 沒開投影模式時不必畫
+
+  const interviewing = state.students.filter(s=>s.state==='interviewing');
+  checkAnnouncements(interviewing);
+  const freeCount = state.students.filter(s=>!s.state || s.state==='free' || s.state==='done').length;
+  const hiredCount = state.students.filter(s=>s.state==='hired').length;
+  document.getElementById('tvStats').textContent =
+    `空閒 ${freeCount} 位　·　媒合成功 ${hiredCount} 位　·　總計 ${state.students.length} 位`;
+
+  if(state.companies.length===0){
+    const emptyHtml = '<div class="tv-empty">尚未新增公司</div>';
+    if(tvBoardHtml !== emptyHtml){ tvBoardHtml = emptyHtml; boardEl.innerHTML = emptyHtml; }
+    return;
+  }
+
+  const studentHtml = (st, extra)=>`<span class="tv-b-student">${extra||''}<span class="tv-b-num">${getStudentNumber(st)}</span>${escapeHtml(st.name)}</span>`;
+
+  const rowsHtml = state.companies.map(c=>{
+    // 面試進行中（每間公司同時最多一位）
+    const cur = interviewing.find(s=>s.companyId===c.id);
+    const intCell = cur
+      ? `<div class="tv-b-cell tv-b-int active" data-label="🟢 面試中" data-student-id="${cur.id}" title="點擊重播語音">${studentHtml(cur)}</div>`
+      : `<div class="tv-b-cell tv-b-int" data-label="🟢 面試中"><span class="tv-b-student tv-b-empty">—</span></div>`;
+
+    // 等候中（依排隊時間）
+    const waiting = state.students.filter(s=>s.queues && s.queues[c.id]!=null)
+      .sort((a,b)=>a.queues[c.id]-b.queues[c.id]);
+    const waitInner = waiting.length
+      ? `<div class="tv-b-marq"><div class="tv-b-track">${waiting.map((s,i)=>
+          `<span class="tv-b-item">${studentHtml(s, `<span class="tv-b-rank">${i+1}</span>`)}</span>`).join('')}</div></div>`
+      : `<span class="tv-b-student tv-b-empty">—</span>`;
+
+    // 即時廠商錄取（媒合成功者排最前面並加上標籤）
+    const admits = state.students.filter(s=>s.pendingAdmits && s.pendingAdmits[c.id]!=null)
+      .sort((a,b)=>{
+        const ma = a.state==='hired' && a.companyId===c.id ? 0 : 1;
+        const mb = b.state==='hired' && b.companyId===c.id ? 0 : 1;
+        return ma-mb || a.pendingAdmits[c.id]-b.pendingAdmits[c.id];
+      });
+    const admitInner = admits.length
+      ? `<div class="tv-b-marq"><div class="tv-b-track">${admits.map(s=>{
+          const matched = s.state==='hired' && s.companyId===c.id;
+          return `<span class="tv-b-chip${matched?' matched':''}">${studentHtml(s)}${matched?'<span class="tv-b-badge">✓ 媒合成功</span>':''}</span>`;
+        }).join('')}</div></div>`
+      : `<span class="tv-b-student tv-b-empty">—</span>`;
+
+    return `<div class="tv-b-row">
+      <div class="tv-b-cell tv-b-company-cell"><span class="tv-b-company">${escapeHtml(c.name)}</span></div>
+      ${intCell}
+      <div class="tv-b-cell tv-b-wait" data-label="🟡 等候中">${waitInner}</div>
+      <div class="tv-b-cell tv-b-admit" data-label="🟣 即時錄取">${admitInner}</div>
+    </div>`;
+  }).join('');
+
+  const html = `<div class="tv-b-head">
+      <div class="tv-b-hcell h-company">公司</div>
+      <div class="tv-b-hcell h-int">🟢 面試進行中</div>
+      <div class="tv-b-hcell h-wait">🟡 等候中</div>
+      <div class="tv-b-hcell h-admit">🟣 即時錄取</div>
+    </div>${rowsHtml}`;
+  if(tvBoardHtml === html) return;
+  tvBoardHtml = html;
+  boardEl.style.setProperty('--n', state.companies.length);
+  boardEl.innerHTML = html;
+  tvFitMarquees(boardEl);
+}
+
+let ttsEnabled = true;
+let announcedMap = {};
+
+function getStudentNumber(s){
+  const idx = state.students.findIndex(x=>x.id===s.id);
+  return idx === -1 ? '' : String(idx+1).padStart(2,'0');
+}
+
+function speakAnnouncement(s){
+  if(!ttsEnabled) return;
+  if(!('speechSynthesis' in window)) return;
+  const num = getStudentNumber(s);
+  const comp = companyName(s.companyId);
+  const text = `${num}號 ${s.name} 同學，請到 ${comp} 面試`;
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'zh-TW';
+  utter.rate = 0.95;
+  window.speechSynthesis.speak(utter);
+}
+
+function checkAnnouncements(interviewingList){
+  interviewingList.forEach(s=>{
+    const key = s.interviewStartedAt || s.updatedAt; // 相容舊資料
+    if(announcedMap[s.id] !== key){
+      const isFirstInit = announcedMap.__initialized !== true;
+      if(!isFirstInit) speakAnnouncement(s);
+      announcedMap[s.id] = key;
+    }
+  });
+  Object.keys(announcedMap).forEach(key=>{
+    if(key==='__initialized') return;
+    if(!interviewingList.some(s=>s.id===key)) delete announcedMap[key];
+  });
+}
+
+function enterTVMode(){
+  document.body.classList.add('tv-active');
+  // 進入投影模式時，先把目前已經在面試中的學生標記為「已播報」，避免一進去就狂唸一輪
+  announcedMap = {__initialized: true};
+  state.students.filter(s=>s.state==='interviewing').forEach(s=>{ announcedMap[s.id] = s.interviewStartedAt || s.updatedAt; });
+  tvBoardHtml = null;
+  renderTV();
+}
+
+document.getElementById('tvModeBtn').addEventListener('click', ()=>{
+  if(!unlocked['tv']){
+    openPwModal('tv');
+    return;
+  }
+  enterTVMode();
+});
+let tvResizeTimer = null;
+window.addEventListener('resize', ()=>{   // 視窗大小改變時重新量測，哪些名單需要捲動
+  clearTimeout(tvResizeTimer);
+  tvResizeTimer = setTimeout(()=>{ tvBoardHtml = null; renderTV(); }, 250);
+});
+document.getElementById('tvExitBtn').addEventListener('click', ()=>{
+  document.body.classList.remove('tv-active');
+  if('speechSynthesis' in window) window.speechSynthesis.cancel();
+});
+document.getElementById('tvSoundToggle').addEventListener('click', ()=>{
+  ttsEnabled = !ttsEnabled;
+  const btn = document.getElementById('tvSoundToggle');
+  if(ttsEnabled){
+    btn.textContent = '🔊 語音提醒：開啟';
+    btn.classList.remove('muted');
+  } else {
+    btn.textContent = '🔇 語音提醒：關閉';
+    btn.classList.add('muted');
+    if('speechSynthesis' in window) window.speechSynthesis.cancel();
+  }
+});
+document.getElementById('tvBody').addEventListener('click', (e)=>{
+  const card = e.target.closest('.tv-b-int[data-student-id]');
+  if(!card) return;
+  const studentId = card.dataset.studentId;
+  const student = state.students.find(s=>s.id===studentId && s.state==='interviewing');
+  if(student) speakAnnouncement(student);
+});
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape') document.body.classList.remove('tv-active');
+});
+
+function escapeHtml(str){
+  const d = document.createElement('div');
+  d.textContent = str ?? '';
+  return d.innerHTML;
+}
+
+// ---- actions ----
+document.getElementById('titleSize1Input').addEventListener('input', (e)=>{
+  document.getElementById('titleSize1Value').textContent = e.target.value + 'px';
+  document.getElementById('titleLine1').style.fontSize = e.target.value + 'px';
+});
+document.getElementById('titleSize2Input').addEventListener('input', (e)=>{
+  document.getElementById('titleSize2Value').textContent = e.target.value + 'px';
+  document.getElementById('titleLine2').style.fontSize = e.target.value + 'px';
+});
+document.getElementById('titleLine1Input').addEventListener('input', (e)=>{
+  document.getElementById('titleLine1').textContent = e.target.value;
+});
+document.getElementById('titleLine2Input').addEventListener('input', (e)=>{
+  document.getElementById('titleLine2').textContent = e.target.value;
+});
+document.getElementById('saveTitleBtn').addEventListener('click', async ()=>{
+  state.titleLine1 = document.getElementById('titleLine1Input').value.trim();
+  state.titleLine2 = document.getElementById('titleLine2Input').value.trim();
+  state.titleSize1 = parseInt(document.getElementById('titleSize1Input').value, 10) || DEFAULT_TITLE_SIZE1;
+  state.titleSize2 = parseInt(document.getElementById('titleSize2Input').value, 10) || DEFAULT_TITLE_SIZE2;
+  await saveState();
+  renderAll();
+});
+
+document.getElementById('tvCompanyFontInput').addEventListener('input', (e)=>{
+  document.getElementById('tvCompanyFontValue').textContent = e.target.value + 'px';
+  document.documentElement.style.setProperty('--tv-company-font', e.target.value + 'px');
+});
+document.getElementById('tvStudentFontInput').addEventListener('input', (e)=>{
+  document.getElementById('tvStudentFontValue').textContent = e.target.value + 'px';
+  document.documentElement.style.setProperty('--tv-student-font', e.target.value + 'px');
+});
+document.getElementById('saveTvFontBtn').addEventListener('click', async ()=>{
+  state.tvCompanyFont = parseInt(document.getElementById('tvCompanyFontInput').value, 10) || DEFAULT_TV_COMPANY_FONT;
+  state.tvStudentFont = parseInt(document.getElementById('tvStudentFontInput').value, 10) || DEFAULT_TV_STUDENT_FONT;
+  await saveState();
+  renderAll();
+});
+
+document.getElementById('addCompanyBtn').addEventListener('click', async ()=>{
+  const ta = document.getElementById('companyBulk');
+  const names = ta.value.split('\n').map(s=>s.trim()).filter(Boolean);
+  if(names.length===0) return;
+  names.forEach(name=>{
+    state.companies.push({id: uid('co'), name, freeSince: Date.now()});
+  });
+  ta.value = '';
+  await saveState();
+  renderAll();
+});
+
+document.getElementById('addStudentBtn').addEventListener('click', async ()=>{
+  const ta = document.getElementById('studentBulk');
+  const names = ta.value.split('\n').map(s=>s.trim()).filter(Boolean);
+  if(names.length===0) return;
+  names.forEach(name=>{
+    state.students.push({id: uid('st'), name, state:'free', companyId:null, queues:{}, pendingAdmits:{}, updatedAt: Date.now()});
+  });
+  ta.value = '';
+  await saveState();
+  renderAll();
+});
+
+document.getElementById('clearCompanyBtn').addEventListener('click', async ()=>{
+  if(state.companies.length===0) return;
+  const ok = confirm(`確定要清空全部 ${state.companies.length} 間公司嗎？
+所有學生的面試中／等候中狀態也會一併重設為空閒，此動作無法復原。`);
+  if(!ok) return;
+  state.companies = [];
+  state.students.forEach(s=>{
+    if(s.state !== 'hired'){
+      s.state = 'free';
+      s.companyId = null;
+    }
+    s.queues = {};
+    s.pendingAdmits = {};
+  });
+  await saveState();
+  renderAll();
+});
+
+document.getElementById('clearStudentBtn').addEventListener('click', async ()=>{
+  if(state.students.length===0) return;
+  const ok = confirm(`確定要清空全部 ${state.students.length} 位學生嗎？此動作無法復原。`);
+  if(!ok) return;
+  state.students = [];
+  await saveState();
+  renderAll();
+});
+
+document.getElementById('pendingAdmitCompanySelect').addEventListener('change', (e)=>{
+  saveMyCompany(e.target.value);
+  renderPendingAdmit();
+});
+
+function runAutoMatch(){
+  let progress = true;
+  let safety = 0;
+  while(progress && safety < 50){
+    safety++;
+    progress = false;
+    const busyCompanyIds = new Set(state.students.filter(s=>s.state==='interviewing').map(s=>s.companyId));
+
+    // 找出每間「目前空閒」的公司，其等候名單中排最前面、且本身也是空閒可被安排的學生
+    const idleCandidates = [];
+    state.companies.forEach(company=>{
+      if(busyCompanyIds.has(company.id)) return;
+      if(company.autoFill === false) return;   // 該公司關閉自動遞補，需自行按「開始面試」
+      const waitingHere = state.students.filter(s=>
+        s.queues && s.queues[company.id] != null &&
+        s.state !== 'interviewing' && s.state !== 'hired'
+      ).sort((a,b)=>a.queues[company.id]-b.queues[company.id]);
+      if(waitingHere.length === 0) return;
+      const top = waitingHere[0];
+      idleCandidates.push({ company, student: top, queuedAt: top.queues[company.id] });
+    });
+    if(idleCandidates.length === 0) break;
+
+    // 同一位學生可能同時是多間空閒公司的第一順位，需要決定要分配給哪一間：
+    // 1. 公司空閒時間較久的優先（freeSince 越早代表空閒越久）
+    // 2. 空閒時間相同則比較該公司按下「加入等候」的時間，較早的優先
+    const byStudent = {};
+    idleCandidates.forEach(ic=>{
+      if(!byStudent[ic.student.id]) byStudent[ic.student.id] = [];
+      byStudent[ic.student.id].push(ic);
+    });
+
+    Object.values(byStudent).forEach(group=>{
+      group.sort((a,b)=>{
+        const freeA = a.company.freeSince || 0;
+        const freeB = b.company.freeSince || 0;
+        if(freeA !== freeB) return freeA - freeB;
+        return a.queuedAt - b.queuedAt;
+      });
+      const winner = group[0];
+      const student = state.students.find(s=>s.id===winner.student.id);
+      if(!student || student.state === 'interviewing' || student.state === 'hired') return;
+      student.state = 'interviewing';
+      student.companyId = winner.company.id;
+      if(student.queues) delete student.queues[winner.company.id];
+      student.updatedAt = Date.now();
+      student.interviewStartedAt = student.updatedAt;
+      progress = true;
+    });
+  }
+}
+
+async function endInterview(studentId){
+  const student = state.students.find(s=>s.id===studentId);
+  if(!student || student.state !== 'interviewing') return;
+  const endedCompanyId = student.companyId;
+  student.state = 'free';
+  student.companyId = null;
+  student.updatedAt = Date.now();
+  const endedCompany = state.companies.find(c=>c.id===endedCompanyId);
+  if(endedCompany) endedCompany.freeSince = Date.now();
+  runAutoMatch();
+  await saveState();
+  renderAll();
+}
+
+document.getElementById('endInterviewBtn').addEventListener('click', ()=>{
+  if(!myCompanyId) return;
+  const id = document.getElementById('endInterviewBtn').dataset.id;
+  if(!id) return;
+  endSelectedId = (endSelectedId === id) ? null : id;   // 先勾選，再按「確認」才會結束（再點一次可取消）
+  renderCompanyPanel();
+});
+document.getElementById('autoFillCheck').addEventListener('change', async (e)=>{
+  const me = state.companies.find(c=>c.id===myCompanyId);
+  if(!me){ e.target.checked = true; return; }
+  me.autoFill = e.target.checked;
+  if(me.autoFill) runAutoMatch();   // 重新打勾時，若本公司目前空閒且有人等候，立即遞補
+  await saveState();
+  renderAll();
+});
+document.getElementById('endConfirmBtn').addEventListener('click', ()=>{
+  if(!myCompanyId || !endSelectedId) return;
+  const id = endSelectedId;
+  endSelectedId = null;
+  endInterview(id);
+});
+
+async function handleCompanyAction(e){
+  const btn = e.target.closest('button[data-action]');
+  if(!btn) return;
+  await performCompanyAction(btn.dataset.action, btn.dataset.id);
+}
+async function performCompanyAction(action, id){
+  if(!myCompanyId) return;
+  const student = state.students.find(s=>s.id===id);
+  if(!student) return;
+  if(!student.queues) student.queues = {};
+
+  if(action === 'queue'){
+    student.queues[myCompanyId] = Date.now();
+  } else if(action === 'unqueue'){
+    delete student.queues[myCompanyId];
+  } else if(action === 'start'){
+    const busyAnywhere = student.state === 'interviewing';
+    const companyBusyNow = state.students.some(other=>other.id!==student.id && other.state==='interviewing' && other.companyId===myCompanyId);
+    if(busyAnywhere || companyBusyNow || student.state==='hired'){
+      renderAll();
+      return;
+    }
+    student.state = 'interviewing';
+    student.companyId = myCompanyId;
+    delete student.queues[myCompanyId];
+    student.interviewStartedAt = Date.now();
+  } else if(action === 'end'){
+    await endInterview(student.id);
+    return;
+  } else if(action === 'hire'){
+    const keepTime = (student.pendingAdmits && student.pendingAdmits[myCompanyId]) || Date.now();
+    student.state = 'hired';
+    student.companyId = myCompanyId;
+    student.queues = {};
+    student.pendingAdmits = { [myCompanyId]: keepTime };
+  } else if(action === 'unhire'){
+    student.state = 'free';
+    student.companyId = null;
+  } else if(action === 'remove'){
+    student.state = 'free';
+    student.companyId = null;
+  }
+  student.updatedAt = Date.now();
+  await saveState();
+  renderAll();
+}
+document.getElementById('companyRoster').addEventListener('click', async (e)=>{
+  const opt = e.target.closest('button[data-opt]');
+  if(opt){
+    const id = opt.dataset.id;
+    coSelections[id] = (coSelections[id] === opt.dataset.opt) ? null : opt.dataset.opt;   // 再點一次取消勾選
+    if(!coSelections[id]) delete coSelections[id];
+    renderCompanyRoster();
+    return;
+  }
+  const ok = e.target.closest('button[data-confirm]');
+  if(ok){
+    const id = ok.dataset.id;
+    const action = coSelections[id];
+    if(!action) return;
+    delete coSelections[id];
+    await performCompanyAction(action, id);
+  }
+});
+document.getElementById('companyQueue').addEventListener('click', async (e)=>{
+  const mv = e.target.closest('button[data-qmove]');
+  if(mv){
+    const order = getDisplayQueueOrder().slice();
+    const i = order.indexOf(mv.dataset.id);
+    const j = mv.dataset.qmove === 'up' ? i-1 : i+1;
+    if(i < 0 || j < 0 || j >= order.length) return;
+    [order[i], order[j]] = [order[j], order[i]];
+    queueDraft = order;
+    renderCompanyPanel();
+    return;
+  }
+  if(e.target.closest('button[data-qconfirm]')){ await confirmQueueOrder(); return; }
+  if(e.target.closest('button[data-qreset]')){ queueDraft = null; renderCompanyPanel(); return; }
+  await handleCompanyAction(e);
+});
+
+document.getElementById('addAdmitBtn').addEventListener('click', async ()=>{
+  const studentId = document.getElementById('admitStudentSelect').value;
+  const companyId = document.getElementById('admitCompanySelect').value;
+  if(!studentId || !companyId) return;
+  const student = state.students.find(s=>s.id===studentId);
+  if(!student) return;
+  const wasInterviewingCompanyId = student.state === 'interviewing' ? student.companyId : null;
+  const keepTime = (student.pendingAdmits && student.pendingAdmits[companyId]) || Date.now();
+  student.state = 'hired';
+  student.companyId = companyId;
+  student.queues = {};
+  student.pendingAdmits = { [companyId]: keepTime };
+  student.updatedAt = Date.now();
+  if(wasInterviewingCompanyId){
+    const freedCompany = state.companies.find(c=>c.id===wasInterviewingCompanyId);
+    if(freedCompany) freedCompany.freeSince = Date.now();
+    runAutoMatch();
+  }
+  await saveState();
+  renderAll();
+});
+
+document.getElementById('admitList').addEventListener('click', async (e)=>{
+  const btn = e.target.closest('button[data-action="unhire"]');
+  if(!btn) return;
+  const student = state.students.find(s=>s.id===btn.dataset.id);
+  if(!student) return;
+  student.state = 'free';
+  student.companyId = null;
+  student.updatedAt = Date.now();
+  runAutoMatch();
+  await saveState();
+  renderAll();
+});
+
+document.getElementById('companyChips').addEventListener('click', async (e)=>{
+  const btn = e.target.closest('button[data-action="del-company"]');
+  if(!btn) return;
+  const id = btn.dataset.id;
+  state.companies = state.companies.filter(c=>c.id!==id);
+  state.students.forEach(s=>{
+    if(s.companyId===id){ s.companyId=null; s.state='free'; }
+    if(s.queues && s.queues[id]!=null) delete s.queues[id];
+    if(s.pendingAdmits && s.pendingAdmits[id]!=null) delete s.pendingAdmits[id];
+  });
+  await saveState();
+  releaseSession(id);
+  renderAll();
+});
+
+document.getElementById('studentChips').addEventListener('click', async (e)=>{
+  const btn = e.target.closest('button[data-action="del-student"]');
+  if(!btn) return;
+  const id = btn.dataset.id;
+  state.students = state.students.filter(s=>s.id!==id);
+  await saveState();
+  renderAll();
+});
+
+// password protection
+const PROTECTED_TABS = ['settingsHub'];
+const HUB_CHILD_TABS = ['pendingAdmit', 'admitted', 'setup'];
+const TAB_LABELS = {settingsHub:'設定', pendingAdmit:'即時廠商錄取名單', admitted:'媒合成功名單', setup:'名單設定', tv:'投影模式'};
+const PASSWORD = '70807081';
+let unlocked = {};
+let pendingTab = null;
+
+function activateTab(target){
+  const navTarget = HUB_CHILD_TABS.includes(target) ? 'settingsHub' : target;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===navTarget));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+target).classList.add('active');
+}
+
+function openPwModal(target){
+  pendingTab = target;
+  document.getElementById('pwModalSub').textContent = `請輸入密碼以進入「${TAB_LABELS[target]}」`;
+  document.getElementById('pwError').style.display = 'none';
+  document.getElementById('pwInput').value = '';
+  document.getElementById('pwModal').classList.add('show');
+  setTimeout(()=>document.getElementById('pwInput').focus(), 50);
+}
+function closePwModal(){
+  document.getElementById('pwModal').classList.remove('show');
+  pendingTab = null;
+}
+function submitPw(){
+  const val = document.getElementById('pwInput').value;
+  if(val === PASSWORD){
+    unlocked[pendingTab] = true;
+    const target = pendingTab;
+    closePwModal();
+    if(target === 'tv'){
+      enterTVMode();
+    } else {
+      activateTab(target);
+    }
+  } else {
+    document.getElementById('pwError').style.display = 'block';
+    document.getElementById('pwInput').value = '';
+    document.getElementById('pwInput').focus();
+  }
+}
+document.getElementById('pwCancel').addEventListener('click', closePwModal);
+document.getElementById('pwSubmit').addEventListener('click', submitPw);
+document.getElementById('pwInput').addEventListener('keydown', (e)=>{ if(e.key==='Enter') submitPw(); });
+document.getElementById('pwModal').addEventListener('click', (e)=>{ if(e.target.id==='pwModal') closePwModal(); });
+
+// tabs
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    const target = tab.dataset.tab;
+    if(PROTECTED_TABS.includes(target) && !unlocked[target]){
+      openPwModal(target);
+      return;
+    }
+    activateTab(target);
+  });
+});
+
+// 設定選單 hub 內的卡片（已通過設定密碼後，點卡片直接進入子頁面，不需再次輸入密碼）
+document.querySelectorAll('.settings-hub-card').forEach(card=>{
+  card.addEventListener('click', ()=>{
+    activateTab(card.dataset.goto);
+  });
+});
+
+// 子頁面內的「返回設定選單」按鈕
+document.querySelectorAll('.settings-back-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    activateTab(btn.dataset.goto);
+  });
+});
+
+// clock
+function tickClock(){
+  const timeStr = new Date().toLocaleTimeString('zh-TW', {hour12:false});
+  document.getElementById('clock').textContent = timeStr;
+  const tvClock = document.getElementById('tvClock');
+  if(tvClock) tvClock.textContent = timeStr;
+}
+setInterval(tickClock, 1000);
+tickClock();
+
+
+// ===== 公司帳號登入 / 同一帳號同時只能一位登入 =====
+// 登入狀態存放在獨立文件 matching-board/sessions；用 transaction 搶占，並以心跳判斷是否仍在線。
+const SESSION_TIMEOUT = 120000;   // 超過 120 秒沒有心跳，視為已離線，可被他人登入
+const HEARTBEAT_MS = 20000;
+const LOGIN_KEY = 'company-login';
+let sessions = {};
+let sessionsReady = false;
+let stateLoaded = false;
+let resumeTried = false;
+let loggedCompanyId = null;
+let mySid = null;
+let loginAt = 0;
+let heartbeatTimer = null;
+let lastAccSig = '';
+
+async function hashPassword(companyId, pw){
+  const enc = new TextEncoder();
+  const key = await crypto.subtle.importKey('raw', enc.encode(pw), 'PBKDF2', false, ['deriveBits']);
+  const bits = await crypto.subtle.deriveBits({name:'PBKDF2', salt: enc.encode('mb|'+companyId), iterations: 100000, hash:'SHA-256'}, key, 256);
+  return Array.from(new Uint8Array(bits)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+function isSessionActive(e){ return !!(e && e.sid && (Date.now() - (e.at||0) < SESSION_TIMEOUT)); }
+function readSavedLogin(){
+  try{ return JSON.parse(localStorage.getItem(LOGIN_KEY) || 'null'); }catch(e){ return null; }
+}
+
+function startSessionSync(){
+  onSnapshot(sessionsRef, (snap)=>{
+    sessions = snap.exists() ? (snap.data().sessions || {}) : {};
+    sessionsReady = true;
+    maybeResumeLogin();
+    verifyMySession();
+    renderLoginUi();
+    renderAccountList();
+  }, (err)=>{ console.error('登入狀態同步失敗', err); });
+}
+
+// 同一台裝置重新整理後，若自己的登入仍有效就自動恢復，不需重新輸入密碼
+function maybeResumeLogin(){
+  if(resumeTried || !sessionsReady || !stateLoaded) return;
+  resumeTried = true;
+  const saved = readSavedLogin();
+  if(!saved) return;
+  const cur = sessions[saved.companyId];
+  if(cur && cur.sid === saved.sid && state.companies.some(c=>c.id===saved.companyId)){
+    setLoggedIn(saved.companyId, saved.sid);
+  } else {
+    localStorage.removeItem(LOGIN_KEY);
+  }
+}
+
+function setLoggedIn(companyId, sid){
+  loggedCompanyId = companyId;
+  mySid = sid;
+  myCompanyId = companyId;
+  loginAt = Date.now();
+  localStorage.setItem(LOGIN_KEY, JSON.stringify({companyId, sid}));
+  clearInterval(heartbeatTimer);
+  heartbeatTimer = setInterval(heartbeat, HEARTBEAT_MS);
+  heartbeat();
+  renderAll();
+}
+
+function clearLocalLogin(){
+  queueDraft = null; endSelectedId = null;
+  loggedCompanyId = null;
+  mySid = null;
+  myCompanyId = null;
+  clearInterval(heartbeatTimer);
+  heartbeatTimer = null;
+  localStorage.removeItem(LOGIN_KEY);
+}
+
+function forceLogoutLocal(msg){
+  clearLocalLogin();
+  renderAll();
+  const el = document.getElementById('loginError');
+  if(el) el.textContent = msg || '';
+}
+
+// 別處登入、被主辦單位登出、公司被刪除時，這台裝置會自動登出
+function verifyMySession(){
+  if(!loggedCompanyId) return;
+  if(Date.now() - loginAt < 5000) return;
+  if(!state.companies.some(c=>c.id===loggedCompanyId)){ forceLogoutLocal('此公司已不存在，請重新登入。'); return; }
+  const cur = sessions[loggedCompanyId];
+  if(!cur || cur.sid !== mySid){ forceLogoutLocal('此帳號已在其他地方登入，或已被主辦單位登出，請重新登入。'); }
+}
+
+async function heartbeat(){
+  if(!loggedCompanyId) return;
+  const cur = sessions[loggedCompanyId];
+  if(cur && cur.sid !== mySid) return;
+  try{ await updateDoc(sessionsRef, {[`sessions.${loggedCompanyId}.at`]: Date.now()}); }
+  catch(e){ console.warn('心跳更新失敗', e); }
+}
+document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) heartbeat(); });
+
+async function doLogin(){
+  const errEl = document.getElementById('loginError');
+  const btn = document.getElementById('loginBtn');
+  const acc = document.getElementById('loginAccount').value.trim().toLowerCase();
+  const pw = document.getElementById('loginPassword').value;
+  errEl.textContent = '';
+  if(!acc || !pw){ errEl.textContent = '請輸入帳號與密碼。'; return; }
+  if(!window.crypto || !crypto.subtle){ errEl.textContent = '此瀏覽器環境不支援加密功能，請改用 https 網址或較新的瀏覽器開啟。'; return; }
+  if(!sessionsReady){ errEl.textContent = '尚在連線中，請稍後再試（若持續出現，請確認 Firestore 規則允許讀寫 matching-board 集合）。'; return; }
+  btn.disabled = true;
+  try{
+    const c = state.companies.find(x=>x.account && x.account.toLowerCase()===acc);
+    const ok = !!(c && c.pwHash && (await hashPassword(c.id, pw)) === c.pwHash);
+    if(!ok){ errEl.textContent = '帳號或密碼錯誤。'; return; }
+    const saved = readSavedLogin();
+    const sid = (saved && saved.companyId===c.id && saved.sid) ? saved.sid : uid('ss');
+    try{
+      await runTransaction(db, async (tx)=>{
+        const snap = await tx.get(sessionsRef);
+        const cur = snap.exists() ? (snap.data().sessions || {})[c.id] : null;
+        if(isSessionActive(cur) && cur.sid !== sid) throw new Error('IN_USE');
+        tx.set(sessionsRef, {sessions:{[c.id]:{sid, at:Date.now()}}}, {merge:true});
+      });
+    }catch(e){
+      errEl.textContent = (e && e.message==='IN_USE')
+        ? '此帳號目前已有人登入，同一帳號同一時間只能一位登入。若對方已離開，請稍候約 2 分鐘，或請主辦單位協助登出。'
+        : '登入失敗，請確認網路連線與 Firestore 規則。';
+      return;
+    }
+    document.getElementById('loginPassword').value = '';
+    setLoggedIn(c.id, sid);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function doLogout(){
+  const cid = loggedCompanyId, sid = mySid;
+  if(!cid) return;
+  clearLocalLogin();
+  renderAll();
+  try{
+    await runTransaction(db, async (tx)=>{
+      const snap = await tx.get(sessionsRef);
+      const cur = snap.exists() ? (snap.data().sessions || {})[cid] : null;
+      if(cur && cur.sid === sid) tx.update(sessionsRef, {[`sessions.${cid}`]: deleteField()});
+    });
+  }catch(e){ console.warn('登出時清除登入狀態失敗', e); }
+}
+
+async function releaseSession(companyId){
+  try{ await updateDoc(sessionsRef, {[`sessions.${companyId}`]: deleteField()}); }
+  catch(e){ /* 文件或欄位不存在時略過 */ }
+}
+
+function renderLoginUi(){
+  const loginBox = document.getElementById('companyLoginBox');
+  const consoleEl = document.getElementById('companyConsole');
+  if(!loginBox || !consoleEl) return;
+  const logged = !!loggedCompanyId;
+  loginBox.style.display = logged ? 'none' : '';
+  consoleEl.style.display = logged ? '' : 'none';
+  if(logged){
+    const c = state.companies.find(x=>x.id===loggedCompanyId);
+    document.getElementById('loggedCompanyName').textContent = c ? c.name : '';
+  }
+}
+
+document.getElementById('loginBtn').addEventListener('click', doLogin);
+document.getElementById('loginPassword').addEventListener('keydown', (e)=>{ if(e.key==='Enter') doLogin(); });
+document.getElementById('loginAccount').addEventListener('keydown', (e)=>{ if(e.key==='Enter') document.getElementById('loginPassword').focus(); });
+document.getElementById('logoutBtn').addEventListener('click', doLogout);
+
+// ---- 名單設定：公司帳號管理 ----
+const PW_CHARS = 'abcdefghjkmnpqrstuvwxyz23456789';
+function randomPassword(len=8){
+  const arr = new Uint32Array(len);
+  crypto.getRandomValues(arr);
+  return Array.from(arr, n=>PW_CHARS[n % PW_CHARS.length]).join('');
+}
+
+function renderAccountList(){
+  const wrap = document.getElementById('accountList');
+  if(!wrap) return;
+  const sig = state.companies.map(c=>[c.id, c.name, c.account||'', c.pwHash?1:0].join('|')).join(';');
+  if(sig !== lastAccSig){
+    lastAccSig = sig;
+    wrap.innerHTML = state.companies.length===0 ? '<span class="hint">尚未新增公司</span>' : state.companies.map(c=>`
+      <div class="account-row" data-id="${c.id}">
+        <span class="acc-name" title="${escapeHtml(c.name)}">${escapeHtml(c.name)}</span>
+        <input type="text" class="acc-input-account" placeholder="帳號" value="${escapeHtml(c.account||'')}" autocapitalize="off" spellcheck="false">
+        <input type="text" class="acc-input-pw" placeholder="${c.pwHash?'輸入新密碼才會更改':'設定密碼'}" autocomplete="off" spellcheck="false">
+        <span class="acc-status" data-id="${c.id}"></span>
+        <span class="acc-actions">
+          <button class="btn btn-add" data-acc-action="save" data-id="${c.id}">儲存</button>
+          <button class="btn btn-remove" data-acc-action="kick" data-id="${c.id}">強制登出</button>
+        </span>
+      </div>`).join('');
+  }
+  wrap.querySelectorAll('.acc-status').forEach(el=>{
+    const c = state.companies.find(x=>x.id===el.dataset.id);
+    if(!c){ el.textContent=''; return; }
+    if(!c.account || !c.pwHash){ el.textContent = '未設定'; el.className = 'acc-status unset'; }
+    else if(isSessionActive(sessions[c.id])){ el.textContent = '● 登入中'; el.className = 'acc-status online'; }
+    else { el.textContent = '未登入'; el.className = 'acc-status offline'; }
+  });
+}
+
+function accountTaken(account, exceptId){
+  const a = account.toLowerCase();
+  return state.companies.some(c=>c.id!==exceptId && c.account && c.account.toLowerCase()===a);
+}
+
+async function saveAccount(companyId){
+  const row = document.querySelector(`.account-row[data-id="${companyId}"]`);
+  const c = state.companies.find(x=>x.id===companyId);
+  if(!row || !c) return;
+  const account = row.querySelector('.acc-input-account').value.trim();
+  const pw = row.querySelector('.acc-input-pw').value;
+  if(!account){ alert('請輸入帳號。'); return; }
+  if(/\s/.test(account)){ alert('帳號不可包含空白。'); return; }
+  if(accountTaken(account, companyId)){ alert('此帳號已被其他公司使用，請換一個。'); return; }
+  if(!c.pwHash && !pw){ alert('請設定密碼。'); return; }
+  if(!window.crypto || !crypto.subtle){ alert('此瀏覽器環境不支援加密功能，請改用 https 網址或較新的瀏覽器。'); return; }
+  const changed = account !== (c.account||'') || !!pw;
+  c.account = account;
+  if(pw) c.pwHash = await hashPassword(c.id, pw);
+  await saveState();
+  if(changed) await releaseSession(c.id);
+  row.querySelector('.acc-input-pw').value = '';
+  lastAccSig = '';
+  renderAccountList();
+}
+
+async function generateAccounts(onlyMissing){
+  const targets = state.companies.filter(c=> !onlyMissing || !c.account || !c.pwHash);
+  if(targets.length===0){ alert(onlyMissing ? '所有公司都已設定帳密。' : '尚未新增公司。'); return; }
+  if(!onlyMissing && !confirm(`確定要為全部 ${targets.length} 間公司重新產生帳密嗎？\n原有帳密會失效，登入中的公司會被登出。`)) return;
+  if(!window.crypto || !crypto.subtle){ alert('此瀏覽器環境不支援加密功能，請改用 https 網址或較新的瀏覽器。'); return; }
+  const lines = [];
+  for(const c of targets){
+    let n = state.companies.findIndex(x=>x.id===c.id) + 1;
+    let account = 'c' + String(n).padStart(2,'0');
+    while(accountTaken(account, c.id)){ n += 100; account = 'c' + String(n).padStart(2,'0'); }
+    const pw = randomPassword(8);
+    c.account = account;
+    c.pwHash = await hashPassword(c.id, pw);
+    lines.push(`${c.name}\t${account}\t${pw}`);
+  }
+  await saveState();
+  for(const c of targets) await releaseSession(c.id);
+  document.getElementById('credOutput').value = '公司\t帳號\t密碼\n' + lines.join('\n');
+  document.getElementById('credOutputWrap').style.display = '';
+  lastAccSig = '';
+  renderAccountList();
+}
+
+document.getElementById('accountList').addEventListener('click', async (e)=>{
+  const btn = e.target.closest('button[data-acc-action]');
+  if(!btn) return;
+  const id = btn.dataset.id;
+  if(btn.dataset.accAction === 'save') await saveAccount(id);
+  else if(btn.dataset.accAction === 'kick'){
+    if(!isSessionActive(sessions[id]) && !(sessions[id] && sessions[id].sid)){ alert('此公司目前沒有登入。'); return; }
+    await releaseSession(id);
+  }
+});
+document.getElementById('genMissingBtn').addEventListener('click', ()=>generateAccounts(true));
+document.getElementById('genAllBtn').addEventListener('click', ()=>generateAccounts(false));
+document.getElementById('copyCredBtn').addEventListener('click', async ()=>{
+  const ta = document.getElementById('credOutput');
+  try{ await navigator.clipboard.writeText(ta.value); }
+  catch(e){ ta.select(); document.execCommand('copy'); }
+  const b = document.getElementById('copyCredBtn'); b.textContent = '已複製'; setTimeout(()=>{ b.textContent = '複製'; }, 1500);
+});
+
+// ===== 學生個人查詢（學生用帳密登入，只看自己的狀態；不需要單一登入限制） =====
+const STU_LOGIN_KEY = 'student-login';
+let loggedStudentId = null;
+let lastStuAccSig = '';
+
+function maybeResumeStudentLogin(){
+  if(loggedStudentId) return;
+  let saved = null;
+  try{ saved = JSON.parse(localStorage.getItem(STU_LOGIN_KEY) || 'null'); }catch(e){}
+  if(!saved) return;
+  const st = state.students.find(x=>x.id===saved.studentId);
+  if(st && st.pwHash && st.pwHash === saved.pwHash) loggedStudentId = st.id;
+  else localStorage.removeItem(STU_LOGIN_KEY);
+}
+
+async function doStudentLogin(){
+  const errEl = document.getElementById('stuLoginError');
+  const btn = document.getElementById('stuLoginBtn');
+  const acc = document.getElementById('stuAccount').value.trim().toLowerCase();
+  const pw = document.getElementById('stuPassword').value;
+  errEl.textContent = '';
+  if(!acc || !pw){ errEl.textContent = '請輸入帳號與密碼。'; return; }
+  if(!window.crypto || !crypto.subtle){ errEl.textContent = '此瀏覽器環境不支援加密功能，請改用 https 網址或較新的瀏覽器開啟。'; return; }
+  if(!stateLoaded){ errEl.textContent = '尚在連線中，請稍後再試。'; return; }
+  btn.disabled = true;
+  try{
+    const st = state.students.find(x=>x.account && x.account.toLowerCase()===acc);
+    const ok = !!(st && st.pwHash && (await hashPassword(st.id, pw)) === st.pwHash);
+    if(!ok){ errEl.textContent = '帳號或密碼錯誤。'; return; }
+    loggedStudentId = st.id;
+    localStorage.setItem(STU_LOGIN_KEY, JSON.stringify({studentId: st.id, pwHash: st.pwHash}));
+    document.getElementById('stuPassword').value = '';
+    renderStudentView();
+  } finally {
+    btn.disabled = false;
+  }
+}
+function studentLogout(msg){
+  loggedStudentId = null;
+  localStorage.removeItem(STU_LOGIN_KEY);
+  renderStudentView();
+  const el = document.getElementById('stuLoginError');
+  if(el) el.textContent = msg || '';
+}
+
+function renderStudentView(){
+  const loginBox = document.getElementById('studentLoginBox');
+  const consoleEl = document.getElementById('studentConsole');
+  if(!loginBox || !consoleEl) return;
+  let st = loggedStudentId ? state.students.find(x=>x.id===loggedStudentId) : null;
+  // 學生被刪除或主辦單位改了密碼：自動登出
+  if(loggedStudentId){
+    let saved = null; try{ saved = JSON.parse(localStorage.getItem(STU_LOGIN_KEY) || 'null'); }catch(e){}
+    if(!st || !st.pwHash || !saved || saved.pwHash !== st.pwHash){
+      loggedStudentId = null; localStorage.removeItem(STU_LOGIN_KEY); st = null;
+      const el = document.getElementById('stuLoginError');
+      if(el) el.textContent = '登入已失效（帳密已變更或名單已調整），請重新登入。';
+    }
+  }
+  loginBox.style.display = st ? 'none' : '';
+  consoleEl.style.display = st ? '' : 'none';
+  if(!st) return;
+
+  const num = String(state.students.findIndex(x=>x.id===st.id)+1).padStart(2,'0');
+  document.getElementById('loggedStudentName').textContent = `${num} ${st.name}`;
+
+  const hired = st.state === 'hired';
+  const interviewing = st.state === 'interviewing';
+  const queues = Object.keys(st.queues || {}).filter(cid=>st.queues[cid]!=null && state.companies.some(c=>c.id===cid))
+    .sort((a,b)=>st.queues[a]-st.queues[b]);
+  const admits = Object.keys(st.pendingAdmits || {}).filter(cid=>state.companies.some(c=>c.id===cid))
+    .sort((a,b)=>st.pendingAdmits[a]-st.pendingAdmits[b]);
+
+  let heroCls = '', heroMain = '', heroSub = '';
+  if(hired){ heroCls = 'is-hired'; heroMain = `🎉 已媒合成功：${escapeHtml(companyName(st.companyId))}`; heroSub = '恭喜！你已確定媒合成功。'; }
+  else if(interviewing){ heroCls = 'is-interviewing'; heroMain = `🟢 面試中：${escapeHtml(companyName(st.companyId))}`; heroSub = '請把握時間，加油！'; }
+  else if(queues.length){ heroMain = `🟡 等候中（${queues.length} 間公司）`; heroSub = '請留意公司叫號，準備前往面試。'; }
+  else { heroMain = '目前空閒'; heroSub = '目前沒有公司正在等候你。'; }
+
+  let html = `<div class="stu-hero ${heroCls}">
+    <div class="stu-hero-name">${num} ${escapeHtml(st.name)}</div>
+    <div class="stu-hero-sub" style="font-size:15px;color:var(--text);margin-top:8px;">${heroMain}</div>
+    <div class="stu-hero-sub">${heroSub}</div>
+  </div>`;
+
+  html += `<div class="stu-section"><h3>🟢 目前面試中</h3>` + (interviewing
+    ? `<div class="stu-item green"><span>${escapeHtml(companyName(st.companyId))}</span><span class="stu-meta">${st.interviewStartedAt ? timeAgo(st.interviewStartedAt) : ''}</span></div>`
+    : '<div class="stu-empty">目前沒有進行中的面試</div>') + `</div>`;
+
+  html += `<div class="stu-section"><h3>🟡 等候中的公司</h3>` + (queues.length
+    ? queues.map(cid=>{
+        const pos = getQueuePosition(st, cid);
+        return `<div class="stu-item amber"><span>${escapeHtml(companyName(cid))}</span><span class="stu-meta">${pos ? '第 '+pos+' 順位' : ''}</span></div>`;
+      }).join('')
+    : '<div class="stu-empty">目前沒有公司在等候你</div>') + `</div>`;
+
+  html += `<div class="stu-section"><h3>🟣 公司錄取（即時登記）</h3>` + (admits.length
+    ? admits.map(cid=>{
+        const matched = hired && st.companyId === cid;
+        return `<div class="stu-item purple"><span>${escapeHtml(companyName(cid))}</span>${matched ? '<span class="stu-badge">✓ 媒合成功</span>' : '<span class="stu-meta">已登記錄取意願</span>'}</div>`;
+      }).join('')
+    : '<div class="stu-empty">目前尚無公司登記錄取</div>') + `</div>`;
+
+  html += `<div class="stu-section"><h3>✅ 媒合成功</h3>` + (hired
+    ? `<div class="stu-item purple"><span>${escapeHtml(companyName(st.companyId))}</span><span class="stu-badge">✓ 媒合成功</span></div>`
+    : '<div class="stu-empty">尚未媒合成功</div>') + `</div>`;
+
+  document.getElementById('studentView').innerHTML = html;
+}
+
+document.getElementById('stuLoginBtn').addEventListener('click', doStudentLogin);
+document.getElementById('stuPassword').addEventListener('keydown', (e)=>{ if(e.key==='Enter') doStudentLogin(); });
+document.getElementById('stuAccount').addEventListener('keydown', (e)=>{ if(e.key==='Enter') document.getElementById('stuPassword').focus(); });
+document.getElementById('stuLogoutBtn').addEventListener('click', ()=>studentLogout(''));
+
+// ---- 名單設定：學生帳號管理 ----
+function studentAccountTaken(account, exceptId){
+  const a = account.toLowerCase();
+  return state.students.some(x=>x.id!==exceptId && x.account && x.account.toLowerCase()===a);
+}
+function renderStudentAccountList(){
+  const wrap = document.getElementById('stuAccountList');
+  if(!wrap) return;
+  const sig = state.students.map(x=>[x.id, x.name, x.account||'', x.pwHash?1:0].join('|')).join(';');
+  if(sig !== lastStuAccSig){
+    lastStuAccSig = sig;
+    wrap.innerHTML = state.students.length===0 ? '<span class="hint">尚未新增學生</span>' : state.students.map((x,i)=>`
+      <div class="account-row" data-id="${x.id}">
+        <span class="acc-name" title="${escapeHtml(x.name)}">${String(i+1).padStart(2,'0')} ${escapeHtml(x.name)}</span>
+        <input type="text" class="acc-input-account" placeholder="帳號" value="${escapeHtml(x.account||'')}" autocapitalize="off" spellcheck="false">
+        <input type="text" class="acc-input-pw" placeholder="${x.pwHash?'輸入新密碼才會更改':'設定密碼'}" autocomplete="off" spellcheck="false">
+        <span class="acc-status ${x.account && x.pwHash ? 'offline' : 'unset'}">${x.account && x.pwHash ? '已設定' : '未設定'}</span>
+        <span class="acc-actions"><button class="btn btn-add" data-stu-save="1" data-id="${x.id}">儲存</button></span>
+      </div>`).join('');
+  }
+}
+async function saveStudentAccount(id){
+  const row = document.querySelector(`#stuAccountList .account-row[data-id="${id}"]`);
+  const st = state.students.find(x=>x.id===id);
+  if(!row || !st) return;
+  const account = row.querySelector('.acc-input-account').value.trim();
+  const pw = row.querySelector('.acc-input-pw').value;
+  if(!account){ alert('請輸入帳號。'); return; }
+  if(/\s/.test(account)){ alert('帳號不可包含空白。'); return; }
+  if(studentAccountTaken(account, id)){ alert('此帳號已被其他學生使用，請換一個。'); return; }
+  if(!st.pwHash && !pw){ alert('請設定密碼。'); return; }
+  if(!window.crypto || !crypto.subtle){ alert('此瀏覽器環境不支援加密功能，請改用 https 網址或較新的瀏覽器。'); return; }
+  st.account = account;
+  if(pw) st.pwHash = await hashPassword(st.id, pw);
+  await saveState();
+  row.querySelector('.acc-input-pw').value = '';
+  lastStuAccSig = '';
+  renderStudentAccountList();
+}
+async function generateStudentAccounts(onlyMissing){
+  const targets = state.students.filter(x=> !onlyMissing || !x.account || !x.pwHash);
+  if(targets.length===0){ alert(onlyMissing ? '所有學生都已設定帳密。' : '尚未新增學生。'); return; }
+  if(!onlyMissing && !confirm(`確定要為全部 ${targets.length} 位學生重新產生帳密嗎？\n原有帳密會失效。`)) return;
+  if(!window.crypto || !crypto.subtle){ alert('此瀏覽器環境不支援加密功能，請改用 https 網址或較新的瀏覽器。'); return; }
+  const lines = [];
+  for(const x of targets){
+    let n = state.students.findIndex(y=>y.id===x.id) + 1;
+    let account = 's' + String(n).padStart(2,'0');
+    while(studentAccountTaken(account, x.id)){ n += 100; account = 's' + String(n).padStart(2,'0'); }
+    const pw = randomPassword(6);
+    x.account = account;
+    x.pwHash = await hashPassword(x.id, pw);
+    lines.push(`${String(state.students.findIndex(y=>y.id===x.id)+1).padStart(2,'0')}\t${x.name}\t${account}\t${pw}`);
+  }
+  await saveState();
+  document.getElementById('stuCredOutput').value = '座號\t姓名\t帳號\t密碼\n' + lines.join('\n');
+  document.getElementById('stuCredOutputWrap').style.display = '';
+  lastStuAccSig = '';
+  renderStudentAccountList();
+}
+document.getElementById('stuAccountList').addEventListener('click', async (e)=>{
+  const btn = e.target.closest('button[data-stu-save]');
+  if(btn) await saveStudentAccount(btn.dataset.id);
+});
+document.getElementById('genStuMissingBtn').addEventListener('click', ()=>generateStudentAccounts(true));
+document.getElementById('genStuAllBtn').addEventListener('click', ()=>generateStudentAccounts(false));
+document.getElementById('copyStuCredBtn').addEventListener('click', async ()=>{
+  const ta = document.getElementById('stuCredOutput');
+  try{ await navigator.clipboard.writeText(ta.value); }
+  catch(e){ ta.select(); document.execCommand('copy'); }
+  const b = document.getElementById('copyStuCredBtn'); b.textContent = '已複製'; setTimeout(()=>{ b.textContent = '複製'; }, 1500);
+});
+
+// init — Firestore onSnapshot 會持續推送即時更新，不需要輪詢
+loadMyCompany();
+startRealtimeSync();
+startSessionSync();
+renderAll();
+</script>
+</body>
+</html>
