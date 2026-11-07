@@ -412,6 +412,54 @@ body.tv-active #tvWall{display:flex;}
   .tv-stats-mini{white-space:normal;text-align:right;font-size:11.5px;line-height:1.3;}
 }
 
+/* ===== 即時錄取通知列印 ===== */
+.np-controls{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:flex-end;margin-bottom:10px;}
+.np-controls label,.np-note-label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;font-weight:700;color:var(--text-dim);}
+.np-controls label.np-check{flex-direction:row;align-items:center;gap:6px;color:var(--text);padding-bottom:8px;}
+.np-note-label{margin-bottom:12px;}
+.np-note-label textarea{width:100%;}
+.np-pickbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:8px;font-size:13px;}
+.np-summary{font-size:12.5px;color:var(--text-dim);font-weight:700;}
+.np-summary .warn{color:var(--danger);}
+.np-pick{display:flex;flex-wrap:wrap;gap:6px;}
+.np-chip{display:inline-flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:700;cursor:pointer;}
+.np-chip small{color:var(--text-dim);font-weight:600;}
+.np-preview{background:#9CA3AF;padding:14px;border-radius:10px;overflow:auto;max-height:80vh;}
+.np-sheet{width:210mm;height:296mm;background:#fff;margin:0 auto 14px;padding:8mm;box-sizing:border-box;display:grid;gap:4mm;font-family:var(--sans);color:#000;}
+.np-sheet.np-n1{grid-template-columns:1fr;grid-template-rows:1fr;font-size:18pt;}
+.np-sheet.np-n2{grid-template-columns:1fr;grid-template-rows:1fr 1fr;font-size:14pt;}
+.np-sheet.np-n4{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;font-size:10.5pt;}
+.np-slip{border:1.5px dashed #6B7280;border-radius:3mm;padding:6mm 7mm;display:flex;flex-direction:column;gap:1.6mm;overflow:hidden;box-sizing:border-box;min-height:0;}
+.np-slip.np-over{outline:3px solid #E23F63;}
+.np-event{font-size:.62em;color:#374151;font-weight:700;}
+.np-title{font-size:1.35em;font-weight:800;letter-spacing:2px;border-bottom:2px solid #000;padding-bottom:1.2mm;}
+.np-who{font-size:1.2em;font-weight:800;}
+.np-who .np-num{font-family:var(--mono);margin-right:.4em;}
+.np-lead{font-size:.8em;font-weight:700;color:#111;}
+.np-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1mm;}
+.np-list li{font-size:1em;font-weight:700;display:flex;align-items:baseline;gap:.4em;}
+.np-list .np-box{font-size:1.1em;}
+.np-list small{font-size:.65em;color:#4B5563;font-weight:600;margin-left:auto;white-space:nowrap;}
+.np-list .np-tag{font-size:.65em;font-weight:800;border:1.5px solid #000;border-radius:1mm;padding:0 1.2mm;}
+.np-none{font-size:.85em;color:#4B5563;font-weight:600;}
+.np-matched{font-size:.9em;font-weight:800;border:2px solid #000;border-radius:2mm;padding:1mm 2mm;}
+.np-notetext{font-size:.72em;color:#111;white-space:pre-wrap;margin-top:auto;}
+.np-sign{display:flex;gap:4mm;font-size:.8em;font-weight:700;margin-top:2mm;align-items:flex-end;}
+.np-sign span{display:flex;align-items:flex-end;white-space:nowrap;}
+.np-sign .np-sign-a{flex:1.4;}
+.np-sign .np-sign-b{flex:1;}
+.np-line{flex:1;display:block;border-bottom:1px solid #000;min-width:8mm;height:1.1em;margin-left:1mm;}
+.np-foot{font-size:.55em;color:#6B7280;}
+#noticePrintRoot{display:none;}
+@media print{
+  @page{size:A4;margin:0;}
+  body.printing-notices{background:#fff !important;}
+  body.printing-notices > *:not(#noticePrintRoot){display:none !important;}
+  body.printing-notices #noticePrintRoot{display:block !important;}
+  body.printing-notices .np-sheet{margin:0;page-break-after:always;break-after:page;}
+  body.printing-notices .np-sheet:last-child{page-break-after:auto;break-after:auto;}
+  body.printing-notices .np-slip.np-over{outline:none;}
+}
 /* ===== 手機版優化（需搭配 viewport 設定才會生效） ===== */
 html{-webkit-text-size-adjust:100%;}
 button,.tab,.btn,.co-opt,.co-confirm,.settings-hub-card,.auto-fill-row{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
@@ -570,6 +618,10 @@ button,.tab,.btn,.co-opt,.co-confirm,.settings-hub-card,.auto-fill-row{touch-act
         <div class="settings-hub-title">媒合成功名單</div>
         <div class="settings-hub-desc">登記每位學生最終確定的唯一媒合結果。</div>
       </button>
+      <button class="settings-hub-card" data-goto="noticePrint">
+        <div class="settings-hub-title">即時錄取通知列印</div>
+        <div class="settings-hub-desc">依學生產生「即時錄取通知」紙本，可選擇對象、每頁張數後列印。</div>
+      </button>
       <button class="settings-hub-card" data-goto="setup">
         <div class="settings-hub-title">名單設定</div>
         <div class="settings-hub-desc">標題、投影字體、公司與學生名單等基本設定。</div>
@@ -607,6 +659,46 @@ button,.tab,.btn,.co-opt,.co-confirm,.settings-hub-card,.auto-fill-row{touch-act
   <div class="panel" id="panel-matchOverview">
     <div class="board-head"><h2>媒合成功總覽（依座號排序）</h2></div>
     <div class="flap-list" id="matchOverviewList"></div>
+  </div>
+
+  <!-- NOTICE PRINT (即時錄取通知列印) -->
+  <div class="panel" id="panel-noticePrint">
+    <button class="settings-back-btn" data-goto="settingsHub">← 返回設定選單</button>
+    <div class="board-head"><h2>即時錄取通知列印</h2></div>
+    <div class="hint" style="margin-bottom:12px;">依每位學生產生一張「即時錄取通知」：列出目前登記錄取他的公司，學生可在方框打勾選擇。選好對象與版面後按「列印」，在列印視窗選印表機（或存成 PDF）。</div>
+    <div class="np-controls">
+      <label>列印對象
+        <select id="npFilter">
+          <option value="pending">尚未媒合、且有公司登記錄取的學生</option>
+          <option value="admitted">所有有公司登記錄取的學生（含已媒合成功）</option>
+          <option value="all">全部學生</option>
+        </select>
+      </label>
+      <label>每頁張數
+        <select id="npPerPage">
+          <option value="1">1 張（整頁）</option>
+          <option value="2" selected>2 張</option>
+          <option value="4">4 張</option>
+        </select>
+      </label>
+      <label class="np-check"><input type="checkbox" id="npBoxes" checked> 公司前面加勾選方框</label>
+      <label class="np-check"><input type="checkbox" id="npSign"> 加上學生簽名欄</label>
+    </div>
+    <label class="np-note-label">提醒文字（會印在每張通知下方，可自行修改）
+      <textarea id="npNote" rows="2"></textarea>
+    </label>
+    <div class="np-pickbar">
+      <b>選擇要列印的學生</b>
+      <button class="btn btn-remove" id="npSelAll">全選</button>
+      <button class="btn btn-remove" id="npSelNone">全不選</button>
+      <span id="npSummary" class="np-summary"></span>
+    </div>
+    <div class="np-pick" id="npPick"></div>
+    <div class="row-inline" style="margin:10px 0;">
+      <button class="btn btn-add" id="npPrintBtn">🖨 列印</button>
+    </div>
+    <div class="board-head"><h2>預覽</h2></div>
+    <div class="np-preview" id="npPreview"></div>
   </div>
 
   <!-- SETUP -->
@@ -656,8 +748,26 @@ button,.tab,.btn,.co-opt,.co-confirm,.settings-hub-card,.auto-fill-row{touch-act
           <span id="tvStudentFontValue" class="title-size-value">20px</span>
         </div>
       </div>
+      <div class="title-setup-row">
+        <label>跑馬燈速度</label>
+        <div class="title-size-control">
+          <span>每秒移動</span>
+          <input type="range" id="tvMarqueeSpeedInput" min="20" max="150" step="5" value="50">
+          <span id="tvMarqueeSpeedValue" class="title-size-value">50px</span>
+        </div>
+      </div>
+      <div class="hint">跑馬燈（等候中、即時錄取放不下時橫向捲動）的速度。每一列都用同樣的速度，數字越大越快。</div>
+      <div class="title-setup-row">
+        <label>語音延遲播報</label>
+        <div class="title-size-control">
+          <span>開始面試後等</span>
+          <input type="range" id="tvSpeakDelayInput" min="0" max="30" step="1" value="8">
+          <span id="tvSpeakDelayValue" class="title-size-value">8秒</span>
+        </div>
+      </div>
+      <div class="hint">按下「開始面試」後，等這幾秒才會語音叫號；等待期間如果結束或取消就不會播報，避免誤觸造成重複唸名字。設為 0 表示立刻播報。另外，同一位學生、同一間公司 2 分鐘內不會重複播報；想再聽一次，可在投影畫面點該學生的綠色格子重播。</div>
       <div class="row-inline" style="margin-top:10px;">
-        <button class="btn btn-add" id="saveTvFontBtn">儲存投影字體設定</button>
+        <button class="btn btn-add" id="saveTvFontBtn">儲存投影設定</button>
       </div>
     </div>
     <div class="setup-block">
@@ -744,6 +854,8 @@ button,.tab,.btn,.co-opt,.co-confirm,.settings-hub-card,.auto-fill-row{touch-act
   </div>
 </div>
 
+<div id="noticePrintRoot"></div>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc, onSnapshot, runTransaction, updateDoc, deleteField } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
@@ -773,6 +885,9 @@ const DEFAULT_TITLE_SIZE1 = 16;
 const DEFAULT_TITLE_SIZE2 = 13;
 const DEFAULT_TV_COMPANY_FONT = 18;
 const DEFAULT_TV_STUDENT_FONT = 20;
+const DEFAULT_TV_SPEAK_DELAY = 8;      // 開始面試後，等幾秒才語音播報（期間被結束／取消就不播）
+const SPEAK_DEDUPE_MS = 120000;        // 同一位學生、同一間公司，2 分鐘內不重複播報
+const DEFAULT_TV_MARQUEE_SPEED = 50;   // 跑馬燈速度（每秒移動的像素數）
 
 let state = { companies: [], students: [] };
 let prevRenderSnapshot = '';
@@ -788,6 +903,8 @@ function ensureTitleDefaults(){
   if(state.titleSize2 === undefined) state.titleSize2 = DEFAULT_TITLE_SIZE2;
   if(state.tvCompanyFont === undefined) state.tvCompanyFont = DEFAULT_TV_COMPANY_FONT;
   if(state.tvStudentFont === undefined) state.tvStudentFont = DEFAULT_TV_STUDENT_FONT;
+  if(state.tvMarqueeSpeed === undefined) state.tvMarqueeSpeed = DEFAULT_TV_MARQUEE_SPEED;
+  if(state.tvSpeakDelay === undefined) state.tvSpeakDelay = DEFAULT_TV_SPEAK_DELAY;
 }
 
 async function saveState(){
@@ -805,7 +922,7 @@ function startRealtimeSync(){
         companies: data.companies || [], students: data.students || [],
         titleLine1: data.titleLine1, titleLine2: data.titleLine2,
         titleSize1: data.titleSize1, titleSize2: data.titleSize2,
-        tvCompanyFont: data.tvCompanyFont, tvStudentFont: data.tvStudentFont
+        tvCompanyFont: data.tvCompanyFont, tvStudentFont: data.tvStudentFont, tvMarqueeSpeed: data.tvMarqueeSpeed, tvSpeakDelay: data.tvSpeakDelay
       };
     } else {
       state = { companies: [], students: [] };
@@ -1234,6 +1351,7 @@ function renderAll(){
   renderSetup();
   renderAccountList();
   renderStudentAccountList();
+  if(document.getElementById('panel-noticePrint').classList.contains('active')) renderNoticePrint();
   renderTV();
 }
 
@@ -1272,6 +1390,22 @@ function renderTitle(){
   document.documentElement.style.setProperty('--tv-company-font', companyFont + 'px');
   document.documentElement.style.setProperty('--tv-student-font', studentFont + 'px');
 
+  const speed = state.tvMarqueeSpeed || DEFAULT_TV_MARQUEE_SPEED;
+  const mInput = document.getElementById('tvMarqueeSpeedInput');
+  const mValue = document.getElementById('tvMarqueeSpeedValue');
+  if(mInput && document.activeElement !== mInput){
+    mInput.value = speed;
+    if(mValue) mValue.textContent = speed + 'px';
+  }
+
+  const delay = (state.tvSpeakDelay === undefined || state.tvSpeakDelay === null) ? DEFAULT_TV_SPEAK_DELAY : state.tvSpeakDelay;
+  const dInput = document.getElementById('tvSpeakDelayInput');
+  const dValue = document.getElementById('tvSpeakDelayValue');
+  if(dInput && document.activeElement !== dInput){
+    dInput.value = delay;
+    if(dValue) dValue.textContent = delay + '秒';
+  }
+
   const cInput = document.getElementById('tvCompanyFontInput');
   const uInput = document.getElementById('tvStudentFontInput');
   const cValue = document.getElementById('tvCompanyFontValue');
@@ -1287,7 +1421,7 @@ function renderTitle(){
 }
 
 let tvBoardHtml = null;   // 上一次畫出的內容；沒有變動就不重畫，避免跑馬燈每次更新都從頭開始
-function tvFitMarquees(root){
+function tvFitMarquees(root, speed){
   root.querySelectorAll('.tv-b-marq').forEach(m=>{
     const track = m.firstElementChild;
     if(!track) return;
@@ -1295,7 +1429,7 @@ function tvFitMarquees(root){
       track.innerHTML = track.innerHTML + track.innerHTML;
       track.classList.add('scrolling');
       m.classList.add('is-scrolling');
-      track.style.animationDuration = Math.max(8, (track.scrollWidth / 2) / 55) + 's';
+      track.style.animationDuration = ((track.scrollWidth / 2) / speed) + 's';   // 所有列同一速度（像素/秒）：距離除以速度
     }
   });
 }
@@ -1382,12 +1516,14 @@ function renderTV(){
       <div class="tv-b-hcell h-wait">🟡 等候中</div>
       <div class="tv-b-hcell h-admit">🟣 即時錄取</div>
     </div>${rowsHtml}`;
-  if(tvBoardHtml === html) return;
-  tvBoardHtml = html;
+  const speed = state.tvMarqueeSpeed || DEFAULT_TV_MARQUEE_SPEED;
+  const cacheKey = html + '|' + speed;
+  if(tvBoardHtml === cacheKey) return;
+  tvBoardHtml = cacheKey;
   boardEl.style.setProperty('--n', state.companies.length);
   boardEl.innerHTML = html;
   tvFitCompanyNames(boardEl);
-  tvFitMarquees(boardEl);
+  tvFitMarquees(boardEl, speed);
 }
 
 let ttsEnabled = true;
@@ -1410,24 +1546,54 @@ function speakAnnouncement(s){
   window.speechSynthesis.speak(utter);
 }
 
+const pendingSpeech = {};   // studentId -> { timer, key }：已排程、等待播報的叫號
+const lastSpoken = {};      // 'studentId|companyId' -> 上次播報時間
+
+function clearPendingSpeech(){
+  Object.keys(pendingSpeech).forEach(id=>{ clearTimeout(pendingSpeech[id].timer); delete pendingSpeech[id]; });
+}
+
+function scheduleAnnouncement(s, key){
+  const id = s.id;
+  if(pendingSpeech[id]){ clearTimeout(pendingSpeech[id].timer); delete pendingSpeech[id]; }
+  const delay = (state.tvSpeakDelay === undefined || state.tvSpeakDelay === null) ? DEFAULT_TV_SPEAK_DELAY : state.tvSpeakDelay;
+  const fire = ()=>{
+    delete pendingSpeech[id];
+    if(!document.body.classList.contains('tv-active')) return;
+    const cur = state.students.find(x=>x.id===id);
+    // 等待期間若已結束、取消或換成別次面試，就不播報
+    if(!cur || cur.state !== 'interviewing' || (cur.interviewStartedAt || cur.updatedAt) !== key) return;
+    const dk = id + '|' + cur.companyId;
+    if(lastSpoken[dk] && Date.now() - lastSpoken[dk] < SPEAK_DEDUPE_MS) return;   // 短時間內同一組不重複唸
+    lastSpoken[dk] = Date.now();
+    speakAnnouncement(cur);
+  };
+  if(delay <= 0) fire();
+  else pendingSpeech[id] = { key, timer: setTimeout(fire, delay * 1000) };
+}
+
 function checkAnnouncements(interviewingList){
   interviewingList.forEach(s=>{
     const key = s.interviewStartedAt || s.updatedAt; // 相容舊資料
     if(announcedMap[s.id] !== key){
       const isFirstInit = announcedMap.__initialized !== true;
-      if(!isFirstInit) speakAnnouncement(s);
+      if(!isFirstInit) scheduleAnnouncement(s, key);
       announcedMap[s.id] = key;
     }
   });
   Object.keys(announcedMap).forEach(key=>{
     if(key==='__initialized') return;
-    if(!interviewingList.some(s=>s.id===key)) delete announcedMap[key];
+    if(!interviewingList.some(s=>s.id===key)){
+      delete announcedMap[key];
+      if(pendingSpeech[key]){ clearTimeout(pendingSpeech[key].timer); delete pendingSpeech[key]; }   // 面試已結束 → 取消尚未播出的叫號
+    }
   });
 }
 
 function enterTVMode(){
   document.body.classList.add('tv-active');
   // 進入投影模式時，先把目前已經在面試中的學生標記為「已播報」，避免一進去就狂唸一輪
+  clearPendingSpeech();
   announcedMap = {__initialized: true};
   state.students.filter(s=>s.state==='interviewing').forEach(s=>{ announcedMap[s.id] = s.interviewStartedAt || s.updatedAt; });
   tvBoardHtml = null;
@@ -1448,6 +1614,7 @@ window.addEventListener('resize', ()=>{   // 視窗大小改變時重新量測�
 });
 document.getElementById('tvExitBtn').addEventListener('click', ()=>{
   document.body.classList.remove('tv-active');
+  clearPendingSpeech();
   if('speechSynthesis' in window) window.speechSynthesis.cancel();
 });
 document.getElementById('tvSoundToggle').addEventListener('click', ()=>{
@@ -1470,7 +1637,7 @@ document.getElementById('tvBody').addEventListener('click', (e)=>{
   if(student) speakAnnouncement(student);
 });
 document.addEventListener('keydown', (e)=>{
-  if(e.key === 'Escape') document.body.classList.remove('tv-active');
+  if(e.key === 'Escape'){ document.body.classList.remove('tv-active'); clearPendingSpeech(); }
 });
 
 function escapeHtml(str){
@@ -1511,7 +1678,16 @@ document.getElementById('tvStudentFontInput').addEventListener('input', (e)=>{
   document.getElementById('tvStudentFontValue').textContent = e.target.value + 'px';
   document.documentElement.style.setProperty('--tv-student-font', e.target.value + 'px');
 });
+document.getElementById('tvSpeakDelayInput').addEventListener('input', (e)=>{
+  document.getElementById('tvSpeakDelayValue').textContent = e.target.value + '秒';
+});
+document.getElementById('tvMarqueeSpeedInput').addEventListener('input', (e)=>{
+  document.getElementById('tvMarqueeSpeedValue').textContent = e.target.value + 'px';
+});
 document.getElementById('saveTvFontBtn').addEventListener('click', async ()=>{
+  state.tvMarqueeSpeed = parseInt(document.getElementById('tvMarqueeSpeedInput').value, 10) || DEFAULT_TV_MARQUEE_SPEED;
+  const dv = parseInt(document.getElementById('tvSpeakDelayInput').value, 10);
+  state.tvSpeakDelay = isNaN(dv) ? DEFAULT_TV_SPEAK_DELAY : dv;
   state.tvCompanyFont = parseInt(document.getElementById('tvCompanyFontInput').value, 10) || DEFAULT_TV_COMPANY_FONT;
   state.tvStudentFont = parseInt(document.getElementById('tvStudentFontInput').value, 10) || DEFAULT_TV_STUDENT_FONT;
   await saveState();
@@ -1804,8 +1980,8 @@ document.getElementById('studentChips').addEventListener('click', async (e)=>{
 
 // password protection
 const PROTECTED_TABS = ['settingsHub'];
-const HUB_CHILD_TABS = ['pendingAdmit', 'admitted', 'setup'];
-const TAB_LABELS = {settingsHub:'設定', pendingAdmit:'即時廠商錄取名單', admitted:'媒合成功名單', setup:'名單設定', tv:'投影模式'};
+const HUB_CHILD_TABS = ['pendingAdmit', 'admitted', 'setup', 'noticePrint'];
+const TAB_LABELS = {settingsHub:'設定', pendingAdmit:'即時廠商錄取名單', admitted:'媒合成功名單', setup:'名單設定', noticePrint:'即時錄取通知列印', tv:'投影模式'};
 const PASSWORD = '70807081';
 let unlocked = {};
 let pendingTab = null;
@@ -1815,6 +1991,7 @@ function activateTab(target){
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===navTarget));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('panel-'+target).classList.add('active');
+  if(target === 'noticePrint') renderNoticePrint();
 }
 
 function openPwModal(target){
@@ -2349,6 +2526,129 @@ document.getElementById('copyStuCredBtn').addEventListener('click', async ()=>{
   catch(e){ ta.select(); document.execCommand('copy'); }
   const b = document.getElementById('copyStuCredBtn'); b.textContent = '已複製'; setTimeout(()=>{ b.textContent = '複製'; }, 1500);
 });
+
+// ===== 即時錄取通知列印 =====
+const npExcluded = new Set();   // 使用者取消勾選的學生 id
+const NP_NOTE_KEY = 'np-note';
+const NP_DEFAULT_NOTE = '請在要接受的公司前方的方框打勾，並交給承辦老師確認。';
+
+function npStudents(){
+  const f = document.getElementById('npFilter').value;
+  return state.students.map((st, i)=>{
+    const admits = Object.keys(st.pendingAdmits || {})
+      .filter(cid=>state.companies.some(c=>c.id===cid))
+      .sort((a,b)=>{
+        const ma = st.state==='hired' && st.companyId===a ? 0 : 1;
+        const mb = st.state==='hired' && st.companyId===b ? 0 : 1;
+        return ma-mb || st.pendingAdmits[a]-st.pendingAdmits[b];
+      });
+    return { st, num: String(i+1).padStart(2,'0'), admits };
+  }).filter(x=>{
+    if(f==='all') return true;
+    if(f==='admitted') return x.admits.length>0;
+    return x.admits.length>0 && x.st.state!=='hired';   // pending
+  });
+}
+
+function npSlipHtml(x, opts){
+  const st = x.st;
+  const hired = st.state==='hired';
+  const fmt = (ts)=>{ try{ return new Date(ts).toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit',hour12:false}); }catch(e){ return ''; } };
+  const list = x.admits.length
+    ? `<ul class="np-list">${x.admits.map(cid=>{
+        const matched = hired && st.companyId===cid;
+        const box = opts.boxes ? `<span class="np-box">${matched?'☑':'☐'}</span>` : '';
+        const tag = matched ? '<span class="np-tag">已媒合成功</span>' : '';
+        return `<li>${box}<span>${escapeHtml(companyName(cid))}</span>${tag}<small>${fmt(st.pendingAdmits[cid])}</small></li>`;
+      }).join('')}</ul>`
+    : '<div class="np-none">目前尚無公司登記錄取。</div>';
+  const matchedLine = hired && !x.admits.includes(st.companyId)
+    ? `<div class="np-matched">✓ 已媒合成功：${escapeHtml(companyName(st.companyId))}</div>` : '';
+  const sign = opts.sign ? '<div class="np-sign"><span class="np-sign-a">學生簽名：<i class="np-line"></i></span><span class="np-sign-b">日期：<i class="np-line"></i></span></div>' : '';
+  const note = opts.note ? `<div class="np-notetext">${escapeHtml(opts.note)}</div>` : '';
+  return `<div class="np-slip">
+    <div class="np-event">${escapeHtml(state.titleLine1 || '')}</div>
+    <div class="np-title">即時錄取通知</div>
+    <div class="np-who"><span class="np-num">${x.num}</span>${escapeHtml(st.name)} 同學</div>
+    <div class="np-lead">${x.admits.length ? '以下公司已登記錄取你：' : '錄取狀況：'}</div>
+    ${list}${matchedLine}${note}${sign}
+    <div class="np-foot">列印時間 ${new Date().toLocaleString('zh-TW',{hour12:false})}</div>
+  </div>`;
+}
+
+function npSheetsHtml(list, perPage, opts){
+  const sheets = [];
+  for(let i=0; i<list.length; i+=perPage){
+    sheets.push(`<div class="np-sheet np-n${perPage}">${list.slice(i, i+perPage).map(x=>npSlipHtml(x, opts)).join('')}</div>`);
+  }
+  return sheets.join('');
+}
+
+function npOptions(){
+  return {
+    boxes: document.getElementById('npBoxes').checked,
+    sign: document.getElementById('npSign').checked,
+    note: document.getElementById('npNote').value.trim(),
+  };
+}
+
+function renderNoticePrint(){
+  const noteEl = document.getElementById('npNote');
+  if(noteEl && !noteEl.dataset.init){
+    noteEl.dataset.init = '1';
+    let saved = null; try{ saved = localStorage.getItem(NP_NOTE_KEY); }catch(e){}
+    noteEl.value = saved === null ? NP_DEFAULT_NOTE : saved;
+  }
+  const all = npStudents();
+  const pick = document.getElementById('npPick');
+  pick.innerHTML = all.length===0 ? '<span class="hint">目前沒有符合條件的學生。</span>' : all.map(x=>
+    `<label class="np-chip"><input type="checkbox" data-np-id="${x.st.id}" ${npExcluded.has(x.st.id)?'':'checked'}>${x.num} ${escapeHtml(x.st.name)}<small>${x.admits.length} 間</small></label>`
+  ).join('');
+  const chosen = all.filter(x=>!npExcluded.has(x.st.id));
+  const perPage = parseInt(document.getElementById('npPerPage').value, 10) || 2;
+  const preview = document.getElementById('npPreview');
+  preview.innerHTML = chosen.length ? npSheetsHtml(chosen, perPage, npOptions()) : '<div class="hint" style="color:#fff;">沒有要列印的學生。</div>';
+  const over = [...preview.querySelectorAll('.np-slip')].filter(el=>{
+    const bad = el.scrollHeight > el.clientHeight + 1;
+    el.classList.toggle('np-over', bad);
+    return bad;
+  }).length;
+  const pages = Math.ceil(chosen.length / perPage);
+  document.getElementById('npSummary').innerHTML = `共 ${chosen.length} 位、${pages} 頁` +
+    (over ? `　<span class="warn">⚠ ${over} 張內容過多（紅框）會被截斷，請改用每頁較少張數</span>` : '');
+  document.getElementById('npPrintBtn').disabled = chosen.length === 0;
+}
+
+function npPrint(){
+  const all = npStudents().filter(x=>!npExcluded.has(x.st.id));
+  if(all.length===0){ alert('沒有要列印的學生。'); return; }
+  const perPage = parseInt(document.getElementById('npPerPage').value, 10) || 2;
+  const root = document.getElementById('noticePrintRoot');
+  root.innerHTML = npSheetsHtml(all, perPage, npOptions());
+  document.body.classList.add('printing-notices');
+  const done = ()=>{ document.body.classList.remove('printing-notices'); root.innerHTML = ''; window.removeEventListener('afterprint', done); };
+  window.addEventListener('afterprint', done);
+  window.print();
+  setTimeout(()=>{ if(document.body.classList.contains('printing-notices') && !/iPad|iPhone|Android/i.test(navigator.userAgent)) done(); }, 1500);
+}
+
+document.getElementById('npFilter').addEventListener('change', ()=>{ npExcluded.clear(); renderNoticePrint(); });
+document.getElementById('npPerPage').addEventListener('change', renderNoticePrint);
+document.getElementById('npBoxes').addEventListener('change', renderNoticePrint);
+document.getElementById('npSign').addEventListener('change', renderNoticePrint);
+document.getElementById('npNote').addEventListener('input', (e)=>{
+  try{ localStorage.setItem(NP_NOTE_KEY, e.target.value); }catch(err){}
+  renderNoticePrint();
+});
+document.getElementById('npPick').addEventListener('change', (e)=>{
+  const id = e.target.dataset && e.target.dataset.npId;
+  if(!id) return;
+  if(e.target.checked) npExcluded.delete(id); else npExcluded.add(id);
+  renderNoticePrint();
+});
+document.getElementById('npSelAll').addEventListener('click', ()=>{ npExcluded.clear(); renderNoticePrint(); });
+document.getElementById('npSelNone').addEventListener('click', ()=>{ npStudents().forEach(x=>npExcluded.add(x.st.id)); renderNoticePrint(); });
+document.getElementById('npPrintBtn').addEventListener('click', npPrint);
 
 // init — Firestore onSnapshot 會持續推送即時更新，不需要輪詢
 loadMyCompany();
