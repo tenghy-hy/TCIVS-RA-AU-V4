@@ -263,6 +263,11 @@ select{min-width:200px;}
 .account-list{display:flex;flex-direction:column;gap:8px;}
 .account-row{display:grid;grid-template-columns:minmax(110px,1.2fr) minmax(90px,1fr) minmax(90px,1fr) auto auto;gap:8px;align-items:center;
   background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:12.5px;}
+.quota-row{display:grid;grid-template-columns:minmax(120px,1.6fr) 110px minmax(90px,1fr);gap:10px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:13px;}
+.quota-row .acc-name{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.quota-row input{width:100%;min-width:0;}
+.quota-row .quota-status{font-size:12px;font-weight:700;color:var(--text-dim);white-space:nowrap;}
+.quota-row .quota-status.full{color:var(--danger);}
 .account-row .acc-name{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .account-row input{min-width:0;width:100%;}
 .acc-status{font-size:11.5px;font-weight:700;white-space:nowrap;}
@@ -412,53 +417,46 @@ body.tv-active #tvWall{display:flex;}
   .tv-stats-mini{white-space:normal;text-align:right;font-size:11.5px;line-height:1.3;}
 }
 
-/* ===== 即時錄取通知列印 ===== */
+/* ===== 即時錄取回報單列印 ===== */
 .np-controls{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:flex-end;margin-bottom:10px;}
-.np-controls label,.np-note-label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;font-weight:700;color:var(--text-dim);}
+.np-controls label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;font-weight:700;color:var(--text-dim);}
 .np-controls label.np-check{flex-direction:row;align-items:center;gap:6px;color:var(--text);padding-bottom:8px;}
-.np-note-label{margin-bottom:12px;}
-.np-note-label textarea{width:100%;}
 .np-pickbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:8px;font-size:13px;}
 .np-summary{font-size:12.5px;color:var(--text-dim);font-weight:700;}
-.np-summary .warn{color:var(--danger);}
 .np-pick{display:flex;flex-wrap:wrap;gap:6px;}
 .np-chip{display:inline-flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:700;cursor:pointer;}
 .np-chip small{color:var(--text-dim);font-weight:600;}
 .np-preview{background:#9CA3AF;padding:14px;border-radius:10px;overflow:auto;max-height:80vh;}
-.np-sheet{width:210mm;height:296mm;background:#fff;margin:0 auto 14px;padding:8mm;box-sizing:border-box;display:grid;gap:4mm;font-family:var(--sans);color:#000;}
-.np-sheet.np-n1{grid-template-columns:1fr;grid-template-rows:1fr;font-size:18pt;}
-.np-sheet.np-n2{grid-template-columns:1fr;grid-template-rows:1fr 1fr;font-size:14pt;}
-.np-sheet.np-n4{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;font-size:10.5pt;}
-.np-slip{border:1.5px dashed #6B7280;border-radius:3mm;padding:6mm 7mm;display:flex;flex-direction:column;gap:1.6mm;overflow:hidden;box-sizing:border-box;min-height:0;}
-.np-slip.np-over{outline:3px solid #E23F63;}
-.np-event{font-size:.62em;color:#374151;font-weight:700;}
-.np-title{font-size:1.35em;font-weight:800;letter-spacing:2px;border-bottom:2px solid #000;padding-bottom:1.2mm;}
-.np-who{font-size:1.2em;font-weight:800;}
-.np-who .np-num{font-family:var(--mono);margin-right:.4em;}
-.np-lead{font-size:.8em;font-weight:700;color:#111;}
-.np-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1mm;}
-.np-list li{font-size:1em;font-weight:700;display:flex;align-items:baseline;gap:.4em;}
-.np-list .np-box{font-size:1.1em;}
-.np-list small{font-size:.65em;color:#4B5563;font-weight:600;margin-left:auto;white-space:nowrap;}
-.np-list .np-tag{font-size:.65em;font-weight:800;border:1.5px solid #000;border-radius:1mm;padding:0 1.2mm;}
-.np-none{font-size:.85em;color:#4B5563;font-weight:600;}
-.np-matched{font-size:.9em;font-weight:800;border:2px solid #000;border-radius:2mm;padding:1mm 2mm;}
-.np-notetext{font-size:.72em;color:#111;white-space:pre-wrap;margin-top:auto;}
-.np-sign{display:flex;gap:4mm;font-size:.8em;font-weight:700;margin-top:2mm;align-items:flex-end;}
-.np-sign span{display:flex;align-items:flex-end;white-space:nowrap;}
-.np-sign .np-sign-a{flex:1.4;}
-.np-sign .np-sign-b{flex:1;}
-.np-line{flex:1;display:block;border-bottom:1px solid #000;min-width:8mm;height:1.1em;margin-left:1mm;}
-.np-foot{font-size:.55em;color:#6B7280;}
+.rp-form{font-family:var(--sans);color:#000;}
+.np-preview .rp-form{width:210mm;min-height:297mm;box-sizing:border-box;padding:12mm;background:#fff;margin:0 auto 14px;}
+.rp-title{font-size:21pt;font-weight:800;text-align:center;letter-spacing:6px;}
+.rp-event{font-size:9pt;text-align:center;color:#374151;margin:1mm 0 5mm;}
+.rp-head{display:flex;gap:10mm;align-items:flex-end;margin:0 0 5mm;font-size:13pt;font-weight:800;}
+.rp-field{display:flex;align-items:flex-end;gap:2mm;white-space:nowrap;}
+.rp-field.rp-company{flex:1.7;min-width:0;}
+.rp-field.rp-count{flex:1;}
+.rp-fill{flex:1;min-width:0;border-bottom:1.6px solid #000;min-height:1.5em;padding:0 2mm;overflow:hidden;text-overflow:ellipsis;}
+.rp-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:10.5pt;}
+.rp-table th,.rp-table td{border:1.6px solid #000;padding:1.5mm 2mm;vertical-align:middle;word-break:break-all;}
+.rp-table th{background:#EEF0F4;font-weight:800;text-align:center;font-size:10pt;}
+.rp-table td{height:23mm;}
+.rp-table thead{display:table-header-group;}
+.rp-table tbody{break-inside:avoid;page-break-inside:avoid;}
+.rp-table tr{break-inside:avoid;page-break-inside:avoid;}
+.rp-batch{text-align:center;font-weight:800;background:#F6F7F9;}
+.rp-name{font-weight:800;font-size:12pt;}
+.rp-hint{font-size:8.5pt;color:#6B7280;text-align:center;}
+.rp-web,.rp-intent{font-weight:700;line-height:1.5;}
+.rp-web .rp-small{font-size:8.5pt;font-weight:600;color:#374151;margin-top:1mm;}
+.rp-web .rp-wline{border-bottom:1px solid #000;height:5mm;}
 #noticePrintRoot{display:none;}
 @media print{
-  @page{size:A4;margin:0;}
-  body.printing-notices{background:#fff !important;}
-  body.printing-notices > *:not(#noticePrintRoot){display:none !important;}
-  body.printing-notices #noticePrintRoot{display:block !important;}
-  body.printing-notices .np-sheet{margin:0;page-break-after:always;break-after:page;}
-  body.printing-notices .np-sheet:last-child{page-break-after:auto;break-after:auto;}
-  body.printing-notices .np-slip.np-over{outline:none;}
+  @page{size:A4;margin:12mm;}
+  body.printing-reports{background:#fff !important;}
+  body.printing-reports > *:not(#noticePrintRoot){display:none !important;}
+  body.printing-reports #noticePrintRoot{display:block !important;}
+  body.printing-reports .rp-form{page-break-after:always;break-after:page;}
+  body.printing-reports .rp-form:last-child{page-break-after:auto;break-after:auto;}
 }
 /* ===== 手機版優化（需搭配 viewport 設定才會生效） ===== */
 html{-webkit-text-size-adjust:100%;}
@@ -618,9 +616,9 @@ button,.tab,.btn,.co-opt,.co-confirm,.settings-hub-card,.auto-fill-row{touch-act
         <div class="settings-hub-title">媒合成功名單</div>
         <div class="settings-hub-desc">登記每位學生最終確定的唯一媒合結果。</div>
       </button>
-      <button class="settings-hub-card" data-goto="noticePrint">
-        <div class="settings-hub-title">即時錄取通知列印</div>
-        <div class="settings-hub-desc">依學生產生「即時錄取通知」紙本，可選擇對象、每頁張數後列印。</div>
+      <button class="settings-hub-card" data-goto="reportPrint">
+        <div class="settings-hub-title">即時錄取回報單列印</div>
+        <div class="settings-hub-desc">依公司產生「即時錄取回報單」紙本：公司代表簽名、回報時間、網頁登錄與學生媒合意願。</div>
       </button>
       <button class="settings-hub-card" data-goto="setup">
         <div class="settings-hub-title">名單設定</div>
@@ -661,44 +659,47 @@ button,.tab,.btn,.co-opt,.co-confirm,.settings-hub-card,.auto-fill-row{touch-act
     <div class="flap-list" id="matchOverviewList"></div>
   </div>
 
-  <!-- NOTICE PRINT (即時錄取通知列印) -->
-  <div class="panel" id="panel-noticePrint">
+  <!-- REPORT PRINT (即時錄取回報單列印) -->
+  <div class="panel" id="panel-reportPrint">
     <button class="settings-back-btn" data-goto="settingsHub">← 返回設定選單</button>
-    <div class="board-head"><h2>即時錄取通知列印</h2></div>
-    <div class="hint" style="margin-bottom:12px;">依每位學生產生一張「即時錄取通知」：列出目前登記錄取他的公司，學生可在方框打勾選擇。選好對象與版面後按「列印」，在列印視窗選印表機（或存成 PDF）。</div>
+    <div class="board-head"><h2>即時錄取回報單列印</h2></div>
+    <div class="hint" style="margin-bottom:12px;">每間公司一張回報單，用來記錄「公司回報即時錄取 → 網頁登錄 → 學生媒合意願」。表格依「第 1、2、3…次回報」分組，每次可填數位學生；公司名稱會自動帶入。選好公司與版面後按「列印」，在列印視窗選印表機（或存成 PDF）。</div>
     <div class="np-controls">
-      <label>列印對象
-        <select id="npFilter">
-          <option value="pending">尚未媒合、且有公司登記錄取的學生</option>
-          <option value="admitted">所有有公司登記錄取的學生（含已媒合成功）</option>
-          <option value="all">全部學生</option>
+      <label>回報次數
+        <select id="rpBatches">
+          <option value="1">1 次</option><option value="2">2 次</option><option value="3">3 次</option>
+          <option value="4" selected>4 次</option><option value="5">5 次</option><option value="6">6 次</option>
         </select>
       </label>
-      <label>每頁張數
-        <select id="npPerPage">
-          <option value="1">1 張（整頁）</option>
-          <option value="2" selected>2 張</option>
-          <option value="4">4 張</option>
+      <label>每次回報可填
+        <select id="rpRows">
+          <option value="1">1 位學生</option><option value="2" selected>2 位學生</option>
+          <option value="3">3 位學生</option><option value="4">4 位學生</option>
         </select>
       </label>
-      <label class="np-check"><input type="checkbox" id="npBoxes" checked> 公司前面加勾選方框</label>
-      <label class="np-check"><input type="checkbox" id="npSign"> 加上學生簽名欄</label>
+      <label class="np-check"><input type="checkbox" id="rpPrefill"> 預先帶入目前已登記錄取的學生姓名</label>
     </div>
-    <label class="np-note-label">提醒文字（會印在每張通知下方，可自行修改）
-      <textarea id="npNote" rows="2"></textarea>
-    </label>
+    <div class="np-controls">
+      <label style="flex:1 1 260px;">標題第一行（大字）
+        <input type="text" id="rpTitle1" placeholder="即時錄取回報單">
+      </label>
+      <label style="flex:1 1 260px;">標題第二行（小字，可留空）
+        <input type="text" id="rpTitle2" placeholder="例如活動名稱">
+      </label>
+      <button class="btn btn-remove" id="rpTitleReset">還原預設標題</button>
+    </div>
     <div class="np-pickbar">
-      <b>選擇要列印的學生</b>
-      <button class="btn btn-remove" id="npSelAll">全選</button>
-      <button class="btn btn-remove" id="npSelNone">全不選</button>
-      <span id="npSummary" class="np-summary"></span>
+      <b>選擇要列印的公司</b>
+      <button class="btn btn-remove" id="rpSelAll">全選</button>
+      <button class="btn btn-remove" id="rpSelNone">全不選</button>
+      <span id="rpSummary" class="np-summary"></span>
     </div>
-    <div class="np-pick" id="npPick"></div>
+    <div class="np-pick" id="rpPick"></div>
     <div class="row-inline" style="margin:10px 0;">
-      <button class="btn btn-add" id="npPrintBtn">🖨 列印</button>
+      <button class="btn btn-add" id="rpPrintBtn">🖨 列印</button>
     </div>
     <div class="board-head"><h2>預覽</h2></div>
-    <div class="np-preview" id="npPreview"></div>
+    <div class="np-preview" id="rpPreview"></div>
   </div>
 
   <!-- SETUP -->
@@ -807,6 +808,16 @@ button,.tab,.btn,.co-opt,.co-confirm,.settings-hub-card,.auto-fill-row{touch-act
         <button class="btn btn-danger" id="clearCompanyBtn">清空公司名單</button>
       </div>
       <div class="chip-list" id="companyChips"></div>
+    </div>
+    <div class="setup-block">
+      <h3>公司錄取人數上限</h3>
+      <div class="hint">設定每間公司最多錄取幾位學生（空白＝不限）。這個人數會自動印在「即時錄取回報單」的「公司錄取人數」，在「媒合成功名單」登記超過上限時也會跳出提醒（可選擇仍要登記）。</div>
+      <div class="row-inline" style="margin:8px 0;">
+        <input type="number" id="quotaAllInput" min="1" max="99" placeholder="人數" style="max-width:110px;">
+        <button class="btn btn-remove" id="quotaFillBtn">填入全部公司</button>
+        <button class="btn btn-add" id="quotaSaveBtn">儲存人數上限</button>
+      </div>
+      <div id="quotaList" class="account-list"></div>
     </div>
     <div class="setup-block">
       <h3>學生名單</h3>
@@ -1295,7 +1306,11 @@ function renderAdmitted(){
       const tag = s.state==='hired' ? `（目前媒合成功於 ${companyName(s.companyId)}）` : '';
       return `<option value="${s.id}">${getStudentNumber(s)} ${escapeHtml(s.name)}${tag}</option>`;
     }).join('');
-    companySel.innerHTML = state.companies.map(c=>`<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('');
+    companySel.innerHTML = state.companies.map(c=>{
+      const n = hiredCountOf(c.id);
+      const tag = c.maxHires==null ? (n ? `（已媒合 ${n} 人）` : '') : `（已媒合 ${n} / 上限 ${c.maxHires}）`;
+      return `<option value="${c.id}">${escapeHtml(c.name)}${tag}</option>`;
+    }).join('');
     if(prevStudent && state.students.some(s=>s.id===prevStudent)) studentSel.value = prevStudent;
     if(prevCompany && state.companies.some(c=>c.id===prevCompany)) companySel.value = prevCompany;
   }
@@ -1350,8 +1365,9 @@ function renderAll(){
   renderMatchOverview();
   renderSetup();
   renderAccountList();
+  renderQuotaList();
   renderStudentAccountList();
-  if(document.getElementById('panel-noticePrint').classList.contains('active')) renderNoticePrint();
+  if(document.getElementById('panel-reportPrint').classList.contains('active')) renderReportPrint();
   renderTV();
 }
 
@@ -1925,6 +1941,11 @@ document.getElementById('addAdmitBtn').addEventListener('click', async ()=>{
   if(!studentId || !companyId) return;
   const student = state.students.find(s=>s.id===studentId);
   if(!student) return;
+  const targetCompany = state.companies.find(c=>c.id===companyId);
+  if(targetCompany && targetCompany.maxHires != null){
+    const already = state.students.filter(x=>x.state==='hired' && x.companyId===companyId && x.id!==studentId).length;
+    if(already >= targetCompany.maxHires && !confirm(`${targetCompany.name} 已媒合 ${already} 人，達到錄取人數上限（${targetCompany.maxHires} 人）。\n仍要登記這位學生嗎？`)) return;
+  }
   const wasInterviewingCompanyId = student.state === 'interviewing' ? student.companyId : null;
   const keepTime = (student.pendingAdmits && student.pendingAdmits[companyId]) || Date.now();
   student.state = 'hired';
@@ -1980,8 +2001,8 @@ document.getElementById('studentChips').addEventListener('click', async (e)=>{
 
 // password protection
 const PROTECTED_TABS = ['settingsHub'];
-const HUB_CHILD_TABS = ['pendingAdmit', 'admitted', 'setup', 'noticePrint'];
-const TAB_LABELS = {settingsHub:'設定', pendingAdmit:'即時廠商錄取名單', admitted:'媒合成功名單', setup:'名單設定', noticePrint:'即時錄取通知列印', tv:'投影模式'};
+const HUB_CHILD_TABS = ['pendingAdmit', 'admitted', 'setup', 'reportPrint'];
+const TAB_LABELS = {settingsHub:'設定', pendingAdmit:'即時廠商錄取名單', admitted:'媒合成功名單', setup:'名單設定', reportPrint:'即時錄取回報單列印', tv:'投影模式'};
 const PASSWORD = '70807081';
 let unlocked = {};
 let pendingTab = null;
@@ -1991,7 +2012,7 @@ function activateTab(target){
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===navTarget));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('panel-'+target).classList.add('active');
-  if(target === 'noticePrint') renderNoticePrint();
+  if(target === 'reportPrint') renderReportPrint();
 }
 
 function openPwModal(target){
@@ -2527,128 +2548,167 @@ document.getElementById('copyStuCredBtn').addEventListener('click', async ()=>{
   const b = document.getElementById('copyStuCredBtn'); b.textContent = '已複製'; setTimeout(()=>{ b.textContent = '複製'; }, 1500);
 });
 
-// ===== 即時錄取通知列印 =====
-const npExcluded = new Set();   // 使用者取消勾選的學生 id
-const NP_NOTE_KEY = 'np-note';
-const NP_DEFAULT_NOTE = '請在要接受的公司前方的方框打勾，並交給承辦老師確認。';
-
-function npStudents(){
-  const f = document.getElementById('npFilter').value;
-  return state.students.map((st, i)=>{
-    const admits = Object.keys(st.pendingAdmits || {})
-      .filter(cid=>state.companies.some(c=>c.id===cid))
-      .sort((a,b)=>{
-        const ma = st.state==='hired' && st.companyId===a ? 0 : 1;
-        const mb = st.state==='hired' && st.companyId===b ? 0 : 1;
-        return ma-mb || st.pendingAdmits[a]-st.pendingAdmits[b];
-      });
-    return { st, num: String(i+1).padStart(2,'0'), admits };
-  }).filter(x=>{
-    if(f==='all') return true;
-    if(f==='admitted') return x.admits.length>0;
-    return x.admits.length>0 && x.st.state!=='hired';   // pending
+// ===== 公司錄取人數上限 =====
+let lastQuotaSig = '';
+function hiredCountOf(companyId){
+  return state.students.filter(s=>s.state==='hired' && s.companyId===companyId).length;
+}
+function renderQuotaList(){
+  const wrap = document.getElementById('quotaList');
+  if(!wrap) return;
+  const sig = state.companies.map(c=>[c.id, c.name, c.maxHires==null?'':c.maxHires].join('|')).join(';');
+  if(sig !== lastQuotaSig){
+    lastQuotaSig = sig;
+    wrap.innerHTML = state.companies.length===0 ? '<span class="hint">尚未新增公司</span>' : state.companies.map(c=>`
+      <div class="quota-row" data-id="${c.id}">
+        <span class="acc-name" title="${escapeHtml(c.name)}">${escapeHtml(c.name)}</span>
+        <input type="number" class="quota-input" min="1" max="99" placeholder="不限" value="${c.maxHires==null?'':c.maxHires}">
+        <span class="quota-status" data-id="${c.id}"></span>
+      </div>`).join('');
+  }
+  wrap.querySelectorAll('.quota-status').forEach(el=>{
+    const c = state.companies.find(x=>x.id===el.dataset.id);
+    if(!c){ el.textContent=''; return; }
+    const n = hiredCountOf(c.id);
+    el.textContent = c.maxHires==null ? `已媒合 ${n} 人` : `已媒合 ${n} / ${c.maxHires} 人`;
+    el.classList.toggle('full', c.maxHires!=null && n >= c.maxHires);
   });
 }
+async function saveQuotas(){
+  const rows = [...document.querySelectorAll('#quotaList .quota-row')];
+  const updates = [];
+  for(const row of rows){
+    const raw = row.querySelector('.quota-input').value.trim();
+    const c = state.companies.find(x=>x.id===row.dataset.id);
+    if(!c) continue;
+    if(raw === ''){ updates.push([c, undefined]); continue; }
+    const n = Number(raw);
+    if(!Number.isInteger(n) || n < 1 || n > 99){ alert(`「${c.name}」的人數上限要填 1～99 的整數，或留空表示不限。`); return; }
+    updates.push([c, n]);
+  }
+  updates.forEach(([c,n])=>{ if(n===undefined) delete c.maxHires; else c.maxHires = n; });
+  await saveState();
+  lastQuotaSig = '';
+  renderAll();
+}
+document.getElementById('quotaFillBtn').addEventListener('click', ()=>{
+  const v = document.getElementById('quotaAllInput').value.trim();
+  document.querySelectorAll('#quotaList .quota-input').forEach(i=>{ i.value = v; });
+});
+document.getElementById('quotaSaveBtn').addEventListener('click', saveQuotas);
 
-function npSlipHtml(x, opts){
-  const st = x.st;
-  const hired = st.state==='hired';
-  const fmt = (ts)=>{ try{ return new Date(ts).toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit',hour12:false}); }catch(e){ return ''; } };
-  const list = x.admits.length
-    ? `<ul class="np-list">${x.admits.map(cid=>{
-        const matched = hired && st.companyId===cid;
-        const box = opts.boxes ? `<span class="np-box">${matched?'☑':'☐'}</span>` : '';
-        const tag = matched ? '<span class="np-tag">已媒合成功</span>' : '';
-        return `<li>${box}<span>${escapeHtml(companyName(cid))}</span>${tag}<small>${fmt(st.pendingAdmits[cid])}</small></li>`;
-      }).join('')}</ul>`
-    : '<div class="np-none">目前尚無公司登記錄取。</div>';
-  const matchedLine = hired && !x.admits.includes(st.companyId)
-    ? `<div class="np-matched">✓ 已媒合成功：${escapeHtml(companyName(st.companyId))}</div>` : '';
-  const sign = opts.sign ? '<div class="np-sign"><span class="np-sign-a">學生簽名：<i class="np-line"></i></span><span class="np-sign-b">日期：<i class="np-line"></i></span></div>' : '';
-  const note = opts.note ? `<div class="np-notetext">${escapeHtml(opts.note)}</div>` : '';
-  return `<div class="np-slip">
-    <div class="np-event">${escapeHtml(state.titleLine1 || '')}</div>
-    <div class="np-title">即時錄取通知</div>
-    <div class="np-who"><span class="np-num">${x.num}</span>${escapeHtml(st.name)} 同學</div>
-    <div class="np-lead">${x.admits.length ? '以下公司已登記錄取你：' : '錄取狀況：'}</div>
-    ${list}${matchedLine}${note}${sign}
-    <div class="np-foot">列印時間 ${new Date().toLocaleString('zh-TW',{hour12:false})}</div>
+// ===== 即時錄取回報單列印（每間公司一張） =====
+const rpExcluded = new Set();   // 使用者取消勾選的公司 id
+const RP_DEFAULT_TITLE1 = '即時錄取回報單';
+function rpLoadTitles(force){
+  const t1 = document.getElementById('rpTitle1'), t2 = document.getElementById('rpTitle2');
+  if(!force && t1.dataset.init) return;
+  t1.dataset.init = '1';
+  let a = null, b = null;
+  try{ a = force ? null : localStorage.getItem('rp-title1'); b = force ? null : localStorage.getItem('rp-title2'); }catch(e){}
+  t1.value = a === null ? RP_DEFAULT_TITLE1 : a;
+  t2.value = b === null ? (state.titleLine1 || '') : b;   // 第二行預設帶入活動標題
+}
+
+function rpAdmitsOf(c){
+  return state.students
+    .map((st,i)=>({ st, num: String(i+1).padStart(2,'0'), t: st.pendingAdmits && st.pendingAdmits[c.id] }))
+    .filter(x=>x.t!=null)
+    .sort((a,b)=>a.t-b.t);
+}
+
+function rpFormHtml(c, opts){
+  const admits = opts.prefill ? rpAdmitsOf(c) : [];
+  const batches = Math.max(opts.batches, opts.prefill ? Math.ceil(admits.length / opts.rows) : 0);
+  // 公司錄取人數：有設定上限就印上限；否則在「預先帶入」時印目前登記人數；其餘留白手寫
+  const count = c.maxHires != null ? `${c.maxHires}` : (opts.prefill ? `${admits.length}` : '');
+  let body = '';
+  for(let b=0; b<batches; b++){
+    let rowsHtml = '';
+    for(let r=0; r<opts.rows; r++){
+      const a = admits[b*opts.rows + r];
+      rowsHtml += `<tr>
+        ${r===0 ? `<td class="rp-batch" rowspan="${opts.rows}">第 ${b+1} 次<br>回報</td>` : ''}
+        <td class="rp-name">${a ? `<span style="font-family:var(--mono);font-size:.8em;margin-right:1.5mm;">${a.num}</span>${escapeHtml(a.st.name)}` : ''}</td>
+        <td></td>
+        <td class="rp-hint">　　時　　分</td>
+        <td class="rp-web">□ 登錄<div class="rp-small">完成登錄時間</div><div class="rp-wline"></div></td>
+        <td class="rp-intent">□ 成功<br>□ 不成功</td>
+      </tr>`;
+    }
+    body += `<tbody>${rowsHtml}</tbody>`;
+  }
+  return `<div class="rp-form">
+    <div class="rp-title">${escapeHtml(opts.title1)}</div>
+    ${opts.title2 ? `<div class="rp-event">${escapeHtml(opts.title2)}</div>` : '<div style="height:4mm"></div>'}
+    <div class="rp-head">
+      <div class="rp-field rp-company">公司名稱：<span class="rp-fill">${escapeHtml(c.name)}</span></div>
+      <div class="rp-field rp-count">公司錄取人數：<span class="rp-fill" style="text-align:center;">${count}</span>人</div>
+    </div>
+    <table class="rp-table">
+      <colgroup><col style="width:12%"><col style="width:20%"><col style="width:21%"><col style="width:13%"><col style="width:19%"><col style="width:15%"></colgroup>
+      <thead><tr><th></th><th>即時錄取<br>學生姓名</th><th>公司代表簽名</th><th>回報時間</th><th>網頁</th><th>學生<br>媒合意願</th></tr></thead>
+      ${body}
+    </table>
   </div>`;
 }
 
-function npSheetsHtml(list, perPage, opts){
-  const sheets = [];
-  for(let i=0; i<list.length; i+=perPage){
-    sheets.push(`<div class="np-sheet np-n${perPage}">${list.slice(i, i+perPage).map(x=>npSlipHtml(x, opts)).join('')}</div>`);
-  }
-  return sheets.join('');
-}
-
-function npOptions(){
+function rpOptions(){
   return {
-    boxes: document.getElementById('npBoxes').checked,
-    sign: document.getElementById('npSign').checked,
-    note: document.getElementById('npNote').value.trim(),
+    batches: parseInt(document.getElementById('rpBatches').value, 10) || 4,
+    rows: parseInt(document.getElementById('rpRows').value, 10) || 2,
+    prefill: document.getElementById('rpPrefill').checked,
+    title1: document.getElementById('rpTitle1').value.trim() || RP_DEFAULT_TITLE1,
+    title2: document.getElementById('rpTitle2').value.trim(),
   };
 }
 
-function renderNoticePrint(){
-  const noteEl = document.getElementById('npNote');
-  if(noteEl && !noteEl.dataset.init){
-    noteEl.dataset.init = '1';
-    let saved = null; try{ saved = localStorage.getItem(NP_NOTE_KEY); }catch(e){}
-    noteEl.value = saved === null ? NP_DEFAULT_NOTE : saved;
-  }
-  const all = npStudents();
-  const pick = document.getElementById('npPick');
-  pick.innerHTML = all.length===0 ? '<span class="hint">目前沒有符合條件的學生。</span>' : all.map(x=>
-    `<label class="np-chip"><input type="checkbox" data-np-id="${x.st.id}" ${npExcluded.has(x.st.id)?'':'checked'}>${x.num} ${escapeHtml(x.st.name)}<small>${x.admits.length} 間</small></label>`
+function renderReportPrint(){
+  rpLoadTitles(false);
+  const pick = document.getElementById('rpPick');
+  pick.innerHTML = state.companies.length===0 ? '<span class="hint">尚未新增公司，請至「名單設定」新增。</span>' : state.companies.map(c=>
+    `<label class="np-chip"><input type="checkbox" data-rp-id="${c.id}" ${rpExcluded.has(c.id)?'':'checked'}>${escapeHtml(c.name)}<small>${rpAdmitsOf(c).length} 人</small></label>`
   ).join('');
-  const chosen = all.filter(x=>!npExcluded.has(x.st.id));
-  const perPage = parseInt(document.getElementById('npPerPage').value, 10) || 2;
-  const preview = document.getElementById('npPreview');
-  preview.innerHTML = chosen.length ? npSheetsHtml(chosen, perPage, npOptions()) : '<div class="hint" style="color:#fff;">沒有要列印的學生。</div>';
-  const over = [...preview.querySelectorAll('.np-slip')].filter(el=>{
-    const bad = el.scrollHeight > el.clientHeight + 1;
-    el.classList.toggle('np-over', bad);
-    return bad;
-  }).length;
-  const pages = Math.ceil(chosen.length / perPage);
-  document.getElementById('npSummary').innerHTML = `共 ${chosen.length} 位、${pages} 頁` +
-    (over ? `　<span class="warn">⚠ ${over} 張內容過多（紅框）會被截斷，請改用每頁較少張數</span>` : '');
-  document.getElementById('npPrintBtn').disabled = chosen.length === 0;
+  const chosen = state.companies.filter(c=>!rpExcluded.has(c.id));
+  const opts = rpOptions();
+  const preview = document.getElementById('rpPreview');
+  preview.innerHTML = chosen.length ? chosen.map(c=>rpFormHtml(c, opts)).join('') : '<div class="hint" style="color:#fff;">沒有要列印的公司。</div>';
+  document.getElementById('rpSummary').textContent = `共 ${chosen.length} 間公司，每間一張回報單`;
+  document.getElementById('rpPrintBtn').disabled = chosen.length === 0;
 }
 
-function npPrint(){
-  const all = npStudents().filter(x=>!npExcluded.has(x.st.id));
-  if(all.length===0){ alert('沒有要列印的學生。'); return; }
-  const perPage = parseInt(document.getElementById('npPerPage').value, 10) || 2;
+function rpPrint(){
+  const chosen = state.companies.filter(c=>!rpExcluded.has(c.id));
+  if(chosen.length===0){ alert('沒有要列印的公司。'); return; }
+  const opts = rpOptions();
   const root = document.getElementById('noticePrintRoot');
-  root.innerHTML = npSheetsHtml(all, perPage, npOptions());
-  document.body.classList.add('printing-notices');
-  const done = ()=>{ document.body.classList.remove('printing-notices'); root.innerHTML = ''; window.removeEventListener('afterprint', done); };
+  root.innerHTML = chosen.map(c=>rpFormHtml(c, opts)).join('');
+  document.body.classList.add('printing-reports');
+  const done = ()=>{ document.body.classList.remove('printing-reports'); root.innerHTML = ''; window.removeEventListener('afterprint', done); };
   window.addEventListener('afterprint', done);
   window.print();
-  setTimeout(()=>{ if(document.body.classList.contains('printing-notices') && !/iPad|iPhone|Android/i.test(navigator.userAgent)) done(); }, 1500);
+  setTimeout(()=>{ if(document.body.classList.contains('printing-reports') && !/iPad|iPhone|Android/i.test(navigator.userAgent)) done(); }, 1500);
 }
 
-document.getElementById('npFilter').addEventListener('change', ()=>{ npExcluded.clear(); renderNoticePrint(); });
-document.getElementById('npPerPage').addEventListener('change', renderNoticePrint);
-document.getElementById('npBoxes').addEventListener('change', renderNoticePrint);
-document.getElementById('npSign').addEventListener('change', renderNoticePrint);
-document.getElementById('npNote').addEventListener('input', (e)=>{
-  try{ localStorage.setItem(NP_NOTE_KEY, e.target.value); }catch(err){}
-  renderNoticePrint();
+['rpBatches','rpRows','rpPrefill'].forEach(id=>document.getElementById(id).addEventListener('change', renderReportPrint));
+['rpTitle1','rpTitle2'].forEach(id=>document.getElementById(id).addEventListener('input', (e)=>{
+  try{ localStorage.setItem(id==='rpTitle1' ? 'rp-title1' : 'rp-title2', e.target.value); }catch(err){}
+  renderReportPrint();
+}));
+document.getElementById('rpTitleReset').addEventListener('click', ()=>{
+  try{ localStorage.removeItem('rp-title1'); localStorage.removeItem('rp-title2'); }catch(e){}
+  rpLoadTitles(true);
+  renderReportPrint();
 });
-document.getElementById('npPick').addEventListener('change', (e)=>{
-  const id = e.target.dataset && e.target.dataset.npId;
+document.getElementById('rpPick').addEventListener('change', (e)=>{
+  const id = e.target.dataset && e.target.dataset.rpId;
   if(!id) return;
-  if(e.target.checked) npExcluded.delete(id); else npExcluded.add(id);
-  renderNoticePrint();
+  if(e.target.checked) rpExcluded.delete(id); else rpExcluded.add(id);
+  renderReportPrint();
 });
-document.getElementById('npSelAll').addEventListener('click', ()=>{ npExcluded.clear(); renderNoticePrint(); });
-document.getElementById('npSelNone').addEventListener('click', ()=>{ npStudents().forEach(x=>npExcluded.add(x.st.id)); renderNoticePrint(); });
-document.getElementById('npPrintBtn').addEventListener('click', npPrint);
+document.getElementById('rpSelAll').addEventListener('click', ()=>{ rpExcluded.clear(); renderReportPrint(); });
+document.getElementById('rpSelNone').addEventListener('click', ()=>{ state.companies.forEach(c=>rpExcluded.add(c.id)); renderReportPrint(); });
+document.getElementById('rpPrintBtn').addEventListener('click', rpPrint);
 
 // init — Firestore onSnapshot 會持續推送即時更新，不需要輪詢
 loadMyCompany();
