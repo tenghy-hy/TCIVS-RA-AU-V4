@@ -773,13 +773,17 @@ button,.tab,.btn,.co-opt,.co-confirm,.settings-hub-card,.auto-fill-row{touch-act
     </div>
     <div class="setup-block">
       <h3>學生帳號設定</h3>
-      <div class="hint">每位學生一組帳號與密碼，學生到「學生查詢」頁登入後，只能看到自己的狀態（被哪些公司等候、面試中、錄取結果）。密碼不會被明文保存，儲存後無法再查看，忘記時請重新設定。</div>
+      <div class="hint">每位學生一組帳號與密碼，學生到「學生查詢」頁登入後，只能看到自己的狀態（被哪些公司等候、面試中、錄取結果）。預設帳號依座號為 s01、s02…，<b>密碼與帳號相同</b>（例如 s01／s01）；新增學生時會自動設定。也可以選「隨機密碼」：帳號一樣是 s01、s02…，密碼改成隨機產生，只在產生當下顯示一次。需要時可在下方逐位修改密碼，儲存後無法再查看。</div>
       <div class="row-inline" style="margin:8px 0;">
-        <button class="btn btn-add" id="genStuMissingBtn">自動產生（尚未設定的學生）</button>
-        <button class="btn btn-danger" id="genStuAllBtn">全部重新產生</button>
+        <select id="credModeStu" title="帳密方式">
+          <option value="default">預設（帳號＝密碼）</option>
+          <option value="random">隨機密碼</option>
+        </select>
+        <button class="btn btn-add" id="genStuMissingBtn">補齊帳密（尚未設定的學生）</button>
+        <button class="btn btn-danger" id="genStuAllBtn">全部重設帳密</button>
       </div>
       <div id="stuCredOutputWrap" style="display:none;margin-bottom:10px;">
-        <div class="hint">本次產生的帳密（僅此刻顯示，請立即複製或截圖保存）：</div>
+        <div class="hint cred-hint">本次設定的帳密：</div>
         <textarea id="stuCredOutput" readonly rows="6" style="width:100%;font-family:var(--mono);"></textarea>
         <div class="row-inline" style="margin-top:6px;"><button class="btn btn-add" id="copyStuCredBtn">複製</button></div>
       </div>
@@ -787,13 +791,17 @@ button,.tab,.btn,.co-opt,.co-confirm,.settings-hub-card,.auto-fill-row{touch-act
     </div>
     <div class="setup-block">
       <h3>公司帳號設定</h3>
-      <div class="hint">每間公司一組帳號與密碼，公司在「公司操作台」登入後才能操作；同一帳號同時只能一位登入。密碼不會被明文保存，儲存後無法再查看，忘記時請重新設定。</div>
+      <div class="hint">每間公司一組帳號與密碼，公司在「公司操作台」登入後才能操作；同一帳號同時只能一位登入。預設帳號依匯入順序為 c01、c02…，<b>密碼與帳號相同</b>（例如 c01／c01）；新增公司時會自動設定。也可以選「隨機密碼」：帳號一樣是 c01、c02…，密碼改成隨機產生，只在產生當下顯示一次。需要時可在下方逐間修改密碼，儲存後無法再查看。</div>
       <div class="row-inline" style="margin:8px 0;">
-        <button class="btn btn-add" id="genMissingBtn">自動產生（尚未設定的公司）</button>
-        <button class="btn btn-danger" id="genAllBtn">全部重新產生</button>
+        <select id="credModeCo" title="帳密方式">
+          <option value="default">預設（帳號＝密碼）</option>
+          <option value="random">隨機密碼</option>
+        </select>
+        <button class="btn btn-add" id="genMissingBtn">補齊帳密（尚未設定的公司）</button>
+        <button class="btn btn-danger" id="genAllBtn">全部重設帳密</button>
       </div>
       <div id="credOutputWrap" style="display:none;margin-bottom:10px;">
-        <div class="hint">本次產生的帳密（僅此刻顯示，請立即複製或截圖保存）：</div>
+        <div class="hint cred-hint">本次設定的帳密：</div>
         <textarea id="credOutput" readonly rows="6" style="width:100%;font-family:var(--mono);"></textarea>
         <div class="row-inline" style="margin-top:6px;"><button class="btn btn-add" id="copyCredBtn">複製</button></div>
       </div>
@@ -1720,6 +1728,7 @@ document.getElementById('addCompanyBtn').addEventListener('click', async ()=>{
   ta.value = '';
   await saveState();
   renderAll();
+  await autoFillDefaults('company');   // 新增的公司自動給預設帳密（c01／c01…）
 });
 
 document.getElementById('addStudentBtn').addEventListener('click', async ()=>{
@@ -1732,6 +1741,7 @@ document.getElementById('addStudentBtn').addEventListener('click', async ()=>{
   ta.value = '';
   await saveState();
   renderAll();
+  await autoFillDefaults('student');   // 新增的學生自動給預設帳密（s01／s01…）
 });
 
 document.getElementById('clearCompanyBtn').addEventListener('click', async ()=>{
@@ -2258,13 +2268,6 @@ document.getElementById('loginAccount').addEventListener('keydown', (e)=>{ if(e.
 document.getElementById('logoutBtn').addEventListener('click', doLogout);
 
 // ---- 名單設定：公司帳號管理 ----
-const PW_CHARS = 'abcdefghjkmnpqrstuvwxyz23456789';
-function randomPassword(len=8){
-  const arr = new Uint32Array(len);
-  crypto.getRandomValues(arr);
-  return Array.from(arr, n=>PW_CHARS[n % PW_CHARS.length]).join('');
-}
-
 function renderAccountList(){
   const wrap = document.getElementById('accountList');
   if(!wrap) return;
@@ -2318,24 +2321,60 @@ async function saveAccount(companyId){
   renderAccountList();
 }
 
+const PW_CHARS = 'abcdefghjkmnpqrstuvwxyz23456789';   // 去掉容易看錯的 i l o 0 1
+function randomPassword(len){
+  const arr = new Uint32Array(len);
+  crypto.getRandomValues(arr);
+  return Array.from(arr, n=>PW_CHARS[n % PW_CHARS.length]).join('');
+}
+// 帳號依順序 c01、c02… / s01、s02…；密碼預設與帳號相同，選「隨機」時改為隨機產生
+async function computeDefaultCreds(kind, onlyMissing, random){
+  const isCo = kind === 'company';
+  const list = isCo ? state.companies : state.students;
+  const prefix = isCo ? 'c' : 's';
+  const targets = list.filter(x=> !onlyMissing || !x.account || !x.pwHash);
+  const targetIds = new Set(targets.map(x=>x.id));
+  const used = new Set(list.filter(x=>!targetIds.has(x.id) && x.account).map(x=>x.account.toLowerCase()));
+  const results = [];
+  for(const x of targets){
+    const idx = list.findIndex(y=>y.id===x.id);
+    let n = idx + 1;
+    let account = prefix + String(n).padStart(2,'0');
+    while(used.has(account)){ n++; account = prefix + String(n).padStart(2,'0'); }   // 順序號已被占用就往後找下一個空號
+    used.add(account);
+    const pw = random ? randomPassword(isCo ? 8 : 6) : account;
+    results.push({ id:x.id, name:x.name, num:String(idx+1).padStart(2,'0'), account, pw, pwHash: await hashPassword(x.id, pw) });
+  }
+  return results;
+}
+// 雜湊計算期間 state 可能已被即時同步換成新物件，所以最後依 id 寫回「目前」的資料
+function applyDefaultCreds(kind, results, force){
+  const cur = kind === 'company' ? state.companies : state.students;
+  results.forEach(r=>{
+    const t = cur.find(y=>y.id===r.id);
+    if(t && (force || !t.account || !t.pwHash)){ t.account = r.account; t.pwHash = r.pwHash; }
+  });
+}
+async function autoFillDefaults(kind){
+  if(!window.crypto || !crypto.subtle) return;
+  const results = await computeDefaultCreds(kind, true);
+  if(results.length === 0) return;
+  applyDefaultCreds(kind, results, false);
+  await saveState();
+}
+
 async function generateAccounts(onlyMissing){
   const targets = state.companies.filter(c=> !onlyMissing || !c.account || !c.pwHash);
   if(targets.length===0){ alert(onlyMissing ? '所有公司都已設定帳密。' : '尚未新增公司。'); return; }
-  if(!onlyMissing && !confirm(`確定要為全部 ${targets.length} 間公司重新產生帳密嗎？\n原有帳密會失效，登入中的公司會被登出。`)) return;
+  const random = document.getElementById('credModeCo').value === 'random';
+  if(!onlyMissing && !confirm(`確定要為全部 ${targets.length} 間公司重設為${random ? '隨機密碼（帳號 c01、c02…）' : '預設帳密（帳號＝密碼，如 c01／c01）'}嗎？\n原有帳密會失效，登入中的公司會被登出。`)) return;
   if(!window.crypto || !crypto.subtle){ alert('此瀏覽器環境不支援加密功能，請改用 https 網址或較新的瀏覽器。'); return; }
-  const lines = [];
-  for(const c of targets){
-    let n = state.companies.findIndex(x=>x.id===c.id) + 1;
-    let account = 'c' + String(n).padStart(2,'0');
-    while(accountTaken(account, c.id)){ n += 100; account = 'c' + String(n).padStart(2,'0'); }
-    const pw = randomPassword(8);
-    c.account = account;
-    c.pwHash = await hashPassword(c.id, pw);
-    lines.push(`${c.name}\t${account}\t${pw}`);
-  }
+  const results = await computeDefaultCreds('company', onlyMissing, random);
+  applyDefaultCreds('company', results, !onlyMissing);
   await saveState();
-  for(const c of targets) await releaseSession(c.id);
-  document.getElementById('credOutput').value = '公司\t帳號\t密碼\n' + lines.join('\n');
+  for(const r of results) await releaseSession(r.id);
+  document.getElementById('credOutput').value = '公司\t帳號\t密碼\n' + results.map(r=>`${r.name}\t${r.account}\t${r.pw}`).join('\n');
+  document.querySelector('#credOutputWrap .cred-hint').textContent = random ? '本次產生的隨機帳密（密碼只在此刻顯示，請立即複製或截圖保存）：' : '本次設定的帳密（帳號＝密碼），可複製或截圖發給大家：';
   document.getElementById('credOutputWrap').style.display = '';
   lastAccSig = '';
   renderAccountList();
@@ -2517,20 +2556,14 @@ async function saveStudentAccount(id){
 async function generateStudentAccounts(onlyMissing){
   const targets = state.students.filter(x=> !onlyMissing || !x.account || !x.pwHash);
   if(targets.length===0){ alert(onlyMissing ? '所有學生都已設定帳密。' : '尚未新增學生。'); return; }
-  if(!onlyMissing && !confirm(`確定要為全部 ${targets.length} 位學生重新產生帳密嗎？\n原有帳密會失效。`)) return;
+  const random = document.getElementById('credModeStu').value === 'random';
+  if(!onlyMissing && !confirm(`確定要為全部 ${targets.length} 位學生重設為${random ? '隨機密碼（帳號 s01、s02…）' : '預設帳密（帳號＝密碼，如 s01／s01）'}嗎？\n原有帳密會失效。`)) return;
   if(!window.crypto || !crypto.subtle){ alert('此瀏覽器環境不支援加密功能，請改用 https 網址或較新的瀏覽器。'); return; }
-  const lines = [];
-  for(const x of targets){
-    let n = state.students.findIndex(y=>y.id===x.id) + 1;
-    let account = 's' + String(n).padStart(2,'0');
-    while(studentAccountTaken(account, x.id)){ n += 100; account = 's' + String(n).padStart(2,'0'); }
-    const pw = randomPassword(6);
-    x.account = account;
-    x.pwHash = await hashPassword(x.id, pw);
-    lines.push(`${String(state.students.findIndex(y=>y.id===x.id)+1).padStart(2,'0')}\t${x.name}\t${account}\t${pw}`);
-  }
+  const results = await computeDefaultCreds('student', onlyMissing, random);
+  applyDefaultCreds('student', results, !onlyMissing);
   await saveState();
-  document.getElementById('stuCredOutput').value = '座號\t姓名\t帳號\t密碼\n' + lines.join('\n');
+  document.getElementById('stuCredOutput').value = '座號\t姓名\t帳號\t密碼\n' + results.map(r=>`${r.num}\t${r.name}\t${r.account}\t${r.pw}`).join('\n');
+  document.querySelector('#stuCredOutputWrap .cred-hint').textContent = random ? '本次產生的隨機帳密（密碼只在此刻顯示，請立即複製或截圖保存）：' : '本次設定的帳密（帳號＝密碼），可複製或截圖發給大家：';
   document.getElementById('stuCredOutputWrap').style.display = '';
   lastStuAccSig = '';
   renderStudentAccountList();
