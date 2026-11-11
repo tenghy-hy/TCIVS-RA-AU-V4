@@ -30,8 +30,8 @@
   --mono:'IBM Plex Mono', ui-monospace, monospace;
   --sans-d:'Sora', 'Inter', system-ui, sans-serif;
   --sans:'Inter', system-ui, -apple-system, sans-serif;
-  --tv-company-font:18px;
-  --tv-student-font:20px;
+  --tv-company-font:28px;
+  --tv-student-font:32px;
 }
 *{box-sizing:border-box;}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:var(--sans);}
@@ -324,6 +324,14 @@ body.tv-active #tvWall{display:flex;}
 .tv-empty{color:var(--text-dim);font-size:19px;}
 .tv-header-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0;}
 .tv-stats-mini{font-size:15px;font-weight:700;color:var(--text-dim);white-space:nowrap;}
+.tv-page-ctl{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;justify-content:flex-end;font-size:13px;font-weight:700;color:var(--text-dim);}
+.tv-page-ctl select{font-size:13px;padding:3px 6px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--text);}
+.tv-page-info{display:none;border:1.5px solid var(--accent);background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:3px 12px;font-size:13px;font-weight:800;cursor:pointer;}
+.tv-page-info.show{display:inline-block;}
+.tv-title-ctl{display:inline-flex;align-items:center;gap:6px;}
+.tv-title-ctl input[type=range]{width:110px;vertical-align:middle;accent-color:var(--accent);}
+.tv-title-ctl #tvTitleSizeVal{font-family:var(--mono);color:var(--accent);min-width:42px;}
+.tv-mini-btn{border:1px solid var(--line);background:#fff;color:var(--text-dim);border-radius:6px;padding:2px 8px;font-size:12px;font-weight:700;cursor:pointer;}
 
 /* 投影模式：一間公司一列，三個區域（面試進行中／等候中／即時錄取）同列並排，一眼看完 */
 .tv-body{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;}
@@ -347,10 +355,10 @@ body.tv-active #tvWall{display:flex;}
 .tv-b-cell{display:flex;align-items:center;min-width:0;min-height:0;overflow:hidden;border-radius:8px;padding:0 12px;
   background:var(--panel-2);border:1px solid var(--line);}
 .tv-b-company{font-weight:800;line-height:1.15;color:var(--text);font-size:var(--tv-company-font);
-  font-size:min(var(--tv-company-font), calc(var(--row-h) * .5));
+  font-size:min(var(--tv-company-font), calc((var(--row-h) - 12px) / 1.2));
   display:block;white-space:nowrap;overflow:hidden;max-width:100%;}   /* 公司名稱固定一行；放不下時由程式自動縮小字體，不會被切掉 */
 .tv-b-student{font-weight:800;white-space:nowrap;line-height:1.1;font-size:var(--tv-student-font);
-  font-size:min(var(--tv-student-font), calc(var(--row-h) * .52));}
+  font-size:min(var(--tv-student-font), calc((var(--row-h) - 12px) / 1.15));}
 .tv-b-empty{color:#B8C0CD;font-weight:600;}
 .tv-b-num{font-family:var(--mono);font-weight:700;font-size:.72em;border-radius:5px;padding:1px 6px;margin-right:6px;}
 .tv-b-int{cursor:pointer;}
@@ -415,6 +423,7 @@ body.tv-active #tvWall{display:flex;}
   .tv-header-right{flex-direction:row;justify-content:space-between;align-items:baseline;gap:8px;width:100%;}
   .tv-clock{font-size:24px;}
   .tv-stats-mini{white-space:normal;text-align:right;font-size:11.5px;line-height:1.3;}
+  .tv-title-ctl{display:none;}   /* 手機上標題固定小字，不提供調整 */
 }
 
 /* ===== 即時錄取回報單列印 ===== */
@@ -431,6 +440,9 @@ body.tv-active #tvWall{display:flex;}
 .np-preview .rp-form{width:210mm;min-height:297mm;box-sizing:border-box;padding:12mm;background:#fff;margin:0 auto 14px;}
 .rp-title{font-size:21pt;font-weight:800;text-align:center;letter-spacing:6px;}
 .rp-event{font-size:9pt;text-align:center;color:#374151;margin:1mm 0 5mm;}
+.rp-notice{border:1.6px solid #000;border-radius:2mm;background:#F6F7F9;padding:2.2mm 3.5mm;margin:0 0 4mm;font-size:9pt;line-height:1.5;}
+.rp-notice b{font-size:9.5pt;}
+.rp-notice p{margin:.6mm 0 0;padding-left:4.2mm;text-indent:-4.2mm;}
 .rp-head{display:flex;gap:10mm;align-items:flex-end;margin:0 0 5mm;font-size:13pt;font-weight:800;}
 .rp-field{display:flex;align-items:flex-end;gap:2mm;white-space:nowrap;}
 .rp-field.rp-company{flex:1.7;min-width:0;}
@@ -688,6 +700,11 @@ button,.tab,.btn,.co-opt,.co-confirm,.settings-hub-card,.auto-fill-row{touch-act
       </label>
       <button class="btn btn-remove" id="rpTitleReset">還原預設標題</button>
     </div>
+    <label class="np-note-label" style="display:flex;flex-direction:column;gap:4px;font-size:12.5px;font-weight:700;color:var(--text-dim);margin-bottom:12px;">
+      <span><input type="checkbox" id="rpShowNote" checked style="margin-right:6px;">在回報單最上方印出附註（提醒公司面試代表，可自行修改）
+        <button class="btn btn-remove" id="rpNoteReset" style="margin-left:8px;">還原預設附註</button></span>
+      <textarea id="rpNote" rows="6" style="width:100%;"></textarea>
+    </label>
     <div class="np-pickbar">
       <b>選擇要列印的公司</b>
       <button class="btn btn-remove" id="rpSelAll">全選</button>
@@ -737,7 +754,7 @@ button,.tab,.btn,.co-opt,.co-confirm,.settings-hub-card,.auto-fill-row{touch-act
         <label>公司名稱</label>
         <div class="title-size-control">
           <span>字體大小</span>
-          <input type="range" id="tvCompanyFontInput" min="12" max="32" value="18">
+          <input type="range" id="tvCompanyFontInput" min="12" max="60" value="28">
           <span id="tvCompanyFontValue" class="title-size-value">18px</span>
         </div>
       </div>
@@ -745,7 +762,7 @@ button,.tab,.btn,.co-opt,.co-confirm,.settings-hub-card,.auto-fill-row{touch-act
         <label>學生座號＋姓名</label>
         <div class="title-size-control">
           <span>字體大小</span>
-          <input type="range" id="tvStudentFontInput" min="12" max="36" value="20">
+          <input type="range" id="tvStudentFontInput" min="12" max="60" value="32">
           <span id="tvStudentFontValue" class="title-size-value">20px</span>
         </div>
       </div>
@@ -853,6 +870,26 @@ button,.tab,.btn,.co-opt,.co-confirm,.settings-hub-card,.auto-fill-row{touch-act
     <div class="tv-header-right">
       <div class="tv-clock" id="tvClock">--:--:--</div>
       <div class="tv-stats-mini" id="tvStats"></div>
+      <div class="tv-page-ctl">
+        <label>每頁顯示
+          <select id="tvPageSizeSel">
+            <option value="0">全部公司</option><option value="6">6 間</option><option value="8">8 間</option>
+            <option value="10">10 間</option><option value="12">12 間</option><option value="15">15 間</option>
+          </select>
+        </label>
+        <label>每
+          <select id="tvPageSecSel">
+            <option value="5">5</option><option value="8">8</option><option value="10">10</option>
+            <option value="15">15</option><option value="20">20</option><option value="30">30</option>
+          </select> 秒換頁
+        </label>
+        <button type="button" class="tv-page-info" id="tvPageInfo" title="點一下切換下一頁"></button>
+        <span class="tv-title-ctl">
+          <label>標題字體 <input type="range" id="tvTitleSizeRange" min="12" max="80" step="1"></label>
+          <span id="tvTitleSizeVal"></span>
+          <button type="button" class="tv-mini-btn" id="tvTitleSizeReset" title="還原成預設大小">還原</button>
+        </span>
+      </div>
     </div>
   </div>
   <div class="tv-body" id="tvBody">
@@ -902,8 +939,9 @@ const DEFAULT_TITLE_LINE1 = '臺中高工實用技能學程冷凍空調技術科
 const DEFAULT_TITLE_LINE2 = '';
 const DEFAULT_TITLE_SIZE1 = 16;
 const DEFAULT_TITLE_SIZE2 = 13;
-const DEFAULT_TV_COMPANY_FONT = 18;
-const DEFAULT_TV_STUDENT_FONT = 20;
+const DEFAULT_TV_COMPANY_FONT = 28;
+const DEFAULT_TV_STUDENT_FONT = 32;
+const LEGACY_TV_FONTS = [18, 20];   // 舊版預設值：若設定剛好是這組，視為從未調整過，改用新的較大預設
 const DEFAULT_TV_SPEAK_DELAY = 8;      // 開始面試後，等幾秒才語音播報（期間被結束／取消就不播）
 const SPEAK_DEDUPE_MS = 120000;        // 同一位學生、同一間公司，2 分鐘內不重複播報
 const DEFAULT_TV_MARQUEE_SPEED = 50;   // 跑馬燈速度（每秒移動的像素數）
@@ -1409,8 +1447,9 @@ function renderTitle(){
   }
 
   // 投影模式字體（公司名稱 / 學生座號＋姓名）：套用 CSS 變數，全站投影卡片統一套用
-  const companyFont = state.tvCompanyFont || DEFAULT_TV_COMPANY_FONT;
-  const studentFont = state.tvStudentFont || DEFAULT_TV_STUDENT_FONT;
+  const legacy = state.tvCompanyFont === LEGACY_TV_FONTS[0] && state.tvStudentFont === LEGACY_TV_FONTS[1];
+  const companyFont = legacy ? DEFAULT_TV_COMPANY_FONT : (state.tvCompanyFont || DEFAULT_TV_COMPANY_FONT);
+  const studentFont = legacy ? DEFAULT_TV_STUDENT_FONT : (state.tvStudentFont || DEFAULT_TV_STUDENT_FONT);
   document.documentElement.style.setProperty('--tv-company-font', companyFont + 'px');
   document.documentElement.style.setProperty('--tv-student-font', studentFont + 'px');
 
@@ -1445,6 +1484,29 @@ function renderTitle(){
 }
 
 let tvBoardHtml = null;   // 上一次畫出的內容；沒有變動就不重畫，避免跑馬燈每次更新都從頭開始
+// 分頁輪播：公司很多時可分頁顯示，每頁公司少，字就能放大。設定只記在這台（投影）裝置。
+let tvPageSize = 0, tvPageSeconds = 10, tvPageIndex = 0, tvPageTimer = null;
+let tvTitleSize = 0;   // 投影標題第一行字體大小（px）；0 = 用預設（標題設定的大小 × 1.6）。只記在這台投影裝置
+function tvLoadTitleSize(){
+  try{ tvTitleSize = parseInt(localStorage.getItem('tv-title-size'), 10) || 0; }catch(e){ tvTitleSize = 0; }
+}
+function tvLoadPaging(){
+  try{
+    tvPageSize = parseInt(localStorage.getItem('tv-page-size'), 10) || 0;
+    tvPageSeconds = parseInt(localStorage.getItem('tv-page-sec'), 10) || 10;
+  }catch(e){}
+  document.getElementById('tvPageSizeSel').value = String(tvPageSize);
+  document.getElementById('tvPageSecSel').value = String(tvPageSeconds);
+}
+function tvRestartPageTimer(){
+  clearInterval(tvPageTimer);
+  tvPageTimer = setInterval(()=>{
+    if(!document.body.classList.contains('tv-active')) return;
+    tvPageIndex++;
+    renderTV();
+  }, tvPageSeconds * 1000);
+}
+function tvStopPageTimer(){ clearInterval(tvPageTimer); tvPageTimer = null; }
 function tvFitMarquees(root, speed){
   root.querySelectorAll('.tv-b-marq').forEach(m=>{
     const track = m.firstElementChild;
@@ -1474,12 +1536,21 @@ function renderTV(){
   const tvL2 = document.getElementById('tvTitleLine2');
   if(!tvL1 || !boardEl) return;
   const TV_SCALE = 1.6; // 投影畫面字級放大倍率，方便遠距離觀看
+  const base1 = Math.round((state.titleSize1 || DEFAULT_TITLE_SIZE1) * TV_SCALE);
+  const base2 = Math.round((state.titleSize2 || DEFAULT_TITLE_SIZE2) * TV_SCALE);
+  // 在投影畫面上調整過標題字體 → 第一行用調整值，第二行依「標題設定」的第二行／第一行比例同步縮放
+  const size1 = tvTitleSize > 0 ? tvTitleSize : base1;
+  const size2 = tvTitleSize > 0 ? Math.max(10, Math.round(tvTitleSize * base2 / base1)) : base2;
   tvL1.textContent = state.titleLine1 || '';
-  tvL1.style.fontSize = Math.round((state.titleSize1 || DEFAULT_TITLE_SIZE1) * TV_SCALE) + 'px';
+  tvL1.style.fontSize = size1 + 'px';
   if(tvL2){
     tvL2.textContent = state.titleLine2 || '';
-    tvL2.style.fontSize = Math.round((state.titleSize2 || DEFAULT_TITLE_SIZE2) * TV_SCALE) + 'px';
+    tvL2.style.fontSize = size2 + 'px';
   }
+  const tRange = document.getElementById('tvTitleSizeRange');
+  if(tRange && document.activeElement !== tRange) tRange.value = size1;
+  const tVal = document.getElementById('tvTitleSizeVal');
+  if(tVal) tVal.textContent = size1 + 'px' + (tvTitleSize > 0 ? '' : '（預設）');
   if(!document.body.classList.contains('tv-active')) return;   // 沒開投影模式時不必畫
 
   const interviewing = state.students.filter(s=>s.state==='interviewing');
@@ -1497,7 +1568,15 @@ function renderTV(){
 
   const studentHtml = (st, extra)=>`<span class="tv-b-student">${extra||''}<span class="tv-b-num">${getStudentNumber(st)}</span>${escapeHtml(st.name)}</span>`;
 
-  const rowsHtml = state.companies.map(c=>{
+  const pageSize = (tvPageSize > 0 && tvPageSize < state.companies.length) ? tvPageSize : state.companies.length;
+  const totalPages = Math.max(1, Math.ceil(state.companies.length / pageSize));
+  if(tvPageIndex >= totalPages) tvPageIndex = 0;
+  const pageCompanies = state.companies.slice(tvPageIndex * pageSize, (tvPageIndex + 1) * pageSize);
+  const infoEl = document.getElementById('tvPageInfo');
+  infoEl.textContent = `第 ${tvPageIndex + 1} / ${totalPages} 頁`;
+  infoEl.classList.toggle('show', totalPages > 1);
+
+  const rowsHtml = pageCompanies.map(c=>{
     // 面試進行中（每間公司同時最多一位）
     const cur = interviewing.find(s=>s.companyId===c.id);
     const intCell = cur
@@ -1541,10 +1620,10 @@ function renderTV(){
       <div class="tv-b-hcell h-admit">🟣 即時錄取</div>
     </div>${rowsHtml}`;
   const speed = state.tvMarqueeSpeed || DEFAULT_TV_MARQUEE_SPEED;
-  const cacheKey = html + '|' + speed;
+  const cacheKey = html + '|' + speed + '|' + pageSize;
   if(tvBoardHtml === cacheKey) return;
   tvBoardHtml = cacheKey;
-  boardEl.style.setProperty('--n', state.companies.length);
+  boardEl.style.setProperty('--n', pageSize);
   boardEl.innerHTML = html;
   tvFitCompanyNames(boardEl);
   tvFitMarquees(boardEl, speed);
@@ -1621,6 +1700,10 @@ function enterTVMode(){
   announcedMap = {__initialized: true};
   state.students.filter(s=>s.state==='interviewing').forEach(s=>{ announcedMap[s.id] = s.interviewStartedAt || s.updatedAt; });
   tvBoardHtml = null;
+  tvLoadTitleSize();
+  tvLoadPaging();
+  tvPageIndex = 0;
+  tvRestartPageTimer();
   renderTV();
 }
 
@@ -1631,6 +1714,29 @@ document.getElementById('tvModeBtn').addEventListener('click', ()=>{
   }
   enterTVMode();
 });
+document.getElementById('tvPageSizeSel').addEventListener('change', (e)=>{
+  tvPageSize = parseInt(e.target.value, 10) || 0;
+  try{ localStorage.setItem('tv-page-size', String(tvPageSize)); }catch(err){}
+  tvPageIndex = 0; tvBoardHtml = null; tvRestartPageTimer(); renderTV();
+});
+document.getElementById('tvPageSecSel').addEventListener('change', (e)=>{
+  tvPageSeconds = parseInt(e.target.value, 10) || 10;
+  try{ localStorage.setItem('tv-page-sec', String(tvPageSeconds)); }catch(err){}
+  tvRestartPageTimer();
+});
+document.getElementById('tvTitleSizeRange').addEventListener('input', (e)=>{
+  tvTitleSize = parseInt(e.target.value, 10) || 0;
+  try{ localStorage.setItem('tv-title-size', String(tvTitleSize)); }catch(err){}
+  renderTV();
+});
+document.getElementById('tvTitleSizeReset').addEventListener('click', ()=>{
+  tvTitleSize = 0;
+  try{ localStorage.removeItem('tv-title-size'); }catch(err){}
+  renderTV();
+});
+document.getElementById('tvPageInfo').addEventListener('click', ()=>{
+  tvPageIndex++; tvRestartPageTimer(); renderTV();
+});
 let tvResizeTimer = null;
 window.addEventListener('resize', ()=>{   // 視窗大小改變時重新量測，哪些名單需要捲動
   clearTimeout(tvResizeTimer);
@@ -1639,6 +1745,7 @@ window.addEventListener('resize', ()=>{   // 視窗大小改變時重新量測�
 document.getElementById('tvExitBtn').addEventListener('click', ()=>{
   document.body.classList.remove('tv-active');
   clearPendingSpeech();
+  tvStopPageTimer();
   if('speechSynthesis' in window) window.speechSynthesis.cancel();
 });
 document.getElementById('tvSoundToggle').addEventListener('click', ()=>{
@@ -1661,7 +1768,7 @@ document.getElementById('tvBody').addEventListener('click', (e)=>{
   if(student) speakAnnouncement(student);
 });
 document.addEventListener('keydown', (e)=>{
-  if(e.key === 'Escape'){ document.body.classList.remove('tv-active'); clearPendingSpeech(); }
+  if(e.key === 'Escape'){ document.body.classList.remove('tv-active'); clearPendingSpeech(); tvStopPageTimer(); }
 });
 
 function escapeHtml(str){
@@ -2633,6 +2740,12 @@ document.getElementById('quotaSaveBtn').addEventListener('click', saveQuotas);
 // ===== 即時錄取回報單列印（每間公司一張） =====
 const rpExcluded = new Set();   // 使用者取消勾選的公司 id
 const RP_DEFAULT_TITLE1 = '即時錄取回報單';
+const RP_DEFAULT_NOTE = [
+  '※ 提醒各公司面試代表：',
+  '1. 本回報單僅供公司回報「有意錄取」的學生名單，填寫本回報單並不代表該生已媒合成功。',
+  '2. 學生可能同時獲得多間公司的錄取意願，是否媒合成功，須視學生本人的媒合意願，以及是否已重複錄取其他公司而定。',
+  '3. 最終媒合結果，以第一階段綠單或第二階段紅單為準。'
+].join('\n');
 function rpLoadTitles(force){
   const t1 = document.getElementById('rpTitle1'), t2 = document.getElementById('rpTitle2');
   if(!force && t1.dataset.init) return;
@@ -2641,6 +2754,16 @@ function rpLoadTitles(force){
   try{ a = force ? null : localStorage.getItem('rp-title1'); b = force ? null : localStorage.getItem('rp-title2'); }catch(e){}
   t1.value = a === null ? RP_DEFAULT_TITLE1 : a;
   t2.value = b === null ? (state.titleLine1 || '') : b;   // 第二行預設帶入活動標題
+  rpLoadNote(false);
+}
+function rpLoadNote(force){
+  const n = document.getElementById('rpNote');
+  if(!force && n.dataset.init) return;
+  n.dataset.init = '1';
+  let saved = null, shown = null;
+  try{ saved = force ? null : localStorage.getItem('rp-note'); shown = force ? null : localStorage.getItem('rp-note-show'); }catch(e){}
+  n.value = saved === null ? RP_DEFAULT_NOTE : saved;
+  document.getElementById('rpShowNote').checked = shown !== '0';
 }
 
 function rpAdmitsOf(c){
@@ -2674,6 +2797,7 @@ function rpFormHtml(c, opts){
   return `<div class="rp-form">
     <div class="rp-title">${escapeHtml(opts.title1)}</div>
     ${opts.title2 ? `<div class="rp-event">${escapeHtml(opts.title2)}</div>` : '<div style="height:4mm"></div>'}
+    ${opts.note ? `<div class="rp-notice">${opts.note.split('\n').filter(l=>l.trim()).map((l,i)=> i===0 ? `<b>${escapeHtml(l)}</b>` : `<p>${escapeHtml(l)}</p>`).join('')}</div>` : ''}
     <div class="rp-head">
       <div class="rp-field rp-company">公司名稱：<span class="rp-fill">${escapeHtml(c.name)}</span></div>
       <div class="rp-field rp-count">公司錄取人數：<span class="rp-fill" style="text-align:center;">${count}</span>人</div>
@@ -2693,6 +2817,7 @@ function rpOptions(){
     prefill: document.getElementById('rpPrefill').checked,
     title1: document.getElementById('rpTitle1').value.trim() || RP_DEFAULT_TITLE1,
     title2: document.getElementById('rpTitle2').value.trim(),
+    note: document.getElementById('rpShowNote').checked ? document.getElementById('rpNote').value.trim() : '',
   };
 }
 
@@ -2728,6 +2853,19 @@ function rpPrint(){
   try{ localStorage.setItem(id==='rpTitle1' ? 'rp-title1' : 'rp-title2', e.target.value); }catch(err){}
   renderReportPrint();
 }));
+document.getElementById('rpNote').addEventListener('input', (e)=>{
+  try{ localStorage.setItem('rp-note', e.target.value); }catch(err){}
+  renderReportPrint();
+});
+document.getElementById('rpShowNote').addEventListener('change', (e)=>{
+  try{ localStorage.setItem('rp-note-show', e.target.checked ? '1' : '0'); }catch(err){}
+  renderReportPrint();
+});
+document.getElementById('rpNoteReset').addEventListener('click', ()=>{
+  try{ localStorage.removeItem('rp-note'); localStorage.removeItem('rp-note-show'); }catch(e){}
+  rpLoadNote(true);
+  renderReportPrint();
+});
 document.getElementById('rpTitleReset').addEventListener('click', ()=>{
   try{ localStorage.removeItem('rp-title1'); localStorage.removeItem('rp-title2'); }catch(e){}
   rpLoadTitles(true);
@@ -2745,6 +2883,7 @@ document.getElementById('rpPrintBtn').addEventListener('click', rpPrint);
 
 // init — Firestore onSnapshot 會持續推送即時更新，不需要輪詢
 loadMyCompany();
+tvLoadTitleSize();
 startRealtimeSync();
 startSessionSync();
 renderAll();
